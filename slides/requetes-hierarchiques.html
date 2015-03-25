@@ -1,35 +1,10 @@
-<section>
-  <h3>Représentation SQL</h3>
-
-  <div class="layout-two" data-markdown>
-    <script type="text/template">
-    ```sql
-    CREATE TABLE enfants (
-      id NUMERIC PRIMARY KEY,
-      nom VARCHAR2(12) NOT NULL,
-      parent_id NUMERIC,
-      FOREIGN KEY (parent_id) REFERENCES enfants
-    );
-    ```
-
-    ```sql
-    SELECT * FROM enfants;
-    ```
-    <!-- .element: class="run hide" data-db="SQLAVANCE" -->
-    </script>
-  </div>
-  <aside class="notes">
-      Put your speaker notes here.
-      You can see them pressing 's'.
-  </aside>
-</section>
 
 <section>
   <h3>Recherche des relations parent/enfants</h3>
 
   <p>Une auto-jointure externe ne permet de mettre en relation qu’un niveau parent-enfant</p>
   
-  <div class="layout-two" data-markdown>
+  <div data-markdown>
     <script type="text/template">
 ```sql
 SELECT parent.nom AS parent, enfant.nom AS enfant
