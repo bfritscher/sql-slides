@@ -1,11 +1,11 @@
-![](slides/requetes_hierarchiques/cours_map.png)
+![](/images/requetes_hierarchiques/cours_map.png)
 
 note:
 http://ashitani.jp/gv/#
 
 ---
 #intro
-![](slides/requetes_hierarchiques/intro_title.jpg)
+![](/images/requetes_hierarchiques/intro_title.jpg)
 
 ---
 ## Arbre hiérarchique
@@ -41,11 +41,11 @@ mais son parcours posera des difficultés.
 
 ---
 ### Représentation d’une structure hiérarchique
-![](slides/requetes_hierarchiques/org_plain.png)
+![](/images/requetes_hierarchiques/org_plain.png)
 
 ---
 ### Représentation d’une structure hiérarchique
-![](slides/requetes_hierarchiques/org_bfs.png)
+![](/images/requetes_hierarchiques/org_bfs.png)
 
 ---
 ### Représentation SQL
@@ -124,7 +124,7 @@ SELECT grand_parent.nom AS grand_parent,
 **START WITH**<br/>
 *Nœud de départ de la structure*
 
-![](slides/requetes_hierarchiques/railroad_connectby.gif)
+![](/images/requetes_hierarchiques/railroad_connectby.gif)
 
 ---
 ### Exemple CONNECT BY
@@ -181,10 +181,10 @@ START WITH parent_id IS NULL;
 ---
 ### Visualisation du parcours d’un arbre
 
-![](slides/requetes_hierarchiques/arbres_parcour.png)
+![](/images/requetes_hierarchiques/arbres_parcour.png)
 
 ---
-![](slides/requetes_hierarchiques/org_dfs.png)
+![](/images/requetes_hierarchiques/org_dfs.png)
 
 ---
 ### Parcours de la structure
@@ -234,7 +234,7 @@ CONNECT BY id = PRIOR parent_id
 ---
 ### Les niveaux de notre exemple
 
-![](slides/requetes_hierarchiques/org_level_top_bottom.png)
+![](/images/requetes_hierarchiques/org_level_top_bottom.png)
 
 ---
 ### Parcours inverse
@@ -252,7 +252,7 @@ START WITH nom LIKE 'D%';
 
 ---
 
-![](slides/requetes_hierarchiques/org_level_bottom_top.png)
+![](/images/requetes_hierarchiques/org_level_bottom_top.png)
 
 ---
 ### Elagage avec WHERE
@@ -269,7 +269,7 @@ START WITH parent_id IS NULL;
 ---
 ### Elagage avec WHERE
 
-![](slides/requetes_hierarchiques/org_trim_where.png)
+![](/images/requetes_hierarchiques/org_trim_where.png)
 
 ---
 ### Elagage avec CONNECT BY
@@ -286,7 +286,7 @@ START WITH parent_id IS NULL;
 ---
 ### Elagage avec CONNECT BY
 
-![](slides/requetes_hierarchiques/org_trim_connect.png)
+![](/images/requetes_hierarchiques/org_trim_connect.png)
 
 ---
 ### Elagage avec CONNECT BY et WHERE

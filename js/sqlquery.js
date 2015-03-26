@@ -1,5 +1,5 @@
 (function () {
-  
+  'use strict';
   function run(db, sql, $output){
     $.ajax({
       url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
@@ -29,15 +29,18 @@
       .attr('contenteditable','')
       .attr('spellcheck', 'false')
       .keydown(function (e) {
-        if (e.ctrlKey && e.keyCode == 13) {
+        if (e.ctrlKey && e.keyCode === 13) {
             $run.click();
         }
       });
     var $pre = $code.parent();
     var db = $pre.data('db');
     if(db){
+      if($pre.hasClass('col2')){
+        $pre.wrap('<div class="layout-two"></div>');
+      }
       var $output = $('<div class="output"></div>').insertAfter($pre);
-      if($pre.hasClass('hidden')){
+      if($pre.hasClass('start-hidden')){
         $output.addClass('fragment');
       }
       var $run = $('<div class="run">run</div>')
@@ -45,7 +48,7 @@
       $run.click(function(){
         run(db, $code.text(), $output);
       });
-      if($pre.hasClass('run') || window.location.search.indexOf('sqlrun') > -1){
+      if( window.location.search.indexOf('sqlnorun') === -1 && ($pre.hasClass('run') || window.location.search.indexOf('sqlrun') > -1)){
         $run.click();
       }
     }

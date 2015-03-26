@@ -1,4 +1,5 @@
 var SQLtoMarkdown = (function () {
+  'use strict';
   function parse(json){
     var tabularData = json.content;
     tabularData.unshift(json.headers);
@@ -7,7 +8,7 @@ var SQLtoMarkdown = (function () {
     //calculate column maxLen
     tabularData.forEach(function( e, i ) {
         tabularData[i].forEach(function( ee, ii ) {
-            if( typeof maxColLen[ii] == "undefined" ) {
+            if( typeof maxColLen[ii] === 'undefined' ) {
                 maxColLen[ii] = 0;
             }
             maxColLen[ii] = Math.max(maxColLen[ii], String(ee).length);
@@ -19,7 +20,7 @@ var SQLtoMarkdown = (function () {
 
     maxColLen.forEach(function( len ) {
         var spacer;
-        spacer = Array(Number(len + 1 + 2)).join('-');
+        spacer = new Array(Number(len + 1 + 2)).join('-');
         seperatorOutput += '|' + spacer;
     });
 
@@ -28,8 +29,8 @@ var SQLtoMarkdown = (function () {
     var rowOutput = '';
     tabularData.forEach(function( row, i ) {
         maxColLen.forEach(function( len, y ) {
-            var cell = typeof row[y] == 'undefined' ? '' : String(row[y]);
-            var spacing = Array((len - cell.length) + 1).join(' ');
+            var cell = typeof row[y] === 'undefined' ? '' : String(row[y]);
+            var spacing = new Array((len - cell.length) + 1).join(' ');
             cell = cell.replace(/ /g, '&nbsp;');
             if( i === 0 ) {
                 headerOutput += '| ' + cell + spacing + ' ';
@@ -50,5 +51,5 @@ var SQLtoMarkdown = (function () {
   
   return {
     parse: parse
-  }
+  };
 })();

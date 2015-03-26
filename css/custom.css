@@ -8,7 +8,6 @@
 
 .reveal .slides h3{
   text-align: left;
-  font-size: 1em;
 }
 
 .reveal .slides p{
@@ -50,13 +49,34 @@
   width: auto;
 }
 
+.reveal pre code {
+  color: inherit;
+  background: inherit;
+}
+
+.reveal .warn{
+    color: red;
+}
+
+.reveal table{
+    font-size: 0.62em;
+}
+
+.reveal section.summary{
+  background-image: url('../images/common/summary.jpg');
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  height: 100%;
+  width: 100%;
+}
+
 div.output{
   height: 400px;
   margin: 0 auto;
   overflow: hidden;
-  float:left;
   padding: 0;
   margin: 0 5%;
+  flex-grow: 2;
 }
 
 .output.error{
@@ -70,7 +90,13 @@ div.output > div{
   overflow-y: auto;
   overflow-x: hidden;
   height: 400px;
-  width: calc(100% + 15px);
+  /*width: 100%; calc(100% + 15px);*/
+}
+
+pre.float + .output{
+    position:absolute;
+    top: 15%;
+    right:0;
 }
 
 .output table {
@@ -157,7 +183,6 @@ div.output > div{
     border-radius: 0 0 6px 0;
 }
 
-
 pre div.run:hover{
   opacity: 1;
 }
@@ -174,9 +199,9 @@ pre div.run{
   transition: all 0.5s;
 }
 
-pre .keyword{
+pre .hljs-keyword{
   font-weight: bold;
 }
-pre .comment{
+pre .hljs-comment{
   color: #006a00;
 }
