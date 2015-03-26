@@ -1,3 +1,8 @@
+.reveal .slides section .fragment.is-pointer-down{
+  -webkit-transition: none;
+  transition: none;
+}
+
 .reveal section{
     height: 100%;
 }
@@ -95,20 +100,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-}
-
-.reveal .slides section div.output.popup{
-  top:0;
-  left:0;
-  position: absolute;
-  width: 100%;
-  max-height: 100%;
-}
-
-
-div.output.popup table{
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
 }
   
 .reveal ol li{

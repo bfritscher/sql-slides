@@ -74,9 +74,7 @@ var SQLQuery = (function () {
           $pre.wrap('<div class="layout-two"></div>');
         }
         var $output = $('<div class="output"></div>').insertAfter($pre);
-        $output.on('dblclick', function(){
-          $output.toggleClass('popup');
-        });
+        $output.draggabilly({});
         if($pre.hasClass('start-hidden')){
           $output.addClass('fragment');
         }
@@ -109,7 +107,7 @@ var SQLQuery = (function () {
   
   if(!generateCache){
     //try to load cache
-    $.getJSON( 'slides/' + $('title').text().toLowerCase().split(' ').join('_') + '.cache.json', function(data){
+    $.getJSON( 'slides/' + $('title').text().toLowerCase().split(' ').join('_') + '.cache', function(data){
       cache = data;
     })
     .always(parseCode);
