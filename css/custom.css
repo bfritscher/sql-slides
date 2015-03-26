@@ -1,3 +1,7 @@
+.reveal section{
+    height: 100%;
+}
+
 .reveal .hide{
   display:none;
 }
@@ -8,6 +12,7 @@
 
 .reveal .slides h3{
   text-align: left;
+  margin-bottom: 0.8em;
 }
 
 .reveal .slides p{
@@ -32,10 +37,13 @@
   font-size: 90%;
   color: #999;
 }
-
-.reveal .credits, .reveal section img+em{
+.reveal .credits img{
+    display: block;
+}
+.reveal p.credits{
   color: #ccc;
   font-size: 10px;
+  text-align: right;
 }
 
 .reveal .layout-two{
@@ -62,6 +70,14 @@
     font-size: 0.62em;
 }
 
+#searchinputdiv{
+    display: none;
+}
+
+.reveal.overview #searchinputdiv{
+    display: block;
+}
+
 .reveal section.summary{
   background-image: url('../images/common/summary.jpg');
   background-repeat: no-repeat;
@@ -70,13 +86,42 @@
   width: 100%;
 }
 
-div.output{
-  height: 400px;
+.reveal .slides section div.output{
+  max-height: 400px;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: auto;
   padding: 0;
   margin: 0 5%;
-  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.reveal .slides section div.output.popup{
+  top:0;
+  left:0;
+  position: absolute;
+  width: 100%;
+  max-height: 100%;
+}
+
+
+div.output.popup table{
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+}
+  
+.reveal ol li{
+    margin-bottom: 0.8em;
+}
+
+.reveal ol li ul li {
+    font-size: 0.8em;
+    list-style-type: none;
+}
+
+.reveal .slides p.small, .reveal .slides .small li{
+    font-size: 0.8em;
 }
 
 .output.error{
@@ -86,11 +131,36 @@ div.output{
   width: 90%;
 }
 
-div.output > div{
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 400px;
-  /*width: 100%; calc(100% + 15px);*/
+.reveal .left{
+    position: absolute;
+    left: 0;
+}
+
+
+.reveal .no-margin{
+    margin: 0 !important;
+}
+
+.reveal .right{
+    position: absolute;
+    right: 0;
+}
+.reveal .top{
+    position: absolute;
+    top:0;
+}
+.reveal .bottom{
+    position: absolute;
+    bottom: 20px;
+}
+.reveal .w-33{
+    width: 33%;
+}
+.reveal .w-50{
+    width: 50%;
+}
+.reveal .w-66{
+    width: 66%;
 }
 
 pre.float + .output{
@@ -100,14 +170,15 @@ pre.float + .output{
 }
 
 .output table {
-    height: 400px;
     font-family: 'trebuchet MS', 'Lucida sans', Arial;
     font-size: 18px;
     line-height: 18px;
     word-spacing: 10px;
     color: #444;
+    background-color: rgba(255,255,255,0.8);
     border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
+    margin: 0 18px;
     
     border: solid #ccc 1px;
     -moz-border-radius: 6px;
@@ -116,6 +187,9 @@ pre.float + .output{
     -webkit-box-shadow: 0 1px 1px #ccc; 
     -moz-box-shadow: 0 1px 1px #ccc; 
     box-shadow: 0 1px 1px #ccc;         
+}
+.output > div{
+    margin: 0 auto;
 }
 
 .output table tr:hover {

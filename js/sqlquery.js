@@ -1,5 +1,9 @@
-(function () {
+var SQLQuery = (function () {
   'use strict';
+  var config = {
+    animation: 'flipInX',
+    animationError: 'tada'
+  };
   function run(db, sql, $output){
     $.ajax({
       url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
@@ -10,10 +14,17 @@
       success:function(response){
         if(response.error){
           $output.html(response.error);
-          $output.addClass('error');
+          $output.addClass('error animated ' + config.animationError)
+          .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+              $output.removeClass('animated ' + config.animationError);
+            });
         }else{
-          $output.html('<div>' + marked(SQLtoMarkdown.parse(response)) + '</div>');
+          $output.html(marked(SQLtoMarkdown.parse(response)));
           $output.removeClass('error');
+          $output.addClass('animated ' + config.animation)
+          .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+             $output.removeClass('animated ' + config.animation );
+          });
         }
       },
       error:function(response, error){
@@ -40,9 +51,22 @@
         $pre.wrap('<div class="layout-two"></div>');
       }
       var $output = $('<div class="output"></div>').insertAfter($pre);
+      $output.on('dblclick', function(){
+        $output.toggleClass('popup');
+      });
       if($pre.hasClass('start-hidden')){
         $output.addClass('fragment');
       }
+      var toRemove = [];
+      $pre[0].classList.forEach(function(className){
+         if(['top','left', 'right', 'bottom', 'no-margin'].indexOf(className) > -1){
+            $output.addClass(className);
+            toRemove.push(className);
+         }
+      });
+      toRemove.forEach(function(className){
+          $pre.removeClass(className);
+      });
       var $run = $('<div class="run">run</div>')
       .appendTo($pre);
       $run.click(function(){
@@ -53,4 +77,5 @@
       }
     }
   });
+  return config
 })();

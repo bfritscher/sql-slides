@@ -89,7 +89,7 @@ module.exports = (grunt) ->
 
     # Load all grunt tasks.
     require('load-grunt-tasks')(grunt)
-
+    
     grunt.registerMultiTask 'buildIndex',
         'Build slides from templates/_index.html and slides/*.json.',
         ->
@@ -104,16 +104,22 @@ module.exports = (grunt) ->
                         true
                 .map (filepath) ->
                     slides = grunt.file.readJSON filepath
+                    theFile = filepath.match(/\/([^/]*)$/)[1]
+                    onlyName = theFile.substr(0, theFile.lastIndexOf('.')) || theFile
+                    filedest = file.dest + onlyName + '.html'
+                    niceName = onlyName.split('_')
+                    .map (string) ->
+                        string.charAt(0).toUpperCase() + string.slice(1)
+                    .join(' ')
                     html = grunt.template.process indexTemplate, data:
                         slides:
                             slides
+                        title:
+                            niceName
                         section: (slide) ->
                             grunt.template.process sectionTemplate, data:
                                 slide:
                                     slide
-                    theFile = filepath.match(/\/([^/]*)$/)[1]
-                    onlyName = theFile.substr(0, theFile.lastIndexOf('.')) || theFile
-                    filedest = file.dest + onlyName + '.html'
                     grunt.file.write filedest, html
                     grunt.log.writeln 'File "' + filedest + '" created.'
 
