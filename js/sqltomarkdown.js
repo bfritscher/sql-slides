@@ -1,6 +1,7 @@
 var SQLtoMarkdown = (function () {
   'use strict';
   function parse(json){
+    var json = $.extend(true, {}, json);
     var tabularData = json.content;
     tabularData.unshift(json.headers);
 

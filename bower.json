@@ -1,5 +1,5 @@
 {
-  "name": "sql-test",
+  "name": "sql-slides",
   "version": "0.0.0",
   "dependencies": {
     "reveal.js": "~3.0.0",

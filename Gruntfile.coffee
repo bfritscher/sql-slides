@@ -75,11 +75,12 @@ module.exports = (grunt) ->
                         'bower_components/**'
                         'js/**'
                         'css/**'
+                        'images/**'
                     ]
                     dest: 'dist/'
                 },{
                     expand: true
-                    src: ['index.html']
+                    src: ['*.html']
                     dest: 'dist/'
                     filter: 'isFile'
                 }]
