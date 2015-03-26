@@ -460,16 +460,16 @@ ORDER SIBLINGS BY enfants.nom ASC;
 ---
 ### En bref
 
-|            |                      |
-|-----------------------------------|
-| CONNECT BY | Relation père fils. |
-| PRIOR | Sens du parcours de l’arbre. |
-| START WITH | La racine de la hiérarchie à partir de laquelle commence le parcours. |
-| NOCYCLE | Pour afficher les données même en cas de boucles. |
-| LEVEL | Une pseudo-colonne qui montre le niveau du nœud en fonction du départ. |
-| CONNECT_BY_ISLEAF | Une pseudo-colonne qui affiche 1 si un nœud est une feuille. |
-| CONNECT_BY_ISCYCLE | Sert à détecter la boucle. Doit être utilisée avec la clause NOCYCLE. |
-| SYS_CONNECT_BY_PATH | Une fonction qui permet de restituer le nœud en partant de la racine. |
-| CONNECT_BY_ROOT | Un opérateur qui extrait les données depuis la racine. |
-| SIBLINGS | Une clause de tri des structures hiérarchiques. |
+| SQL | Description |
+|--------|----------|
+| CONNECT BY | Relation père fils. 
+| PRIOR | Sens du parcours de l’arbre. 
+| START WITH | La racine de la hiérarchie à partir de laquelle commence le parcours. 
+| NOCYCLE | Pour afficher les données même en cas de boucles. 
+| LEVEL | Une pseudo-colonne qui montre le niveau du nœud en fonction du départ. 
+| CONNECT_BY_ISLEAF | Une pseudo-colonne qui affiche 1 si un nœud est une feuille. 
+| CONNECT_BY_ISCYCLE | Sert à détecter la boucle. Doit être utilisée avec la clause NOCYCLE. 
+| SYS_CONNECT_BY_PATH | Une fonction qui permet de restituer le nœud en partant de la racine. 
+| CONNECT_BY_ROOT | Un opérateur qui extrait les données depuis la racine. 
+| SIBLINGS | Une clause de tri des structures hiérarchiques. 
 <!-- .slide: class="summary" -->
