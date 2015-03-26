@@ -19,7 +19,7 @@ module.exports = (grunt) ->
                 files: [
                     'templates/_index.html'
                     'templates/_section.html'
-                    'slides/list.json'
+                    'slides/*.json'
                 ]
                 tasks: ['buildIndex']
 
@@ -60,6 +60,11 @@ module.exports = (grunt) ->
 
             all: ['js/*.js']
 
+        buildIndex:
+            build:
+                src: ['slides/*.json']
+                dest: ''
+        
         copy:
 
             dist:
@@ -85,21 +90,32 @@ module.exports = (grunt) ->
     # Load all grunt tasks.
     require('load-grunt-tasks')(grunt)
 
-    grunt.registerTask 'buildIndex',
-        'Build index.html from templates/_index.html and slides/list.json.',
+    grunt.registerMultiTask 'buildIndex',
+        'Build slides from templates/_index.html and slides/*.json.',
         ->
             indexTemplate = grunt.file.read 'templates/_index.html'
             sectionTemplate = grunt.file.read 'templates/_section.html'
-            slides = grunt.file.readJSON 'slides/list.json'
-
-            html = grunt.template.process indexTemplate, data:
-                slides:
-                    slides
-                section: (slide) ->
-                    grunt.template.process sectionTemplate, data:
-                        slide:
-                            slide
-            grunt.file.write 'index.html', html
+            this.files.forEach (file) ->
+                file.src.filter (filepath) ->
+                    if !grunt.file.exists filepath
+                        grunt.log.warn('Source file "' + filepath + '" not found.')
+                        false
+                    else
+                        true
+                .map (filepath) ->
+                    slides = grunt.file.readJSON filepath
+                    html = grunt.template.process indexTemplate, data:
+                        slides:
+                            slides
+                        section: (slide) ->
+                            grunt.template.process sectionTemplate, data:
+                                slide:
+                                    slide
+                    theFile = filepath.match(/\/([^/]*)$/)[1]
+                    onlyName = theFile.substr(0, theFile.lastIndexOf('.')) || theFile
+                    filedest = file.dest + onlyName + '.html'
+                    grunt.file.write filedest, html
+                    grunt.log.writeln 'File "' + filedest + '" created.'
 
     grunt.registerTask 'test',
         '*Lint* javascript and coffee files.', [

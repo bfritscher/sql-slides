@@ -1,13 +1,10 @@
 [
-    "index.md",
+    "title.md",
     {
-        "filename": "requetes_hierarchiques.md",
+        "filename": "test.html",
         "attr": {
             "data-separator": "^\\n---\\n",
             "data-vertical": "^\\n@@@\\n"
         }
-    },
-    {
-        "filename": "requetes-hierarchiques.html"
     }
 ]
