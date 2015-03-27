@@ -43,6 +43,9 @@ var SQLQuery = (function () {
             $output.removeClass('animated ' + config.animationError);
           });
       }else{
+        if(response.headers.length === 0){
+           response.headers.push('&nbsp;&nbsp;&nbsp;&nbsp;');
+        }
         $output.html(marked(SQLtoMarkdown.parse(response)));
         $output.removeClass('error');
         $output.addClass('animated ' + config.animation)
