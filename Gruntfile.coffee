@@ -65,8 +65,11 @@ module.exports = (grunt) ->
                 src: ['slides/*.json']
                 dest: ''
         
+        buildMarkdown:
+            build:
+                src: ['slides/*.md']
+                dest: 'dist/'
         copy:
-
             dist:
                 files: [{
                     expand: true
@@ -86,8 +89,6 @@ module.exports = (grunt) ->
                 }]
 
         
-
-
     # Load all grunt tasks.
     require('load-grunt-tasks')(grunt)
     
@@ -123,7 +124,33 @@ module.exports = (grunt) ->
                                     slide
                     grunt.file.write filedest, html
                     grunt.log.writeln 'File "' + filedest + '" created.'
-
+    
+    
+    grunt.registerMultiTask 'buildMarkdown',
+        'Build cache results into markdown files in slides/*.md.',
+        ->
+            SQLtoMarkdown = require('./js/sqltomarkdown.js')
+            this.files.forEach (file) ->
+                file.src.filter (filepath) ->
+                    if !grunt.file.exists filepath
+                        grunt.log.warn('Source file "' + filepath + '" not found.')
+                        false
+                    else if !grunt.file.exists filepath.replace('.md', '.cache')
+                        grunt.log.warn('Cache file "' + filepath + '" not found.')
+                        false
+                    else
+                        true
+                .map (filepath) ->
+                    md = grunt.file.read filepath
+                    cache = grunt.file.readJSON filepath.replace('.md', '.cache')
+                    theFile = filepath.match(/\/([^/]*)$/)[1]
+                    filedest = file.dest + theFile
+                    replacer = (march, sql, db) ->
+                        '```sql\n' + sql + '\n```\n\n' + SQLtoMarkdown.parse(cache[sql])
+                    md = md.replace(/```sql\n([\s\S!]*?)\n```\n(?:.*?data-db="(.*?)".*?-->)?/gm, replacer)
+                    grunt.file.write filedest, md
+                    grunt.log.writeln 'File "' + filedest + '" created.'
+    
     grunt.registerTask 'test',
         '*Lint* javascript and coffee files.', [
             'coffeelint'
