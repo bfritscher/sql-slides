@@ -127,6 +127,12 @@
   width: 90%;
 }
 
+.reveal p.error{
+  margin: 0 auto;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
 .reveal .left{
     position: absolute;
     left: 0;
@@ -136,6 +142,7 @@
 .reveal .no-margin{
     margin: 0 !important;
 }
+
 
 .reveal .right{
     position: absolute;
