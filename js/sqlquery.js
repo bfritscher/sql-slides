@@ -1,3 +1,5 @@
+/* exported SQLQuery */
+/* global marked:false, SQLtoMarkdown:false */
 var SQLQuery = (function () {
   'use strict';
   var config = {
@@ -14,7 +16,7 @@ var SQLQuery = (function () {
   function run(db, sql, $output){
     function handleResponse(response){
       if(generateCache){
-        cache[sql] = $.extend(true, {}, response);
+        cache[sql] = jQuery.extend(true, {}, response);
         cacheDone++;
       }
       if(response.error){
@@ -33,7 +35,7 @@ var SQLQuery = (function () {
       }
     }
   
-    $.ajax({
+    jQuery.ajax({
       url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
       type:'POST',
       dataType:'json',
@@ -58,8 +60,8 @@ var SQLQuery = (function () {
   }
   
   function parseCode(){
-    $('code.sql').each(function(index, code){
-      var $code = $(code);
+    jQuery('code.sql').each(function(index, code){
+      var $code = jQuery(code);
       $code.attr('contenteditable','')
       .attr('spellcheck', 'false')
       .keydown(function (e) {
@@ -73,7 +75,7 @@ var SQLQuery = (function () {
         if($pre.hasClass('col2')){
           $pre.wrap('<div class="layout-two"></div>');
         }
-        var $output = $('<div class="output"></div>').insertAfter($pre);
+        var $output = jQuery('<div class="output"></div>').insertAfter($pre);
         $output.draggabilly({});
         if($pre.hasClass('start-hidden')){
           $output.addClass('fragment');
@@ -88,7 +90,7 @@ var SQLQuery = (function () {
         toRemove.forEach(function(className){
             $pre.removeClass(className);
         });
-        var $run = $('<div class="run">run</div>')
+        var $run = jQuery('<div class="run">run</div>')
         .appendTo($pre);
         $run.click(function(){
           run(db, $code.text(), $output);
@@ -107,25 +109,25 @@ var SQLQuery = (function () {
   
   if(!generateCache){
     //try to load cache
-    $.getJSON( 'slides/' + $('title').text().toLowerCase().split(' ').join('_') + '.cache', function(data){
+    jQuery.getJSON( 'slides/' + jQuery('title').text().toLowerCase().split(' ').join('_') + '.cache', function(data){
       cache = data;
     })
     .always(parseCode);
   }  
   if(generateCache){
     parseCode();
-    function checkCacheDone(){
+    var checkCacheDone = function(){
       if(cacheCounter === cacheDone){
-        $('<a download="cache.json" href="data:application/octet-stream;charset=utf-8,' + encodeURIComponent(JSON.stringify(cache)) + '">cache</a>')[0].click();
+        jQuery('<a download="cache.json" href="data:application/octet-stream;charset=utf-8,' + encodeURIComponent(JSON.stringify(cache)) + '">cache</a>')[0].click();
       }
       else if(cacheCounter === cacheDone + cacheError){
         alert('Caching failed: ' + cacheDone + ' ok and ' + cacheError + ' errors.');
       }else{
         setTimeout(checkCacheDone, 1000);
       }
-    }
+    };
     checkCacheDone();
   }
   
-  return config
+  return config;
 })();
