@@ -76,15 +76,10 @@ var SQLQuery = (function () {
     jQuery('code.sql').each(function(index, code){
       var $code = jQuery(code);
       $code.attr('contenteditable','')
-      .attr('spellcheck', 'false')
-      .keydown(function (e) {
-        if (e.ctrlKey && e.keyCode === 13) {
-            $run.click();
-        }
-      });
+      .attr('spellcheck', 'false');
       var $pre = $code.parent();
       var db = $pre.data('db');
-      if(db){
+      if(db){ //only run if db is known
         if($pre.hasClass('col2')){
           $pre.wrap('<div class="layout-two"></div>');
         }
@@ -110,6 +105,11 @@ var SQLQuery = (function () {
         .appendTo($pre);
         $run.click(function(){
           run(db, $code.text(), $output);
+        });
+        $code.keydown(function (e) { //ctrl + enter to run
+          if (e.ctrlKey && e.keyCode === 13) {
+              $run.click();
+          }
         });
         if( window.location.search.indexOf('sqlnorun') === -1 &&
             ($pre.hasClass('run') || window.location.search.indexOf('sqlrun') > -1)){
