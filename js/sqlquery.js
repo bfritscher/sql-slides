@@ -13,16 +13,21 @@ var SQLQuery = (function () {
   
   var generateCache = window.location.search.indexOf('cache') > -1;
   
+  
   function hashCode(str) {
     var hash = 0, i, chr, len;
-    if (str.length === 0) return hash;
+    if (str.length === 0){
+      return hash;
+    }
     for (i = 0, len = str.length; i < len; i++) {
       chr   = str.charCodeAt(i);
+      /* jshint ignore:start */
       hash  = ((hash << 5) - hash) + chr;
       hash |= 0; // Convert to 32bit integer
+      /* jshint ignore:end */
     }
     return hash;
-  };
+  }
   //Source: http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
   
   function run(db, sql, $output){
@@ -148,7 +153,7 @@ var SQLQuery = (function () {
     parseCode();
     var checkCacheDone = function(){
       if(cacheCounter === cacheDone){
-        jQuery('<a download="cache.json" href="data:application/octet-stream;charset=utf-8,' + encodeURIComponent(JSON.stringify(cache)) + '">cache</a>')[0].click();
+        jQuery('<a download="' + window.location.pathname.match(/\/(.*)html/)[1] + 'cache" href="data:application/octet-stream;charset=utf-8,' + encodeURIComponent(JSON.stringify(cache)) + '">cache</a>')[0].click();
       }
       else if(cacheCounter === cacheDone + cacheError){
         alert('Caching failed: ' + cacheDone + ' ok and ' + cacheError + ' errors.');
