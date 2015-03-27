@@ -120,7 +120,7 @@
 }
 
 
-.output.error{
+.output.error, .error{
   background-color: red;
   color: white;
   height:auto;
@@ -149,6 +149,12 @@
     position: absolute;
     bottom: 20px;
 }
+.reveal .float-left{
+    float: left;
+}
+.reveal .float-right{
+    float: right;
+}
 .reveal .w-33{
     width: 33%;
 }
@@ -160,13 +166,6 @@
 }
 .reveal .w-100{
     width: 100%;
-}
-
-
-pre.float + .output{
-    position:absolute;
-    top: 15%;
-    right:0;
 }
 
 .output table {
