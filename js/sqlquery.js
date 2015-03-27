@@ -77,8 +77,11 @@ var SQLQuery = (function () {
         }
         var $output = jQuery('<div class="output"></div>').insertAfter($pre);
         $output.draggabilly({});
-        if($pre.hasClass('start-hidden')){
+        if($pre.hasClass('start-hidden') || $pre.attr('data-output-fragment-index') !== undefined){
           $output.addClass('fragment');
+          if($pre.attr('data-output-fragment-index') !== undefined){
+            $output.attr('data-fragment-index', $pre.attr('data-output-fragment-index'));
+          }
         }
         var toRemove = [];
         $pre[0].classList.forEach(function(className){
@@ -109,8 +112,13 @@ var SQLQuery = (function () {
   
   if(!generateCache){
     //try to load cache
-    jQuery.getJSON( 'slides/' + jQuery('title').text().toLowerCase().split(' ').join('_') + '.cache', function(data){
-      cache = data;
+    jQuery.ajax({
+      dataType: 'json',
+      url: 'slides/' + jQuery('title').text().toLowerCase().split(' ').join('_') + '.cache',
+      success: function(data){
+        cache = data;
+      },
+      async: false //must be sync in order to be able to write output data-fragment-index before being parsed by Reveal
     })
     .always(parseCode);
   }  

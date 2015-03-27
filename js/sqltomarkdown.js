@@ -53,7 +53,7 @@ var SQLtoMarkdown = (function () {
 
     return headerOutput + seperatorOutput + rowOutput;
   }
-  if(typeof exports != 'undefined'){
+  if(typeof exports !== 'undefined'){
     exports.parse = parse;
   }
   return {
