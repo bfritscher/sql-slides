@@ -84,7 +84,7 @@ var SQLQuery = (function () {
           $pre.wrap('<div class="layout-two"></div>');
         }
         var $output = jQuery('<div class="output"></div>').insertAfter($pre);
-        $output.draggabilly({});
+        
         if($pre.hasClass('start-hidden') || $pre.attr('data-output-fragment-index') !== undefined){
           $output.addClass('fragment');
           if($pre.attr('data-output-fragment-index') !== undefined){
@@ -92,12 +92,21 @@ var SQLQuery = (function () {
           }
         }
         var toRemove = [];
+        var canDrag = true;
         $pre[0].classList.forEach(function(className){
-           if(['top','left', 'right', 'bottom', 'no-margin'].indexOf(className) > -1){
+            //TODO could change to regex... to match w-%
+           if(['top','left', 'right', 'bottom', 'no-margin', 'w-100'].indexOf(className) > -1){
               $output.addClass(className);
               toRemove.push(className);
+              if(['top','left', 'right', 'bottom'].indexOf(className) > -1){
+                //need position absolute conflict with position relative of draggabilly
+                canDrag = false;
+              }
            }
         });
+        if(canDrag){
+          $output.draggabilly({});
+        }
         toRemove.forEach(function(className){
             $pre.removeClass(className);
         });

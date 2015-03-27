@@ -158,6 +158,10 @@
 .reveal .w-66{
     width: 66%;
 }
+.reveal .w-100{
+    width: 100%;
+}
+
 
 pre.float + .output{
     position:absolute;
