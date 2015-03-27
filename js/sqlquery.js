@@ -13,10 +13,22 @@ var SQLQuery = (function () {
   
   var generateCache = window.location.search.indexOf('cache') > -1;
   
+  function hashCode(str) {
+    var hash = 0, i, chr, len;
+    if (str.length === 0) return hash;
+    for (i = 0, len = str.length; i < len; i++) {
+      chr   = str.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+  };
+  //Source: http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+  
   function run(db, sql, $output){
     function handleResponse(response){
       if(generateCache){
-        cache[sql] = jQuery.extend(true, {}, response);
+        cache[hashCode(sql)] = jQuery.extend(true, {}, response);
         cacheDone++;
       }
       if(response.error){
@@ -47,8 +59,9 @@ var SQLQuery = (function () {
         if(generateCache){
           cacheError++;
         }else{
-          if(cache.hasOwnProperty(sql)){
-            handleResponse(cache[sql]);
+          var hash = hashCode(sql);
+          if(cache.hasOwnProperty(hash)){
+            handleResponse(cache[hash]);
           }else{
             $output.html('no connection and no-cache available!');
             console.log(error);
@@ -102,7 +115,7 @@ var SQLQuery = (function () {
             ($pre.hasClass('run') || window.location.search.indexOf('sqlrun') > -1)){
           $run.click();
           if(generateCache){
-            cache[$code.text()] = '';
+            cache[hashCode($code.text())] = '';
             cacheCounter++;
           }
         }
