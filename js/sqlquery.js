@@ -111,10 +111,11 @@ var SQLQuery = (function () {
         var canDrag = true;
         $pre[0].classList.forEach(function(className){
             //TODO could change to regex... to match w-%
+            //TODO more flexible forward classes with output-
            if(['top','left', 'right', 'bottom', 'no-margin', 'w-100'].indexOf(className) > -1){
               $output.addClass(className);
               toRemove.push(className);
-              if(['top','left', 'right', 'bottom'].indexOf(className) > -1){
+              if(['top','left', 'right', 'bottom', 'nodrag'].indexOf(className) > -1){
                 //need position absolute conflict with position relative of draggabilly
                 canDrag = false;
               }
@@ -137,7 +138,7 @@ var SQLQuery = (function () {
           }
         });
         if( window.location.search.indexOf('sqlnorun') === -1 &&
-            ($pre.hasClass('run') || window.location.search.indexOf('sqlrun') > -1)){
+            ($pre.hasClass('run') || window.location.search.indexOf('sqlrun') > -1 || generateCache)){
           $run.click();
           if(generateCache){
             cache[hashCode($code.text())] = '';
@@ -148,32 +149,36 @@ var SQLQuery = (function () {
     });
   }
   
-  if(!generateCache){
-    //try to load cache
-    jQuery.ajax({
-      dataType: 'json',
-      url: 'slides/' + jQuery('title').text().toLowerCase().split(' ').join('_') + '.cache',
-      success: function(data){
-        cache = data;
-      },
-      async: false //must be sync in order to be able to write output data-fragment-index before being parsed by Reveal
-    })
-    .always(parseCode);
-  }  
-  if(generateCache){
-    parseCode();
-    var checkCacheDone = function(){
-      if(cacheCounter === cacheDone){
-        jQuery('<a download="' + window.location.pathname.match(/\/(.*)html/)[1] + 'cache" href="data:application/octet-stream;charset=utf-8,' + encodeURIComponent(JSON.stringify(cache)) + '">cache</a>')[0].click();
+  function init(){
+      if(!generateCache){
+        //try to load cache
+        jQuery.ajax({
+          dataType: 'json',
+          url: 'slides/' + jQuery('title').text().toLowerCase().split(' ').join('_') + '.cache',
+          success: function(data){
+            cache = data;
+          },
+          async: false //must be sync in order to be able to write output data-fragment-index before being parsed by Reveal
+        })
+        .always(parseCode);
+      }  
+      else if(generateCache){
+        parseCode();
+        var checkCacheDone = function(){
+          if(cacheCounter === cacheDone){
+            jQuery('<a download="' + window.location.pathname.match(/\/(.*)html/)[1] + 'cache" href="data:application/octet-stream;charset=utf-8,' + encodeURIComponent(JSON.stringify(cache)) + '">cache</a>')[0].click();
+          }
+          else if(cacheCounter === cacheDone + cacheError){
+            alert('Caching failed: ' + cacheDone + ' ok and ' + cacheError + ' errors.');
+          }else{
+            setTimeout(checkCacheDone, 1000);
+          }
+        };
+        checkCacheDone();
       }
-      else if(cacheCounter === cacheDone + cacheError){
-        alert('Caching failed: ' + cacheDone + ' ok and ' + cacheError + ' errors.');
-      }else{
-        setTimeout(checkCacheDone, 1000);
-      }
-    };
-    checkCacheDone();
   }
-  
-  return config;
+  return {
+    config: config,
+    init: init
+  };
 })();

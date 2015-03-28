@@ -88,7 +88,7 @@
                     { src: 'bower_components/reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } },
                     //{ src: 'bower_components/reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
                     { src: 'js/sqltomarkdown.js', async: false },
-                    { src: 'js/sqlquery.js', async: false }
+                    { src: 'js/sqlquery.js', async: false, callback: function(){SQLQuery.init();} }
                 ]
             });
         </script>
