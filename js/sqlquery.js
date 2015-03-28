@@ -28,12 +28,12 @@ var SQLQuery = (function () {
     animation: 'flipInX',
     animationError: 'tada'
   };
+  var mywindow = null;
   var cache = {};
   var cacheCounter = 0;
   var cacheDone = 0;
   var cacheError = 0;
-  
-  var generateCache = window.location.search.indexOf('cache') > -1;
+  var generateCache = false;
   
   
 
@@ -91,7 +91,7 @@ var SQLQuery = (function () {
   function parseCode(){
     jQuery('code.sql').each(function(index, code){
       var $code = jQuery(code);
-      $code.attr('contenteditable','')
+      $code.attr('contenteditable', '')
       .attr('spellcheck', 'false');
       var $pre = $code.parent();
       var db = $pre.data('db');
@@ -137,8 +137,8 @@ var SQLQuery = (function () {
               $run.click();
           }
         });
-        if( window.location.search.indexOf('sqlnorun') === -1 &&
-            ($pre.hasClass('run') || window.location.search.indexOf('sqlrun') > -1 || generateCache)){
+        if( mywindow.location.search.indexOf('sqlnorun') === -1 &&
+            ($pre.hasClass('run') || mywindow.location.search.indexOf('sqlrun') > -1 || generateCache)){
           $run.click();
           if(generateCache){
             cache[hashCode($code.text())] = '';
@@ -148,13 +148,28 @@ var SQLQuery = (function () {
       }
     });
   }
+  function getCacheName(){
+    var match = mywindow.location.pathname.match(/\/(.*?)\.html/);
+    if(match && match.length > 0){
+        return match[1] + '.cache';
+    }else{
+        return 'index.cache';
+    }
+  }
   
-  function init(){
+  
+  function init(fakewindow){
+      if(fakewindow){
+        mywindow = fakewindow;
+      }else{
+        mywindow = window;
+      }
+      generateCache = mywindow.location.search.indexOf('cache') > -1;
       if(!generateCache){
         //try to load cache
         jQuery.ajax({
           dataType: 'json',
-          url: 'slides/' + jQuery('title').text().toLowerCase().split(' ').join('_') + '.cache',
+          url: 'slides/' + getCacheName(),
           success: function(data){
             cache = data;
           },
@@ -166,7 +181,7 @@ var SQLQuery = (function () {
         parseCode();
         var checkCacheDone = function(){
           if(cacheCounter === cacheDone){
-            jQuery('<a download="' + window.location.pathname.match(/\/(.*)html/)[1] + 'cache" href="data:application/octet-stream;charset=utf-8,' + encodeURIComponent(JSON.stringify(cache)) + '">cache</a>')[0].click();
+            jQuery('<a download="' + getCacheName() + '" href="data:application/octet-stream;charset=utf-8,' + encodeURIComponent(JSON.stringify(cache)) + '">cache</a>')[0].click();
           }
           else if(cacheCounter === cacheDone + cacheError){
             alert('Caching failed: ' + cacheDone + ' ok and ' + cacheError + ' errors.');
@@ -179,6 +194,7 @@ var SQLQuery = (function () {
   }
   return {
     config: config,
+    hashCode: hashCode,
     init: init
   };
 })();
