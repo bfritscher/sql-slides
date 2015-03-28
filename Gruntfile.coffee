@@ -2,9 +2,11 @@
 module.exports = (grunt) ->
 
     grunt.initConfig
-
+        coffee:
+            test:
+                files:
+                    'test/tests.js':'test/test.*.coffee'
         watch:
-
             livereload:
                 options:
                     livereload: true
@@ -13,8 +15,10 @@ module.exports = (grunt) ->
                     'slides/{,*/}*.{md,html}'
                     'js/*.js'
                     'css/*.css'
+                    'images/**'
+                    'test/*.js'
+                    'test/index.html'
                 ]
-
             index:
                 files: [
                     'templates/_index.html'
@@ -24,8 +28,8 @@ module.exports = (grunt) ->
                 tasks: ['buildIndex']
 
             coffeelint:
-                files: ['Gruntfile.coffee']
-                tasks: ['coffeelint']
+                files: ['Gruntfile.coffee', 'test/*.coffee']
+                tasks: ['coffeelint', 'coffee:test']
 
             jshint:
                 files: ['js/*.js']
@@ -51,7 +55,7 @@ module.exports = (grunt) ->
                 max_line_length:
                     level: 'ignore'
 
-            all: ['Gruntfile.coffee']
+            all: ['Gruntfile.coffee', 'test/*.coffee']
 
         jshint:
 

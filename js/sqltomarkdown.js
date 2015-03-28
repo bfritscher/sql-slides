@@ -3,7 +3,10 @@
 var SQLtoMarkdown = (function () {
   'use strict';
   function parse(json){
-    if(!(json && json.hasOwnProperty('content'))){
+    if(!(json && json.hasOwnProperty('content') && json.hasOwnProperty('headers'))){
+      return '';
+    }
+    if(json.content.length === 0 && json.headers.length === 0){
       return '';
     }
     var tabularData = json.content.slice(0);
