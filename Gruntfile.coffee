@@ -69,13 +69,31 @@ module.exports = (grunt) ->
             build:
                 src: ['slides/*.md']
                 dest: 'dist/'
+                
+        clean:
+            dist:
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp'
+                        'dist/{,*/}*'
+                        'dist/.git*'
+                    ]
+                }]
+                
         copy:
             dist:
                 files: [{
                     expand: true
                     src: [
                         'slides/**'
-                        'bower_components/**'
+                        'bower_components/animate-css/animate.min.css'
+                        'bower_components/draggabilly/dist/draggabilly.pkgd.min.js'
+                        'bower_components/jquery/dist/jquery.min.js'
+                        'bower_components/reveal.js/css/{,*/}*.css'
+                        'bower_components/reveal.js/js/*'
+                        'bower_components/reveal.js/plugin/**'
+                        'bower_components/reveal.js/lib/**'
                         'js/**'
                         'css/**'
                         'images/**'
@@ -130,6 +148,7 @@ module.exports = (grunt) ->
         'Build cache results into markdown files in slides/*.md.',
         ->
             SQLtoMarkdown = require('./js/sqltomarkdown.js')
+            SQLQuery = require('./js/sqlquery.js')
             this.files.forEach (file) ->
                 file.src.filter (filepath) ->
                     if !grunt.file.exists filepath
@@ -146,7 +165,7 @@ module.exports = (grunt) ->
                     theFile = filepath.match(/\/([^/]*)$/)[1]
                     filedest = file.dest + theFile
                     replacer = (march, sql, db) ->
-                        '```sql\n' + sql + '\n```\n\n' + SQLtoMarkdown.parse(cache[sql])
+                        '```sql\n' + sql + '\n```\n\n' + SQLtoMarkdown.parse(cache[SQLQuery.hashCode(sql)])
                     md = md.replace(/```sql\n([\s\S!]*?)\n```\n(?:.*?data-db="(.*?)".*?-->)?/gm, replacer)
                     grunt.file.write filedest, md
                     grunt.log.writeln 'File "' + filedest + '" created.'
@@ -168,7 +187,9 @@ module.exports = (grunt) ->
         'Save presentation files to *dist* directory.', [
             'test'
             'buildIndex'
+            'clean:dist'
             'copy'
+            'buildMarkdown'
         ]
 
     

@@ -1,18 +1,7 @@
 /* exported SQLQuery */
-/* global marked:false, SQLtoMarkdown:false */
+/* global marked:false, SQLtoMarkdown:false, exports:false */
 var SQLQuery = (function () {
   'use strict';
-  var config = {
-    animation: 'flipInX',
-    animationError: 'tada'
-  };
-  var cache = {};
-  var cacheCounter = 0;
-  var cacheDone = 0;
-  var cacheError = 0;
-  
-  var generateCache = window.location.search.indexOf('cache') > -1;
-  
   
   function hashCode(str) {
     var hash = 0, i, chr, len;
@@ -29,6 +18,25 @@ var SQLQuery = (function () {
     return hash;
   }
   //Source: http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+  
+  if(typeof exports !== 'undefined'){
+    exports.hashCode = hashCode;
+    return;
+  }
+  
+  var config = {
+    animation: 'flipInX',
+    animationError: 'tada'
+  };
+  var cache = {};
+  var cacheCounter = 0;
+  var cacheDone = 0;
+  var cacheError = 0;
+  
+  var generateCache = window.location.search.indexOf('cache') > -1;
+  
+  
+
   
   function run(db, sql, $output){
     function handleResponse(response){
