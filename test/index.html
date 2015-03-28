@@ -19,7 +19,7 @@
   <script>
     window.onload = function() {
         mocha.checkLeaks();
-        mocha.globals(['jQuery']);
+        mocha.globals(['jQuery', 'marked']);
         mocha.run();
     };
   </script>

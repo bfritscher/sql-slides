@@ -4,12 +4,12 @@
   expect = chai.expect;
 
   describe('SQLQuery', function() {
-    var dragStub, server, todo;
+    var dragSpy, server, todo;
     todo = function() {
       return expect().to.contain('implementation');
     };
     server = null;
-    dragStub = jQuery.fn.draggabilly = sinon.stub();
+    dragSpy = jQuery.fn.draggabilly = sinon.spy();
     beforeEach(function() {
       return server = sinon.fakeServer.create();
     });
@@ -94,18 +94,81 @@
         return expect(server.requests).to.have.length(0);
       });
       it('can find data in cache file', function() {
-        return todo();
+        var cache, html, spy;
+        cache = {
+          "3556498": {
+            "headers": ["test"],
+            content: [["sql"]]
+          }
+        };
+        server.respondWith('get', 'slides/test.cache', [
+          200, {
+            "Content-Type": "application/json"
+          }, JSON.stringify(cache)
+        ]);
+        spy = sinon.spy(SQLtoMarkdown, 'parse');
+        window.marked = function() {
+          return '';
+        };
+        html = "<section id=\"test\">\n<pre data-db=\"test\" class=\"run\"><code class=\"sql\">test</code></pre>\n</section>";
+        jQuery(html).appendTo('body');
+        SQLQuery.init({
+          location: {
+            pathname: '/test.html',
+            search: ''
+          }
+        });
+        server.respond();
+        expect(spy.calledWithMatch(cache["3556498"])).to.be["true"];
+        return spy.restore();
       });
       return it('error if no connection and no cache', function() {
-        return todo();
+        var html;
+        html = "<section id=\"test\">\n<pre data-db=\"test\" class=\"run\"><code class=\"sql\"></code></pre>\n</section>";
+        jQuery(html).appendTo('body');
+        SQLQuery.init();
+        server.respond();
+        return expect(jQuery('#test .output').hasClass('error')).to.be["true"];
       });
     });
     describe('URL options', function() {
+      beforeEach(function() {
+        var html;
+        html = "<section id=\"test\">\n<pre><code class=\"sql\">sql1</code></pre>\n<pre data-db=\"test\" class=\"run\"><code class=\"sql\">sql2</code></pre>\n<pre data-db=\"test\"><code class=\"sql\">sql3</code></pre>\n</section>";
+        jQuery(html).appendTo('body');
+        server.respondWith([
+          200, {
+            "Content-Type": "application/json"
+          }, JSON.stringify({})
+        ]);
+        return server.respond();
+      });
+      it('without url options .run + data-db are executed', function() {
+        SQLQuery.init({
+          location: {
+            pathname: '/test.html',
+            search: ''
+          }
+        });
+        return expect(server.requests).to.have.length(2);
+      });
       it('?sqlrun force run of all data-db blocs', function() {
-        return todo();
+        SQLQuery.init({
+          location: {
+            pathname: '/test.html',
+            search: 'sqlrun'
+          }
+        });
+        return expect(server.requests).to.have.length(3);
       });
       return it('?sqlnorun disable inital run of .run blocs', function() {
-        return todo();
+        SQLQuery.init({
+          location: {
+            pathname: '/test.html',
+            search: 'sqlnorun'
+          }
+        });
+        return expect(server.requests).to.have.length(1);
       });
     });
     return describe('Annotations', function() {
@@ -119,28 +182,54 @@
         return expect(code.spellcheck).to.be["false"];
       });
       it('with data-db="SCHEMA" a run button  and output is added', function() {
-        return todo();
+        var html;
+        html = "<section id=\"test\">\n<pre data-db=\"test\"><code class=\"sql\"></code></pre>\n</section>";
+        jQuery(html).appendTo('body');
+        SQLQuery.init();
+        expect(jQuery('#test .output')).to.have.length(1);
+        return expect(jQuery('#test pre div.run')).to.have.length(1);
       });
-      it('without url options .run + data-db are executed', function() {
-        return todo();
-      });
-      it('.fragment and data-fragment-index on pre', function() {
-        return todo();
-      });
+      it('.fragment and data-fragment-index on pre', function() {});
       it('data-output-fragment-index to add data-fragment-index to output', function() {
-        return todo();
+        var html;
+        html = "<section id=\"test\">\n<pre data-db=\"test\" data-output-fragment-index=\"2\"><code class=\"sql\"></code></pre>\n</section>";
+        jQuery(html).appendTo('body');
+        SQLQuery.init();
+        return expect(jQuery('#test .output').data('fragment-index')).to.be.equal(2);
       });
       it('.start-hidden applies .fragment to output', function() {
-        return todo();
+        var html;
+        html = "<section id=\"test\">\n<pre data-db=\"test\" class=\"start-hidden\"><code class=\"sql\"></code></pre>\n</section>";
+        jQuery(html).appendTo('body');
+        SQLQuery.init();
+        return expect(jQuery('#test .output').hasClass('fragment')).to.be["true"];
       });
       it('.col2 surrounds with a div.layout-two', function() {
-        return todo();
+        var html;
+        html = "<section id=\"test\">\n<pre data-db=\"test\" class=\"col2\"><code class=\"sql\"></code></pre>\n</section>";
+        jQuery(html).appendTo('body');
+        SQLQuery.init();
+        return expect(jQuery('#test .output').parent().hasClass('layout-two')).to.be["true"];
       });
       it('by default output can be dragged', function() {
-        return todo();
+        var html;
+        dragSpy.reset();
+        html = "<section id=\"test\">\n<pre data-db=\"test\"><code class=\"sql\"></code></pre>\n</section>";
+        jQuery(html).appendTo('body');
+        SQLQuery.init();
+        return expect(dragSpy.calledOnce).to.be["true"];
       });
-      it('if absolute classes(left, top,...) or nodrag drag is disabled', function() {
-        return todo();
+      ['left', 'right', 'top', 'bottom', 'nodrag'].forEach(function(className) {
+        return it('class' + className + ' disables drag', function() {
+          var html;
+          dragSpy.reset();
+          html = "<section id=\"test\">\n<pre data-db=\"test\" class=\"";
+          html += className;
+          html += "\"<code class=\"sql\"></code></pre>\n</section>";
+          jQuery(html).appendTo('body');
+          SQLQuery.init();
+          return expect(dragSpy.called).to.be["false"];
+        });
       });
       return it('a class can be forwarded to output with output-classname', function() {
         return todo();

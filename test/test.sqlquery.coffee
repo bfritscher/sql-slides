@@ -6,7 +6,7 @@ describe 'SQLQuery', ->
         expect().to.contain('implementation')
     
     server = null
-    dragStub = jQuery.fn.draggabilly = sinon.stub()
+    dragSpy = jQuery.fn.draggabilly = sinon.spy()
     
     beforeEach ->
         server = sinon.fakeServer.create()
@@ -74,17 +74,62 @@ describe 'SQLQuery', ->
             expect(server.requests).to.have.length(0)
         
         it 'can find data in cache file', ->
-            todo()
+            cache = {"3556498":{"headers":["test"], content:[["sql"]]}}
+            server.respondWith 'get', 'slides/test.cache', [200,
+                { "Content-Type": "application/json" },
+                JSON.stringify(cache)]
+            spy = sinon.spy(SQLtoMarkdown, 'parse')
+            window.marked = -> ''
+            html = """
+                   <section id="test">
+                   <pre data-db="test" class="run"><code class="sql">test</code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init({location: {pathname: '/test.html', search:''}})
+            server.respond()
+            expect(spy.calledWithMatch(cache["3556498"])).to.be.true
+            spy.restore()
             
         it 'error if no connection and no cache', ->
-            todo()
+            html = """
+                   <section id="test">
+                   <pre data-db="test" class="run"><code class="sql"></code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init()
+            server.respond()
+            expect(jQuery('#test .output').hasClass('error')).to.be.true
 
     describe 'URL options', ->
+        beforeEach ->
+            html = """
+                   <section id="test">
+                   <pre><code class="sql">sql1</code></pre>
+                   <pre data-db="test" class="run"><code class="sql">sql2</code></pre>
+                   <pre data-db="test"><code class="sql">sql3</code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            server.respondWith [200,
+                { "Content-Type": "application/json" },
+                JSON.stringify({})]
+            server.respond()
+        it 'without url options .run + data-db are executed', ->
+            SQLQuery.init({location: {pathname: '/test.html', search:''}})
+            expect(server.requests).to.have.length(2)
+            # cache + 1.run
+        
         it '?sqlrun force run of all data-db blocs', ->
-            todo()
+            SQLQuery.init({location: {pathname: '/test.html', search:'sqlrun'}})
+            expect(server.requests).to.have.length(3)
+            # cache + 2
             
         it '?sqlnorun disable inital run of .run blocs', ->
-            todo()
+            SQLQuery.init({location: {pathname: '/test.html', search:'sqlnorun'}})
+            expect(server.requests).to.have.length(1)
+            # cache + 0
             
     describe 'Annotations', ->
         it 'should set attributes contenteditable and spellcheck', ->
@@ -100,28 +145,78 @@ describe 'SQLQuery', ->
             expect(code.spellcheck).to.be.false
             
         it 'with data-db="SCHEMA" a run button  and output is added', ->
-            todo()
-        
-        it 'without url options .run + data-db are executed', ->
-            todo()
+            html = """
+                   <section id="test">
+                   <pre data-db="test"><code class="sql"></code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init()
+            expect(jQuery('#test .output')).to.have.length(1)
+            expect(jQuery('#test pre div.run')).to.have.length(1)
         
         it '.fragment and data-fragment-index on pre', ->
-            todo()
+            #handled by reveal.js
         
         it 'data-output-fragment-index to add data-fragment-index to output', ->
-            todo()
+            html = """
+                   <section id="test">
+                   <pre data-db="test" data-output-fragment-index="2"><code class="sql"></code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init()
+            expect(jQuery('#test .output').data('fragment-index')).to.be.equal(2)
             
         it '.start-hidden applies .fragment to output', ->
-            todo()
+            html = """
+                   <section id="test">
+                   <pre data-db="test" class="start-hidden"><code class="sql"></code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init()
+            expect(jQuery('#test .output').hasClass('fragment')).to.be.true
         
         it '.col2 surrounds with a div.layout-two', ->
-            todo()
+            html = """
+                   <section id="test">
+                   <pre data-db="test" class="col2"><code class="sql"></code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init()
+            expect(jQuery('#test .output').parent().hasClass('layout-two')).to.be.true
         
         it 'by default output can be dragged', ->
-            todo()
-            
-        it 'if absolute classes(left, top,...) or nodrag drag is disabled', ->
-            todo()
+            dragSpy.reset()
+            html = """
+                   <section id="test">
+                   <pre data-db="test"><code class="sql"></code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init()
+            expect(dragSpy.calledOnce).to.be.true
+        ['left', 'right', 'top', 'bottom', 'nodrag'].forEach (className) ->
+            it 'class' + className + ' disables drag', ->
+                dragSpy.reset()
+                html = """
+                       <section id="test">
+                       <pre data-db="test" class="
+                       """
+                html += className
+                html += """
+                       "<code class="sql"></code></pre>
+                       </section>
+                       """
+                jQuery(html).appendTo 'body'
+                SQLQuery.init()
+                expect(dragSpy.called).to.be.false
         
         it 'a class can be forwarded to output with output-classname', ->
             todo()
+            
+            
+            
+            
