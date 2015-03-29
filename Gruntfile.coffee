@@ -20,6 +20,8 @@ module.exports = (grunt) ->
                     'test/index.html'
                 ]
             index:
+                options:
+                    spawn: false
                 files: [
                     'templates/_index.html'
                     'templates/_section.html'
@@ -28,6 +30,8 @@ module.exports = (grunt) ->
                 tasks: ['clean:html','buildIndex']
 
             coffeelint:
+                options:
+                    spawn: false
                 files: ['Gruntfile.coffee', 'test/*.coffee']
                 tasks: ['coffeelint', 'coffee:test']
 
@@ -68,10 +72,15 @@ module.exports = (grunt) ->
             build:
                 src: ['slides/*.json']
                 dest: ''
-        
-        buildMarkdown:
+                
+        filterMarkdown:
             build:
                 src: ['slides/*.md']
+                dest: '.tmp/filtered/'
+                
+        buildMarkdown:
+            build:
+                src: ['.tmp/filtered/*.md']
                 dest: 'dist/'
                 
         clean:
@@ -153,6 +162,45 @@ module.exports = (grunt) ->
                     grunt.log.writeln 'File "' + filedest + '" created.'
     
     
+    grunt.registerMultiTask 'filterMarkdown',
+        'Remove fragment code and sub-sections to create a exercice md',
+        ->
+            XRegExp = XRegExp = require('xregexp').XRegExp
+            replacer = (match) ->
+                if match.indexOf('output-in-statement') > -1
+                    return match
+                else
+                    return ''
+            this.files.forEach (file) ->
+                file.src.filter (filepath) ->
+                    if !grunt.file.exists filepath
+                        grunt.log.warn('Source file "' + filepath + '" not found.')
+                        false
+                    else if !grunt.file.exists filepath.replace('.md', '.cache')
+                        grunt.log.warn('Cache file "' + filepath + '" not found.')
+                        false
+                    else
+                        true
+                .map (filepath) ->
+                    
+                    slide = XRegExp('^\\n\\n\\n\\n', 'gm')
+                    subslide = XRegExp('^\\n\\n\\n', 'gm')
+                    firstSlide = XRegExp('(.*?)(---subslide---.*)?', 's')
+                    data = grunt.file.read filepath
+                    data = XRegExp.replace(data, slide, '---slide---\n')
+                    data = XRegExp.replace(data, subslide, '---subslide---\n')
+                    slides = data.split('---slide---\n')
+                    data = slides.map (s) ->
+                        s = s.match(/^([\s\S]*?)(?:---subslide---[\s\S]*)?$/)[1]
+                        s = s.replace(/```sql\n[\s\S!]*?\n```\n<!--.*?[fragment|start\-hidden].*?-->\n/g, replacer)
+                        return s
+                    .join('\n')
+                    theFile = filepath.match(/\/([^/]*)$/)[1]
+                    filedest = file.dest + theFile
+                    grunt.file.write filedest, data
+                    grunt.file.copy filepath.replace('.md', '.cache'), filedest.replace('.md', '.cache')
+                    grunt.log.writeln 'File "' + filedest + '" created.'
+    
     grunt.registerMultiTask 'buildMarkdown',
         'Build cache results into markdown files in slides/*.md.',
         ->
@@ -171,14 +219,36 @@ module.exports = (grunt) ->
                 .map (filepath) ->
                     md = grunt.file.read filepath
                     cache = grunt.file.readJSON filepath.replace('.md', '.cache')
+                    replacer = (match, sql, db) ->
+                        table = SQLtoMarkdown.parse(cache[SQLQuery.hashCode(sql)])
+                        if match.indexOf('output-in-statement') > -1
+                            return table
+                        else
+                            return '```sql\n' + sql + '\n```\n\n' + table
                     theFile = filepath.match(/\/([^/]*)$/)[1]
                     filedest = file.dest + theFile
-                    replacer = (march, sql, db) ->
-                        '```sql\n' + sql + '\n```\n\n' + SQLtoMarkdown.parse(cache[SQLQuery.hashCode(sql)])
                     md = md.replace(/```sql\n([\s\S!]*?)\n```\n(?:.*?data-db="(.*?)".*?-->\n)?/gm, replacer)
                     grunt.file.write filedest, md
                     grunt.log.writeln 'File "' + filedest + '" created.'
     
+    
+    grunt.registerTask 'new',
+        'Create a new slidedeck',
+        (name) ->
+            if !name
+                return grunt.log.error 'a name must be provided!'
+            name = name.toLowerCase().replace(' ', '_')
+            listTemplate = grunt.file.read 'templates/_list.json'
+            fileTemplate = grunt.file.read 'templates/_file.md'
+            list = grunt.template.process listTemplate, data:
+                filename: name
+            file = grunt.template.process fileTemplate, data:
+                filename: name
+            #todo check file exist?
+            grunt.file.write 'slides/' + name + '.json', list
+            grunt.file.write 'slides/' + name + '.md', file
+            grunt.log.writeln 'File "' + name + '.md|json" created.'
+            
     grunt.registerTask 'test',
         '*Lint* javascript and coffee files.', [
             'coffeelint'
@@ -201,11 +271,14 @@ module.exports = (grunt) ->
             'copy'
             'buildMarkdown'
         ]
-
-    
-
+            
+            
     # Define default task.
     grunt.registerTask 'default', [
         'test'
         'serve'
     ]
+    
+    grunt.event.on 'watch', (action, filepath) ->
+        grunt.config 'jshint.all.src', filepath
+        grunt.config 'coffee.test.src', filepath
