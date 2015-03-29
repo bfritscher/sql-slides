@@ -5,3 +5,4 @@ dist
 .sass-cache
 /*.html
 .tmp
+test/tests.js
