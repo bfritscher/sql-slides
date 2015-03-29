@@ -189,7 +189,7 @@ Résultat: OK
 
 
 
-### 4. Vue avec expression
+### 4a. Vue avec expression
 Créer une vue **v_employes_age** qui liste le numéro, le code, le nom, le prénom et la date de naissance et l’âge des employés.
 
 ```sql
@@ -215,7 +215,8 @@ SELECT * FROM v_employes_age;
 
 
 
-### 4. Vue avec expression - LMD
+
+### 4b. Vue avec expression - LMD
 
 Ajouter l’employé ci-dessous, a travers la vue
 
