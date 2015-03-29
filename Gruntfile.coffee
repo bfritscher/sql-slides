@@ -1,5 +1,8 @@
 # Generated on 2015-03-24 using generator-reveal 0.4.0
 module.exports = (grunt) ->
+    through = require 'through'
+    cheerio = require 'cheerio'
+    slash = require 'slash'
 
     grunt.initConfig
         coffee:
@@ -79,9 +82,12 @@ module.exports = (grunt) ->
                 dest: '.tmp/filtered/'
                 
         buildMarkdown:
-            build:
+            filtered:
                 src: ['.tmp/filtered/*.md']
-                dest: 'dist/'
+                dest: 'dist/filtered/'
+            full:
+                src: ['slides/*.md']
+                dest: 'dist/full/'
                 
         clean:
             dist:
@@ -123,10 +129,41 @@ module.exports = (grunt) ->
                     dest: 'dist/'
                     filter: 'isFile'
                 }]
-
+        markdownpdf:
+            options:
+                preProcessMd: ->
+                    self = this
+                    through (data) ->
+                        data = data.toString()
+                        .replace(/\/images/g, __dirname + '/images')
+                        this.queue(data)
+                preProcessHtml: (data) ->
+                    through (data) ->
+                        #add comment class to previous
+                        $ = cheerio.load('<body>' + data.toString() + '</body>')
+                        $('body').contents().filter (idx, elem) ->
+                            return elem.type == 'comment';
+                        .each (idx, elem) ->
+                            match = elem.nodeValue.match(/class="(.*?)"/)
+                            if match
+                                $(elem).prev().addClass(match[1])
+                        #preload header/footer image
+                        data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/images/common/logo_heg.png" />\n'
+                        data += '<img class="hide" src="' + slash(__dirname) + '/images/common/logo_hes-so_noir.jpg" />\n'
+                        this.queue(data)
+                paperBorder: '0.5cm'
+                highlightCssPath: 'bower_components/highlightjs/styles/vs.css'
+                cssPath: 'css/pdf.css'
+                assetDir: slash(__dirname) + '/images'
+                remarkable:
+                    html: true
+            files:
+                src: ['dist/{full,filtered,slides}/*.md']
+                dest: 'dist/'
         
     # Load all grunt tasks.
     require('load-grunt-tasks')(grunt)
+    grunt.loadTasks('tasks')
     
     grunt.registerMultiTask 'buildIndex',
         'Build slides from templates/_index.html and slides/*.json.',
@@ -231,7 +268,6 @@ module.exports = (grunt) ->
                     grunt.file.write filedest, md
                     grunt.log.writeln 'File "' + filedest + '" created.'
     
-    
     grunt.registerTask 'new',
         'Create a new slidedeck',
         (name) ->
@@ -269,7 +305,9 @@ module.exports = (grunt) ->
             'clean:dist'
             'buildIndex'
             'copy'
+            'filterMarkdown'
             'buildMarkdown'
+            'markdownpdf'
         ]
             
             
