@@ -25,7 +25,7 @@ module.exports = (grunt) ->
                     'templates/_section.html'
                     'slides/*.json'
                 ]
-                tasks: ['buildIndex']
+                tasks: ['clean:html','buildIndex']
 
             coffeelint:
                 files: ['Gruntfile.coffee', 'test/*.coffee']
@@ -84,7 +84,12 @@ module.exports = (grunt) ->
                         'dist/.git*'
                     ]
                 }]
-                
+            html:
+                files: [{
+                      src: [
+                          '*.html'
+                      ]
+                }]
         copy:
             dist:
                 files: [{
@@ -170,7 +175,7 @@ module.exports = (grunt) ->
                     filedest = file.dest + theFile
                     replacer = (march, sql, db) ->
                         '```sql\n' + sql + '\n```\n\n' + SQLtoMarkdown.parse(cache[SQLQuery.hashCode(sql)])
-                    md = md.replace(/```sql\n([\s\S!]*?)\n```\n(?:.*?data-db="(.*?)".*?-->)?/gm, replacer)
+                    md = md.replace(/```sql\n([\s\S!]*?)\n```\n(?:.*?data-db="(.*?)".*?-->\n)?/gm, replacer)
                     grunt.file.write filedest, md
                     grunt.log.writeln 'File "' + filedest + '" created.'
     
@@ -190,8 +195,9 @@ module.exports = (grunt) ->
     grunt.registerTask 'dist',
         'Save presentation files to *dist* directory.', [
             'test'
-            'buildIndex'
+            'clean:html'
             'clean:dist'
+            'buildIndex'
             'copy'
             'buildMarkdown'
         ]
