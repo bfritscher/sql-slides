@@ -3,8 +3,8 @@
     {
         "filename": "requetes_hierarchiques.md",
         "attr": {
-            "data-separator": "^\\n---\\n",
-            "data-separator-vertical": "^\\n@@@\\n"
+            "data-separator": "^\\n\\n\\n\\n",
+            "data-separator-vertical": "^\\n\\n\\n"
         }
     }
 ]

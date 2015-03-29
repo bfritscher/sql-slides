@@ -1,12 +1,16 @@
 ![](/images/requetes_hierarchiques/cours_map.png)
 
----
+
+
+
 ### SQL:<br/>Requêtes hiérarchiques
 <!-- .element: class="warn" style="position:absolute; left:0; bottom: 20px;" -->
 
 ![](/images/requetes_hierarchiques/intro_title.jpg)
 
----
+
+
+
 ## Arbre hiérarchique
 
 Les arbres hiérarchiques représentent des structures très courantes en informatique
@@ -20,7 +24,9 @@ Une arborescence peut représenter:
 - Composition de pièces
 - ...
 
----
+
+
+
 ## Limites du modèle relationnel
 
 Le modèle relationnel est simple et efficace, mais il n'est pas capable de gérer certaines structures de bases, tel que:
@@ -34,25 +40,38 @@ mais son parcours posera des difficultés.
 
 <!-- .element: class="comment"-->
 
----
+
+
+
 ## Associations réflexives
 
 ![](/images/requetes_hierarchiques/associations_reflexives1.png)
-<!-- .element: class="fragment" style="width: 30%;vertical-align: middle;margin: 5%;"-->
+<!-- .element: class="fragment w-66"-->
+
+<!-- .element: class="center w-50"-->
+
 ![](/images/requetes_hierarchiques/associations_reflexives2.png)
-<!-- .element: class="fragment" style="width: 30%;vertical-align: middle;margin: 5%;"-->
+<!-- .element: class="fragment w-75"-->
 
-<!-- .element: style="text-align:center;"-->
+<!-- .element: class="center w-50"-->
 
----
+<!-- .slide: class="layout-two" -->
+
+
+
+
 ### Représentation d’une structure hiérarchique
 ![](/images/requetes_hierarchiques/org_plain.png)
 
----
+
+
+
 ### Représentation d’une structure hiérarchique
 ![](/images/requetes_hierarchiques/org_bfs.png)
 
----
+
+
+
 ### Représentation SQL
 
 ```sql
@@ -69,7 +88,9 @@ SELECT * FROM enfants;
 ```
 <!-- .element: class="run hide" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Recherche des relations parent/enfant
 
 Une auto-jointure externe permet de mettre en relation un niveau parent-enfant
@@ -82,7 +103,9 @@ SELECT parent.nom AS parent, enfant.nom AS enfant
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Recherche des relations enfant/parent
 
 L'auto-jointure permet également de rechercher les enfants
@@ -97,7 +120,9 @@ SELECT parent.nom AS parent, enfant.nom AS enfant
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Recherche des relations enfant/parent/grand parent
 
 L'auto-jointure ne permet de mettre en relation q'un niveau à la fois.
@@ -117,21 +142,25 @@ SELECT grand_parent.nom AS grand_parent,
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
-###Clauses de spécification du parcours de la structure hiérarchique (Solution Oracle)
 
-**CONNECT BY**<br/>
+
+
+### Clauses de spécification du parcours de la structure hiérarchique (Solution Oracle)
+
+**CONNECT BY** <br/>
 *Relation « père-fils » de l’arbre*
 
-**PRIOR **<br/>
+**PRIOR** <br/>
 *Sens du parcours de l’arbre (ascendant/descendant)*
 
-**START WITH**<br/>
+**START WITH** <br/>
 *Nœud de départ de la structure*
 
 ![](/images/requetes_hierarchiques/railroad_connectby.gif)
 
----
+
+
+
 ### Exemple CONNECT BY
 
 ```sql
@@ -151,7 +180,9 @@ Sans définition du nœud de début du parcours, l’arbre est parcouru pour cha
 note:
     fix code fragment index
 
----
+
+
+
 ### Afficher le niveau du parcours
 
 ```sql
@@ -161,7 +192,9 @@ CONNECT BY PRIOR id = parent_id;
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Parcours de l’arbre, depuis l’ancêtre
 
 Le parcours de l’arbre est défini par
@@ -181,19 +214,25 @@ SELECT level, LPAD(' ', level) || nom AS nom
 CONNECT BY PRIOR id = parent_id
 START WITH parent_id IS NULL;
 ```
-<!-- .element: class="float run start-hidden" data-db="SQLAVANCE" -->
+<!-- .element: class="top right run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Visualisation du parcours d’un arbre
 
 ![](/images/requetes_hierarchiques/arbres_parcour.png)
 
----
+
+
+
 ### Visualisation du parcours de l'exemple
 
 ![](/images/requetes_hierarchiques/org_dfs.png)
 
----
+
+
+
 ### Parcours de la structure
 
 1. Sélection de la "racine" (**START WITH**)
@@ -203,7 +242,9 @@ START WITH parent_id IS NULL;
 4. Evaluation de la clause **WHERE**.
   - Le système évalue cette condition pour chaque tuple de manière individuelle plutôt que d’éliminer tous les enfants d’un tuple qui ne la satisfait pas
 
----
+
+
+
 ### Définition du début du parcours
 
 Le début du parcours n’est pas forcément l’ancêtre.
@@ -218,7 +259,9 @@ START WITH nom='Beatrice';
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Contrôle du parcours
 
 On connaît le niveau dynamique de la profondeur du parcours avec la pseudo colonne **LEVEL**.
@@ -233,14 +276,18 @@ SELECT level, LPAD(' ', level) || nom AS nom
  WHERE level <=2
 CONNECT BY id = PRIOR parent_id
 ```
-<!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
+<!-- .element: class="col2  run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Les niveaux de notre exemple
 
 ![](/images/requetes_hierarchiques/org_level_top_bottom.png)
 
----
+
+
+
 ### Parcours inverse
 
 La clause **PRIOR** permet de définir le sens du parcours.
@@ -254,12 +301,16 @@ START WITH nom LIKE 'D%';
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Les niveaux en parcours inverse
 
 ![](/images/requetes_hierarchiques/org_level_bottom_top.png)
 
----
+
+
+
 ### Elagage avec WHERE
 
 Avec une condition **WHERE** on peut filtrer/éliminier des nœuds de l'arbre.
@@ -273,12 +324,16 @@ START WITH parent_id IS NULL;
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Elagage avec WHERE
 
 ![](/images/requetes_hierarchiques/org_trim_where.png)
 
----
+
+
+
 ### Elagage avec CONNECT BY
 
 Avec une condition dans **CONNECT BY** on peut filtrer/éliminier des nœuds de l'arbre.
@@ -292,12 +347,16 @@ START WITH parent_id IS NULL;
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Elagage avec CONNECT BY
 
 ![](/images/requetes_hierarchiques/org_trim_connect.png)
 
----
+
+
+
 ### Elagage avec CONNECT BY et WHERE
 
 ```sql
@@ -310,7 +369,9 @@ START WITH parent_id IS NULL;
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Plusieurs tables
 
 ```sql
@@ -335,7 +396,9 @@ START WITH parent_id IS NULL;
 Attention cependant à ne pas éliminer des nœuds nécessaires pour créer l'arbre!
 <!-- .element: class="warn bottom left w-66" -->
 
----
+
+
+
 ### Affichage du chemin
 
 **SYS_CONNECT_BY_PATH**
@@ -360,7 +423,9 @@ note:
   LTRIM(,'->')
   
 
----
+
+
+
 ### Affichage du chemin
 
 ```sql
@@ -372,7 +437,9 @@ CONNECT BY PRIOR id = parent_id;
 ```
 <!-- .element: class="run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Distance entre les noeuds
 
 **CONNECT_BY_ROOT**
@@ -391,7 +458,9 @@ CONNECT BY PRIOR id = parent_id;
 ```
 <!-- .element: class="run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Détection des feuilles
 
 La clause **CONNECT_BY_ISLEAF** permet de détecter les feuilles.
@@ -408,7 +477,7 @@ START WITH parent_id IS NULL;
 ```
 <!-- .element: class="run start-hidden" data-db="SQLAVANCE" -->
 
-@@@
+
 
 ![](/images/requetes_hierarchiques/org_plain.png)
 
@@ -420,7 +489,9 @@ START WITH parent_id IS NULL;
 ```
 <!-- .element: class="run hide top left no-margin" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Cycle dans l’arborescence
 
 Si un cycle est détecté dans l’arbre, un message d’erreur est retourné
@@ -443,7 +514,9 @@ note:
   Utiliser: CONNECT BY NOCYCLE pour résoudre le problème
 
 
----
+
+
+
 ### Pseudo-colonnes de contrôle 
 
 Un cycle peut être détecté par la clause **CONNECT_BY_ISCYCLE**
@@ -463,7 +536,9 @@ START WITH id=0;
 ```
 <!-- .element: class="run start-hidden top right no-margin" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### Ordre de parcours des noeuds
 
 Une clause **ORDER BY** classique « brise » le parcours de l’arbre
@@ -479,7 +554,9 @@ ORDER BY enfants.nom ASC;
 ```
 <!-- .element: class="run col2 start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ```sql
 SELECT level, LPAD(' ', level) || nom AS nom
 FROM enfants
@@ -497,7 +574,9 @@ ORDER SIBLINGS BY enfants.nom DESC;
 ```
 <!-- .element: class="col2 run start-hidden" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### En bref
 
 | SQL | Description |

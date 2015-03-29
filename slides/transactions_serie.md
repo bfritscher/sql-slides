@@ -1,10 +1,14 @@
-##Série 4
-#Transactions
+## Série 4
+# Transactions
 
----
+
+
+
 ![](/images/vues/schema.png)
 
----
+
+
+
 ### 1. COMMIT
 
 Ajouter un département *TEST* puis visualiser le contenu de la table.
@@ -26,7 +30,9 @@ ROLLBACK;
 SELECT * FROM departements;
 ```
 
----
+
+
+
 ### 2. Sessions
 Ouvrir deux sessions dans la base de données
 *(ouvrir 2 fois SQLDeveloper avec connexions)*<!-- .element class="small" -->
@@ -45,10 +51,11 @@ Tester la suite des opérations ci-dessous:
 |                            | SELECT * FROM departements |
 | COMMIT                     |                            |
 |                            | SELECT * FROM departements |
-|                            |                            |
 <!-- .element class="stretch" -->
 
----
+
+
+
 ### 3. Evaluation de deux sessions
 Vous disposez d’une table test qui contient un seul champ: **valeur**
 
@@ -59,13 +66,16 @@ Deux sessions accèdent à cette table **sans utiliser** votre ordinateur et en 
 
 Téléchargez: [serie3.3-evaluation_de_deux_sessions.pdf](/slides/transactions_serie3.3-evaluation_de_deux_sessions.pdf)
 
-@@@
+
+
 
 ![](/images/transactions/evaluation_de_deux_sessions.png)
 
 <!-- .element class="center" -->
 
----
+
+
+
 ### 4. Transaction
 Vous devez changer le contrat d’un employé (changement de fonction). 
 
@@ -74,8 +84,9 @@ Valérie Durand (VDU) à la fonction de comptable (CPT) Depuis aujourd’hui, el
 Ecrire la transaction pour réaliser cette opération
 *Astuce : (Mettre fin à son contrat actuel et insérer un nouveau)*
 
-@@@
-### 4. Transaction
+
+
+### 4b. Transaction
 ```sql
 COMMIT;
 
@@ -96,7 +107,9 @@ INSERT INTO contrats (num_employe, num_fonction,
 COMMIT; -- fin de la transaction
 ```
 
----
+
+
+
 ### 5. Verification métier 1
 Est-ce qu’il existe des employés qui ont plusieurs contrats ouverts ?
 
@@ -113,7 +126,9 @@ SELECT nom, prenom
 ```
 <!-- .element class="run col2 fragment start-hidden" data-fragment-index="1"  data-output-fragment-index="0"  data-db="SQLAVANCE" -->
 
----
+
+
+
 ### 6. Vérification métier 2
 
 Est-ce qu'il existe des employés qui ont des contrats qui se chevauchent ?
