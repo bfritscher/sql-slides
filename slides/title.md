@@ -3,7 +3,7 @@
 # 622-2.1 SQL avancée
 
 
-![](/images/common/logo_heg.jpg)
+![](/images/common/logo_heg.png)
 <!-- .element style="position:absolute; top:0; left:0;width:40%;" -->
 
 ![](/images/common/logo_hes-so.jpg)
