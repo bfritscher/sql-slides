@@ -2,7 +2,7 @@
 /* globals exports */
 var SQLtoMarkdown = (function () {
   'use strict';
-  function parse(json){
+  function parse(json, limit){
     if(!(json && json.hasOwnProperty('content') && json.hasOwnProperty('headers'))){
       return '';
     }
@@ -36,8 +36,14 @@ var SQLtoMarkdown = (function () {
 
     var rowOutput = '';
     tabularData.forEach(function( row, i ) {
+        if(limit && i > limit){
+          return;
+        }
         maxColLen.forEach(function( len, y ) {
             var cell = typeof row[y] === 'undefined' ? '' : String(row[y]);
+            if(limit && limit === i){
+              cell = '...';
+            }
             var spacing = new Array((len - cell.length) + 1).join(' ');
             cell = cell.replace(/ /g, '&nbsp;');
             if( i === 0 ) {
@@ -46,7 +52,6 @@ var SQLtoMarkdown = (function () {
                 rowOutput += '| ' + cell + spacing + ' ';
             }
         });
-        
         if( i === 0 ) {
             headerOutput += '| \n';
         } else {

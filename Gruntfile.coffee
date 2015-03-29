@@ -257,7 +257,7 @@ module.exports = (grunt) ->
                     md = grunt.file.read filepath
                     cache = grunt.file.readJSON filepath.replace('.md', '.cache')
                     replacer = (match, sql, db) ->
-                        table = SQLtoMarkdown.parse(cache[SQLQuery.hashCode(sql)])
+                        table = SQLtoMarkdown.parse(cache[SQLQuery.hashCode(sql)], 10)
                         if match.indexOf('output-in-statement') > -1
                             return table
                         else

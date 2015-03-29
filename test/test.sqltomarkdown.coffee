@@ -14,3 +14,5 @@ describe 'SQLtoMarkdown', ->
     it 'should return a valid markdown table with headers', ->
         expect(SQLtoMarkdown.parse({headers:['ha','hb'],content:[['a','b'],['c','d']]}))
         .to.equal('| ha | hb | \n|----|----| \n| a  | b  | \n| c  | d  | \n')
+    it 'should limit number of rows to provided limit', ->
+        expect('implementation').to.be.undefined
