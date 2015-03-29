@@ -67,6 +67,16 @@ SQL-slide custom styles
  align-content: center;
 }
 
+.reveal section.layout-two > p:first-of-type{
+  float:left;
+  width: 50%;
+}
+
+.reveal section.layout-two > p:nth-of-type(2){
+  margin-left: 50%;
+  width: 50%;
+}
+
 .reveal .layout-two pre {
   width: auto;
 }
@@ -153,6 +163,15 @@ SQL-slide custom styles
 }
 
 
+.reveal .inline{
+    display: inline;
+}
+
+.reveal .inline-block{
+    display: inline-block;
+}
+
+
 .reveal .right{
     position: absolute;
     right: 0;
@@ -171,6 +190,9 @@ SQL-slide custom styles
 .reveal .float-right{
     float: right;
 }
+.reveal .w-25{
+    width: 25%;
+}
 .reveal .w-33{
     width: 33%;
 }
@@ -179,6 +201,9 @@ SQL-slide custom styles
 }
 .reveal .w-66{
     width: 66%;
+}
+.reveal .w-75{
+    width: 75%;
 }
 .reveal .w-100{
     width: 100%;
