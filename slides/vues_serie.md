@@ -1,13 +1,17 @@
 ##Série 3
 #Vues
 
----
+
+
+
 ![](/images/vues/schema.png)
 
 *Besoin: des tables crées pendant la **série 1 et 2**, ainsi que de l'exécution du script **create_triggers.sql***
 <!-- .element class="smaller" -->
 
----
+
+
+
 ### 1-6. Méthodes pour la série 
 
 1. Trouver le code **SELECT** qui répond à la question.
@@ -18,7 +22,9 @@
 - SELECT, INSERT, UPDATE
 - De quel type est la vue?
 
----
+
+
+
 ### 1. Vue
 Créer une vue **v_employes** qui liste le numéro, le code, le nom, le prénom et la date de naissance des employés dont le nom commence par la lettre « D ».
 
@@ -38,7 +44,8 @@ SELECT * FROM v_employes1;
 ```
 <!-- .element class="run hide start-hidden" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 1. Vue - LMD
 
 ```sql
@@ -57,7 +64,9 @@ INSERT INTO v_employes1 (numero, code, nom, prenom, date_naissance) VALUES (
 
 INSERT, UPDATE, DELETE --> OK
 
----
+
+
+
 ### 2. Vue WITH CHECK OPTION
 Ajouter la clause WITH CHECK OPTION à la vue v_employes.
 *Tester les opérations d’ajout, de mise à jour et de suppressions (y.c. des employés dont le nom ne commence pas par la lettre « D »).*
@@ -80,7 +89,8 @@ SELECT * FROM v_employes2;
 ```
 <!-- .element class="run hide start-hidden" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 2. Vue WITH CHECK OPTION - LMD
 
 Ajout d'un employé dont le nom commence par "D"
@@ -106,7 +116,7 @@ UPDATE v_employes2
 Résultat: OK
 <!-- .element class="fragment" -->
 
-@@@
+
 
 Ajout d'un employé dont le nom ne commence pas par "D"
 ```sql
@@ -130,7 +140,9 @@ UPDATE v_employes2
 Erreur SQL : ORA-01402: vue WITH CHECK OPTION - violation de clause WHERE 01402. 00000 -  "view WITH CHECK OPTION where-clause violation"
 <!-- .element class="fragment error small" -->
 
----
+
+
+
 ### 3. Vue partielle
 Créer une vue **v_departements** qui liste le numéro et le libellé des départements.
 *Tester les opérations d’ajout et de mise à jour à travers cette vue. Que se passe-t-il ? Pourquoi ? Que peut-on changer ?*
@@ -148,7 +160,8 @@ SELECT * FROM v_departements;
 ```
 <!-- .element class="run hide start-hidden" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 3. Vue partielle - LMD
 
 Test INSERT
@@ -173,7 +186,9 @@ UPDATE v_departements1
 Résultat: OK
 <!-- .element class="fragment" -->
 
----
+
+
+
 ### 4. Vue avec expression
 Créer une vue **v_employes_age** qui liste le numéro, le code, le nom, le prénom et la date de naissance et l’âge des employés.
 
@@ -198,7 +213,8 @@ SELECT * FROM v_employes_age;
 ```
 <!-- .element class="run hide start-hidden" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 4. Vue avec expression - LMD
 
 Ajouter l’employé ci-dessous, a travers la vue
@@ -223,7 +239,9 @@ UPDATE v_employes_age
 ```
 <!-- .element class="fragment" -->
 
----
+
+
+
 ### 5. Vue avec fonction
 Créer une vue **v_fonctions**(responsable, nombre) qui affiche l’état de la responsabilité (O,N) et le nombre de fonctions qui ont ces responsabilité.
 *Tester les opérations LMD.*
@@ -242,7 +260,8 @@ SELECT * FROM v_fonctions;
 ```
 <!-- .element class="run hide start-hidden" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 5. Vue avec fonction - LMD
 
 Requête avec un GROUP BY, donc une vue complexe
@@ -250,7 +269,9 @@ Requête avec un GROUP BY, donc une vue complexe
 Résultats: INSERT, UPDATE, DELETE impossibles
 <!-- .element class="error" -->
 
----
+
+
+
 ### 6. Vue complexe
 Créer une vue **v_employes_resp** qui affiche les employés qui ont une responsabilité.
 
@@ -271,7 +292,8 @@ SELECT * FROM v_employes_resp;
 ```
 <!-- .element class="run hide start-hidden" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 6. Vue modifiable 
 
 Faites que la mise à jours des employés puisse se faire par cette vue
@@ -296,14 +318,17 @@ SELECT * FROM v_employes_resp2;
 Impact si on ajoute WITH CHECK OPTIONS?
 <!-- .element class="fragment" -->
 
----
+
+
+
 ### 7. Vue de vue (hard) 
 Créer une vue **v_employes_stars** qui affiche les employés les mieux payés pour chaque département.
 
 *(Astuce: procédé par étapes/plusieurs vues : salaires maximum par département, salaires et départements des employés)*
 <!-- .element class="small" -->
 
-@@@
+
+
 ### 7a. salaires maximum par département
 
 ```sql
@@ -323,7 +348,8 @@ SELECT * FROM v_salaire_max_dep;
 ```
 <!-- .element class="run hide" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 7b. salaires et départements des employés
 
 ```sql
@@ -345,7 +371,7 @@ SELECT * FROM v_salaires;
 ```
 <!-- .element class="run hide" data-db="SQLAVANCE" -->
 
-@@@
+
 
 ```sql
 SELECT * FROM v_salaire_max_dep;
@@ -357,13 +383,15 @@ SELECT * FROM v_salaires;
 ```
 <!-- .element class="run hide bottom right" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ![](/images/vues/view_join1.png)
 <!-- .element class="top"-->
 ![](/images/vues/view_join2.png)
 <!-- .element class="fragment top"-->
 
-@@@
+
+
 ### 7c. les employés les mieux payés pour chaque département
 
 ```sql
@@ -380,7 +408,8 @@ SELECT * FROM v_employes_stars;
 ```
 <!-- .element class="run hide" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 7c' les employés les mieux payés pour chaque département (variante)
 
 ```sql
@@ -400,7 +429,8 @@ SELECT * FROM v_employes_stars;
 ```
 <!-- .element class="run hide" data-db="SQLAVANCE" -->
 
-@@@
+
+
 Avec une seule vue
 ```sql
 -- CREATE OR REPLACE VIEW v_employes_stars AS 
@@ -423,14 +453,17 @@ ORDER BY emp.nom,  emp.prenom;
 ```
 <!-- .element class="run" data-db="SQLAVANCE" -->
 
----
+
+
+
 ### 8. Vue de vue2 (hard)
 Créer une vue **v_vieux_informaticiens** qui affiche les employés sans responsabilités appartenant au département informatique, dont l’âge est supérieure à la moyenne des employés qui ont une responsabilité, tous départements confondus.
 
 *Astuce: procédé par étapes/plusieurs vues : Liste des employés « inf » sans responsabilité, Moyenne d'âge des employés a responsabilité*
 <!-- .element class="small" -->
 
-@@@
+
+
 ### 8a. Liste des employes informaticien sans responsabilité
 
 ```sql
@@ -448,7 +481,8 @@ SELECT * FROM v_inf_sans_resp;
 ```
 <!-- .element class="run hide" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 8b. Moyenne d'âge des employés à responsabilité
 ```sql
 CREATE VIEW v_moyenne_age_res AS 
@@ -464,7 +498,8 @@ SELECT * FROM v_moyenne_age_res;
 ```
 <!-- .element class="run hide" data-db="SQLAVANCE" -->
 
-@@@
+
+
 ### 8c. Vieux informaticiens
 
 ```sql 
@@ -480,7 +515,8 @@ SELECT * FROM v_vieux_informaticiens;
 ```
 <!-- .element class="run hide" data-db="SQLAVANCE" -->
 
-@@@
+
+
 Avec une seule vue
 ```sql
 -- CREATE OR REPLACE VIEW v_vieux_informaticiens AS 
