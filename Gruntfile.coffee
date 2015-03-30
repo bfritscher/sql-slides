@@ -78,7 +78,7 @@ module.exports = (grunt) ->
                 
         filterMarkdown:
             build:
-                src: ['slides/*.md']
+                src: ['slides/*_serie.md']
                 dest: '.tmp/filtered/'
                 
         buildMarkdown:
@@ -316,7 +316,3 @@ module.exports = (grunt) ->
         'test'
         'serve'
     ]
-    
-    grunt.event.on 'watch', (action, filepath) ->
-        grunt.config 'jshint.all.src', filepath
-        grunt.config 'coffee.test.src', filepath
