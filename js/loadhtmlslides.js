@@ -21,7 +21,7 @@
                                 (xhr.status >= 200 && xhr.status < 300) ||
                                 xhr.status === 0 // file protocol yields status code 0 (useful for local debug, mobile applications etc.)
                                 ) {
-                                section.innerHTML = xhr.responseText;
+                                jQuery(section).replaceWith(xhr.responseText);
                             } else {
                                 section.outerHTML = '<section data-state="alert">ERROR: The attempt to fetch ' + url + ' failed with the HTTP status ' + xhr.status + '. Check your browser\'s JavaScript console for more details.</p></section>';
                             }
