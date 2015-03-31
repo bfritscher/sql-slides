@@ -1,5 +1,5 @@
 <section>
-<section>
+<section id="demo-autoroutes">
 Trajet <label>de <select id="villeDe">
     <option>Bern</option>
     <option>Bienne</option>
@@ -33,7 +33,7 @@ SELECT trajet
 FROM trajets
 WHERE ville_de = '{de}'
 AND ville_vers = '{vers}';</code></pre>
-<ul id="trajets" class="smaller"></ul>
+<ul id="trajets" class="smaller" style="  height: 200px;overflow: auto;padding-left: 20px;cursor: pointer;"></ul>
 </div>
 <svg style="padding:0 2%" id="autoroutes" width="400pt" height="394pt" viewBox="0.00 0.00 400.00 394.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 390)">
