@@ -7,6 +7,10 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 SQL-slide custom styles
 **/
 
+.reveal .slide-background.bg-contain{
+    background-size: contain;
+}
+
 .reveal .slides section .fragment.is-pointer-down{
   -webkit-transition: none;
   transition: none;
@@ -14,6 +18,15 @@ SQL-slide custom styles
 
 .reveal section{
     height: 100%;
+}
+
+.reveal blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+}
+
+.reveal .slides blockquote p {
+    margin:  10px;
 }
 
 .reveal .hide{
@@ -146,6 +159,10 @@ SQL-slide custom styles
   width: 90%;
 }
 
+.reveal .output table:hover{
+    background-color: #fff;
+}
+
 .reveal p.error{
   margin: 0 auto;
   padding: 5px;
@@ -162,6 +179,14 @@ SQL-slide custom styles
     margin: 0 !important;
 }
 
+.reveal .clear{
+    clear: both;
+}
+
+.code-title{
+    background-color: #E5F2FF;
+    color: #838181;
+}
 
 .reveal .inline{
     display: inline;
@@ -171,6 +196,11 @@ SQL-slide custom styles
     display: inline-block;
 }
 
+.reveal .blockquote {
+    border-left: 5px solid #999;
+    box-shadow: none;
+    padding-left: 0.5em;
+}
 
 .reveal .right{
     position: absolute;
@@ -195,6 +225,9 @@ SQL-slide custom styles
 }
 .reveal .w-33{
     width: 33%;
+}
+.reveal .w-40{
+    width: 40%;
 }
 .reveal .w-50{
     width: 50%;
