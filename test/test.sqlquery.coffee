@@ -216,7 +216,8 @@ describe 'SQLQuery', ->
         
         it 'a class can be forwarded to output with output-classname', ->
             todo()
-            
+        it 'a title can be added with data-title', ->
+            todo()   
             
             
             

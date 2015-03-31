@@ -129,6 +129,11 @@ var SQLQuery = (function () {
         });
         var $run = jQuery('<div class="run">run</div>')
         .appendTo($pre);
+        var title = $pre.data('title');
+        if(title){
+            jQuery('<div class="code-title">' + title + '</div>')
+            .appendTo($pre);
+        }
         $run.click(function(){
           run(db, $code.text(), $output);
         });
