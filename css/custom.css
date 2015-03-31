@@ -130,11 +130,11 @@ SQL-slide custom styles
     list-style-type: none;
 }
 
-.reveal .slides p.small, .reveal .slides strong.small, .reveal .slides em.small, .reveal .slides .small li{
+.reveal .slides span.smaller, .reveal .slides p.small, .reveal .slides strong.small, .reveal .slides em.small, .reveal .slides .small li{
     font-size: 0.8em;
 }
 
-.reveal .slides p.smaller, .reveal .slides strong.smaller, .reveal .slides em.smaller, .reveal .slides .smaller li{
+.reveal .slides span.smaller, .reveal .slides p.smaller, .reveal .slides strong.smaller, .reveal .slides em.smaller, .reveal .slides .smaller li{
     font-size: 0.6em;
 }
 
