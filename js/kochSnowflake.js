@@ -1,9 +1,11 @@
+/* global Pen */
+/* jshint strict: false*/
 var redraw;
 jQuery(document).ready(function(){
 var angle = 60;
 
 var counter = 0;
-var color = ''
+var color = '';
 
 function nextColor(){
     color = '#f00'  === color ? '#000' : '#f00';
@@ -43,7 +45,7 @@ function drawKoch(){
     counter = 0;
     p.penstyle('#f00');
     koch(p, distance, nbLevel );
-    if(isTriangle.checked){
+    if(document.getElementById('isTriangle').checked){
         p.turn(120);   
         koch(p, distance, nbLevel );
         p.turn(120);   
@@ -54,7 +56,6 @@ function drawKoch(){
 // code to drag and zoom
 //http://phrogz.net/tmp/canvas_zoom_to_cursor.html
 var canvas = document.getElementById('kochcanvas');
-console.log('test', canvas.getContext('2d'));
 canvas.width = 800; canvas.height = 600;
 var ctx = canvas.getContext('2d');
 
