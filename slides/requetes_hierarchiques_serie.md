@@ -139,7 +139,7 @@ START WITH code ='RINF' ;
 
 
 ### 7. Visualisation d’une branche de l’arbre
-Visualisez le niveau et le libelle des fonctions dont ils dépendent (avec indentation), mais sans la fonction *SDIR* et toutes ses subordonnées.
+Visualisez le niveau et le libelle des fonctions (avec indentation), mais sans la fonction *SDIR* et toutes ses subordonnées.
 ```sql
 SELECT LEVEL niveau,
   LPAD(' ', LEVEL) || libelle fonction
