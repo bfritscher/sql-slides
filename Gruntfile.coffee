@@ -3,6 +3,8 @@ module.exports = (grunt) ->
     through = require 'through'
     cheerio = require 'cheerio'
     slash = require 'slash'
+    modRewrite = require('connect-modrewrite')
+    url = require('url')
 
     grunt.initConfig
         coffee:
@@ -54,10 +56,10 @@ module.exports = (grunt) ->
                     open: true
                     livereload: true
                     middleware: (connect, options, middlewares) ->
-                        modRewrite = require('connect-modrewrite')
                         rewrite = modRewrite(['^(.*)$ /slides/$1'])
                         middlewares.unshift (req, res, next)->
-                            return if grunt.file.exists(__dirname, req.url) then next() else rewrite req, res, next
+                            r = url.parse(req.url)
+                            return if grunt.file.exists(__dirname, r.pathname) then next() else rewrite req, res, next
                         middlewares
         coffeelint:
 
@@ -125,7 +127,7 @@ module.exports = (grunt) ->
                         'bower_components/reveal.js/lib/**'
                         'js/**'
                         'css/**'
-                        'images/**'
+                        'fonts/**'
                     ]
                     dest: 'dist/'
                 },{

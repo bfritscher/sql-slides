@@ -92,7 +92,8 @@
                     }},
                     //{ src: 'bower_components/reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
                     { src: 'js/sqltomarkdown.js', async: false },
-                    { src: 'js/sqlquery.js', async: false, callback: function(){SQLQuery.init();} }
+                    { src: 'js/sqlquery.js', async: false, callback: function(){SQLQuery.init();} },
+                    { src: 'js/toc.js', async: false}
                 ]
             });
         </script>
