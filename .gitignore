@@ -6,3 +6,4 @@ dist
 /*.html
 .tmp
 test/tests.js
+slides/
