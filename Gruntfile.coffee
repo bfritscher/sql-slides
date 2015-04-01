@@ -53,7 +53,12 @@ module.exports = (grunt) ->
                     base: '.'
                     open: true
                     livereload: true
-
+                    middleware: (connect, options, middlewares) ->
+                        modRewrite = require('connect-modrewrite')
+                        rewrite = modRewrite(['^(.*)$ /slides/$1'])
+                        middlewares.unshift (req, res, next)->
+                            return if grunt.file.exists(__dirname, req.url) then next() else rewrite req, res, next
+                        middlewares
         coffeelint:
 
             options:
@@ -135,7 +140,7 @@ module.exports = (grunt) ->
                     self = this
                     through (data) ->
                         data = data.toString()
-                        .replace(/\/images/g, __dirname + '/images')
+                        .replace(/images\//g, __dirname + '/slides/images/')
                         this.queue(data)
                 preProcessHtml: (data) ->
                     through (data) ->
@@ -148,13 +153,13 @@ module.exports = (grunt) ->
                             if match
                                 $(elem).prev().addClass(match[1])
                         #preload header/footer image
-                        data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/images/common/logo_heg.png" />\n'
-                        data += '<img class="hide" src="' + slash(__dirname) + '/images/common/logo_hes-so_noir.jpg" />\n'
+                        data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_heg.png" />\n'
+                        data += '<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_hes-so_noir.jpg" />\n'
                         this.queue(data)
                 paperBorder: '0.5cm'
                 highlightCssPath: 'bower_components/highlightjs/styles/vs.css'
                 cssPath: 'css/pdf.css'
-                assetDir: slash(__dirname) + '/images'
+                assetDir: slash(__dirname) + '/slides/images'
                 remarkable:
                     html: true
             files:

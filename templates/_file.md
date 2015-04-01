@@ -4,7 +4,7 @@
 
 
 ## new slide
-![](/images/vues/schema.png)
+![](images/vues/schema.png)
 
 
 <!-- .element class="smaller" -->
