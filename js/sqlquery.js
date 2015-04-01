@@ -62,7 +62,26 @@ var SQLQuery = (function () {
         });
       }
     }
-  
+    function handleError(response, error){
+      //try to get from cache
+      if(generateCache){
+        cacheError++;
+      }else{
+        var hash = hashCode(sql);
+        if(cache.hasOwnProperty(hash)){
+          handleResponse(cache[hash]);
+        }else{
+          $output.html('no connection and no-cache available!');
+          console.log(error);
+          $output.addClass('error');
+        }
+      }
+    }
+    
+    //force use of cache on start
+    if(mywindow.location.search.indexOf('usecache') > -1){
+      handleError();
+    }
     jQuery.ajax({
       url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
       type:'POST',
@@ -70,21 +89,7 @@ var SQLQuery = (function () {
       contentType:'application/json',
       data:JSON.stringify({db: db,sql: sql}),
       success:handleResponse,
-      error:function(response, error){
-        //try to get from cache
-        if(generateCache){
-          cacheError++;
-        }else{
-          var hash = hashCode(sql);
-          if(cache.hasOwnProperty(hash)){
-            handleResponse(cache[hash]);
-          }else{
-            $output.html('no connection and no-cache available!');
-            console.log(error);
-            $output.addClass('error');
-          }
-        }
-      }
+      error:handleError
     });
   }
   
@@ -169,7 +174,7 @@ var SQLQuery = (function () {
       }else{
         mywindow = window;
       }
-      generateCache = mywindow.location.search.indexOf('cache') > -1;
+      generateCache = mywindow.location.search.indexOf('generatecache') > -1;
       if(!generateCache){
         //try to load cache
         jQuery.ajax({

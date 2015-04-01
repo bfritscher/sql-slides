@@ -56,11 +56,11 @@ describe 'SQLQuery', ->
                 lastArg = arguments[0]
                 arguments[0]='<div></div>'
                 return parseHTML.apply(this, arguments)
-            SQLQuery.init({location: {pathname: '/test.html', search:'cache'}})
+            SQLQuery.init({location: {pathname: '/test.html', search:'generatecache'}})
             jQuery.parseHTML.restore()
             expect(lastArg).to.contain.string('%7B%223556498%22%3A%22%22%7D')
          
-        it 'cache does not load cache file', ->
+        it 'generatecache does not load cache file', ->
             server.respondWith [200,
                 { "Content-Type": "application/json" },
                 JSON.stringify({})]
@@ -68,7 +68,7 @@ describe 'SQLQuery', ->
             sinon.stub jQuery, 'parseHTML', ->
                 arguments[0]='<div></div>'
                 return parseHTML.apply(this, arguments)
-            SQLQuery.init({location: {pathname: '/test.html', search:'cache'}})
+            SQLQuery.init({location: {pathname: '/test.html', search:'generatecache'}})
             jQuery.parseHTML.restore()
             
             expect(server.requests).to.have.length(0)
@@ -101,6 +101,9 @@ describe 'SQLQuery', ->
             SQLQuery.init()
             server.respond()
             expect(jQuery('#test .output').hasClass('error')).to.be.true
+            
+        it 'load from cache on start if ?usecache', ->
+            todo()
 
     describe 'URL options', ->
         beforeEach ->
