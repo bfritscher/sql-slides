@@ -135,7 +135,7 @@ var SQLQuery = (function () {
             .appendTo($pre);
         }
         $run.click(function(){
-          run(db, $code.text(), $output);
+          run(db, $code[0].innerText, $output);
         });
         $code.keydown(function (e) { //ctrl + enter to run
           if (e.ctrlKey && e.keyCode === 13) {
