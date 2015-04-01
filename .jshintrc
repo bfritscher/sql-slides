@@ -18,5 +18,8 @@
     "white": true,
     "browser": true,
     "devel": true,
-    "jquery": true
+    "jquery": true,
+    "globals" {
+      "Reveal": false
+    }
 }
