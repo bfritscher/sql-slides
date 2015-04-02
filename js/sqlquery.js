@@ -159,12 +159,8 @@ var SQLQuery = (function () {
     });
   }
   function getCacheName(){
-    var match = mywindow.location.pathname.match(/\/(.*?)\.html/);
-    if(match && match.length > 0){
-        return match[1] + '.cache';
-    }else{
-        return 'index.cache';
-    }
+    var pathname = mywindow.location.pathname;
+    return pathname.slice(pathname.lastIndexOf('/')+1).replace(/\.html$/m, '.cache');
   }
   
   
