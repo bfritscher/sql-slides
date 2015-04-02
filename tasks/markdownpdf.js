@@ -38,9 +38,10 @@ module.exports = function (grunt) {
     function escape(str){
       return str.replace(/'/g, "\\'");
     }
-      
+    
     // Create the tasks to process the targets
     this.files.forEach(function (f) {
+        var i=0;
         f.src.forEach(function (filepath) {
           // Warn on and remove invalid source files (if nonull was set).
           if (!grunt.file.exists(filepath)) {
@@ -79,9 +80,12 @@ module.exports = function (grunt) {
           var destPath = filepath.replace(/\.(markdown|md)/g, "") + ".pdf";
           grunt.verbose.writeln("Determined dest path: " + destPath);
           //start a markdown for each file because we have custom runnings
-          
           markdownpdf(localOpts).from(filepath).to(destPath, function (er) {
             grunt.log.ok(destPath);
+            i++;
+            if(i === f.src.length){
+              done();
+            }
           });
           return true;
         })

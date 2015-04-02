@@ -91,10 +91,10 @@ module.exports = (grunt) ->
         buildMarkdown:
             filtered:
                 src: ['.tmp/filtered/*.md']
-                dest: 'dist/filtered/'
+                dest: '.tmp/build/filtered/'
             full:
                 src: ['slides/*.md']
-                dest: 'dist/full/'
+                dest: '.tmp/build/full/'
                 
         clean:
             dist:
@@ -117,7 +117,7 @@ module.exports = (grunt) ->
                 files: [{
                     expand: true
                     src: [
-                        'slides/**'
+                        'slides/*.*'
                         'bower_components/animate-css/animate.min.css'
                         'bower_components/draggabilly/dist/draggabilly.pkgd.min.js'
                         'bower_components/jquery/dist/jquery.min.js'
@@ -132,6 +132,14 @@ module.exports = (grunt) ->
                     dest: 'dist/'
                 },{
                     expand: true
+                    cwd: 'slides/'
+                    src: [
+                        'images/**'
+                        'js/**'
+                    ]
+                    dest: 'dist/'
+                },{
+                    expand: true
                     src: ['*.html']
                     dest: 'dist/'
                     filter: 'isFile'
@@ -139,14 +147,14 @@ module.exports = (grunt) ->
             pdf:
                 files: [{
                     expand: true
-                    src: ['dist/full/*.pdf']
+                    src: ['.tmp/build/full/*.pdf']
                     dest: 'dist/pdf/'
                     flatten: true
                     rename: (dest, src) ->
                         dest + src.replace('_serie.pdf','_serie_solution.pdf')
                 },{
                     expand: true
-                    src: ['dist/filtered/*.pdf']
+                    src: ['.tmp/build/filtered/*.pdf']
                     dest: 'dist/pdf/'
                     flatten: true
                     rename: (dest, src) ->
@@ -197,7 +205,7 @@ module.exports = (grunt) ->
                 remarkable:
                     html: true
             files:
-                src: ['dist/{full,filtered,slides}/*.md']
+                src: ['.tmp/build/{full,filtered}/*.md']
                 dest: 'dist/'
         
     # Load all grunt tasks.
