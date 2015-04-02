@@ -29,7 +29,7 @@ module.exports = function (grunt) {
     
     function getVersion(file){
       try{
-        return execSync('git log -n 1  --abbrev-commit --pretty=oneline -- slides/' + file).toString().slice(0,7) || '0';
+        return execSync('git log -n 1  --abbrev-commit --pretty=oneline -- ' + file, {cwd:'slides/'}).toString().slice(0,7) || '0';
       }catch(ex){
         return '0';
       }
