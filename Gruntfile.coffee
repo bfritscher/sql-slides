@@ -136,6 +136,23 @@ module.exports = (grunt) ->
                     dest: 'dist/'
                     filter: 'isFile'
                 }]
+            rename:
+                files: [{
+                    expand: true
+                    src: ['dist/full/*.pdf']
+                    dest: 'dist/pdf/'
+                    flatten: true
+                    rename: (dest, src) ->
+                        dest + src.replace('_serie.pdf','_serie_solution.pdf')
+                },{
+                    expand: true
+                    src: ['dist/filtered/*.pdf']
+                    dest: 'dist/pdf/'
+                    flatten: true
+                    rename: (dest, src) ->
+                        dest + src.replace('.pdf','_enonce.pdf')
+                }]
+
         markdownpdf:
             options:
                 preProcessMd: ->
