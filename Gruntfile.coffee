@@ -172,7 +172,6 @@ module.exports = (grunt) ->
                         data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_heg.png" />\n'
                         data += '<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_hes-so_noir.jpg" />\n'
                         
-                        console.log(data)
                         this.queue(data)
                 paperBorder: '0.5cm'
                 highlightCssPath: 'bower_components/highlightjs/styles/vs.css'
@@ -181,8 +180,7 @@ module.exports = (grunt) ->
                 remarkable:
                     html: true
             files:
-                src: ['dist/full/requetes_hierarchiques.md']
-                #src: ['dist/{full,filtered,slides}/*.md']
+                src: ['dist/{full,filtered,slides}/*.md']
                 dest: 'dist/'
         
     # Load all grunt tasks.
