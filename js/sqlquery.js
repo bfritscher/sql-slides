@@ -1,5 +1,5 @@
 /* exported SQLQuery */
-/* global marked:false, SQLtoMarkdown:false, exports:false */
+/* global marked:false, SQLtoMarkdown:false, exports:false, ga:false */
 var SQLQuery = (function () {
   'use strict';
   
@@ -38,13 +38,14 @@ var SQLQuery = (function () {
   
 
   
-  function run(db, sql, $output){
-    function handleResponse(response){
+  function run(db, sql, $output, isUser){
+    function handleResponse(response, type){
       if(generateCache){
         cache[hashCode(sql)] = jQuery.extend(true, {}, response);
         cacheDone++;
       }
       if(response.error){
+        type = 'error';
         $output.html(response.error);
         $output.addClass('error animated ' + config.animationError)
         .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -61,6 +62,10 @@ var SQLQuery = (function () {
            $output.removeClass('animated ' + config.animation );
         });
       }
+      if(isUser){
+        var s = Reveal.getState();
+        ga('send', 'event', 'run', type, 'Slide #/' + s.indexh + '/' + s.indexv + '/' + s.indexf + '/' + hashCode(sql));
+      }
     }
     function handleError(response, error){
       //try to get from cache
@@ -69,7 +74,7 @@ var SQLQuery = (function () {
       }else{
         var hash = hashCode(sql);
         if(cache.hasOwnProperty(hash)){
-          handleResponse(cache[hash]);
+          handleResponse(cache[hash], 'cache');
         }else{
           $output.html('no connection and no-cache available!');
           console.log(error);
@@ -140,7 +145,7 @@ var SQLQuery = (function () {
             .appendTo($pre);
         }
         $run.click(function(){
-          run(db, $code[0].innerText, $output);
+          run(db, $code[0].innerText, $output, true);
         });
         $code.keydown(function (e) { //ctrl + enter to run
           if (e.ctrlKey && e.keyCode === 13) {
@@ -149,7 +154,7 @@ var SQLQuery = (function () {
         });
         if( mywindow.location.search.indexOf('sqlnorun') === -1 &&
             ($pre.hasClass('run') || mywindow.location.search.indexOf('sqlrun') > -1 || generateCache)){
-          $run.click();
+          run(db, $code[0].innerText, $output);
           if(generateCache){
             cache[hashCode($code.text())] = '';
             cacheCounter++;

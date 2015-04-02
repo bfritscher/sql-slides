@@ -96,8 +96,30 @@
                     { src: 'js/toc.js', async: false}
                 ]
             });
+            
+            
+            $(document).ready(function () {
+              var title = document.title;
+              Reveal.addEventListener("slidechanged",function(event){
+                var fullTitle = title + ': ' + $(event.currentSlide).find('h1, h2, h3').first().text()
+                document.title = fullTitle;
+                ga('send', 'pageview', {
+                  'page': window.location.pathname + window.location.search + '#' + event.indexh + '/' + event.indexv,
+                  'title': fullTitle
+                });
+              });
+            });
         </script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+          ga('create', 'UA-55173430-3', 'auto');
+          ga('send', 'pageview');
+
+        </script>
     </body>
 
 </html>
