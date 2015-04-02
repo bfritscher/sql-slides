@@ -146,17 +146,33 @@ module.exports = (grunt) ->
                         this.queue(data)
                 preProcessHtml: (data) ->
                     through (data) ->
+                        #strip note:
+                        data = data.toString()
+                        data = data.replace(/<p>note: /gm, '<p>')
+                        
                         #add comment class to previous
-                        $ = cheerio.load('<body>' + data.toString() + '</body>')
+                        $ = cheerio.load('<body>' + data + '</body>')
                         $('body').contents().filter (idx, elem) ->
                             return elem.type == 'comment';
                         .each (idx, elem) ->
                             match = elem.nodeValue.match(/class="(.*?)"/)
                             if match
                                 $(elem).prev().addClass(match[1])
+                        
+                        #wrap col2
+                        $('.col2').each (idx, pre) ->
+                            $pre = $(pre)
+                            table = $pre.next('table')
+                            $('<div class="layout-two"></div>')
+                            .insertBefore($pre)
+                            .append(pre)
+                            .append(table)
+                            
                         #preload header/footer image
                         data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_heg.png" />\n'
                         data += '<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_hes-so_noir.jpg" />\n'
+                        
+                        console.log(data)
                         this.queue(data)
                 paperBorder: '0.5cm'
                 highlightCssPath: 'bower_components/highlightjs/styles/vs.css'
@@ -165,7 +181,8 @@ module.exports = (grunt) ->
                 remarkable:
                     html: true
             files:
-                src: ['dist/{full,filtered,slides}/*.md']
+                src: ['dist/full/requetes_hierarchiques.md']
+                #src: ['dist/{full,filtered,slides}/*.md']
                 dest: 'dist/'
         
     # Load all grunt tasks.
@@ -264,11 +281,19 @@ module.exports = (grunt) ->
                     md = grunt.file.read filepath
                     cache = grunt.file.readJSON filepath.replace('.md', '.cache')
                     replacer = (match, sql, db) ->
-                        table = SQLtoMarkdown.parse(cache[SQLQuery.hashCode(sql)], 10)
+                        classes = /class="(.*?)"/.exec(match)
+                        return '' if classes && classes[1].indexOf('nopdf') > -1
+                        response = cache[SQLQuery.hashCode(sql)]
+                        if response && response.error
+                            table = response.error + '\n<!-- .element class="warn" -->\n'
+                        else
+                            table = SQLtoMarkdown.parse(response, 10)
                         if match.indexOf('output-in-statement') > -1
                             return table
                         else
-                            return '```sql\n' + sql + '\n```\n\n' + table
+                            answer = '```sql\n' + sql + '\n```\n\n'
+                            answer += '<!-- .element class="' + classes[1] + '" -->\n\n' if classes
+                            return answer + table
                     theFile = filepath.match(/\/([^/]*)$/)[1]
                     filedest = file.dest + theFile
                     md = md.replace(/```sql\n([\s\S!]*?)\n```\n(?:.*?data-db="(.*?)".*?-->\n)?/gm, replacer)

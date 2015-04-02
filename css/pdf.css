@@ -3,6 +3,7 @@ body {
     margin: 0 1cm;
     padding: 0;
     font-family: 'Lato Light';
+    color: #000;
 }
 
 h1, h2, h3, strong{
@@ -59,11 +60,39 @@ p.w-50{
   display: inline-block;
 }
 
+.layout-two{
+    margin: 1em 0;
+    padding:0;
+    clear: both;
+}
+
+.layout-two:after {
+    content: ".";
+    display: block;
+    height: 0px;
+    clear: both;
+    visibility: hidden;
+}
+.layout-two pre{
+  width: 60%;
+  float: left;
+  margin-right: 3em;
+}
+.layout-two table{
+    float: right;
+}
+
+.nopdf, pre.nopdf, p.nopdf, table.nopdf{
+    display: none;
+}
+  
 pre{
   padding-left: 0.5em;
   border: 0;
   border-left: 5px solid #999;
-  font-size: 0.9em;  
+  font-size: 0.9em;
+  background-color: #EDEFF2;
+  margin: 0 0 1em 0;
 }
 
 .hljs-keyword{
@@ -76,11 +105,10 @@ pre{
 table {
     font-family: 'Consolas', 'trebuchet MS', 'Lucida sans', Arial;
     font-size: 0.8em;
-    color: #444;
-    background-color: rgba(255,255,255,0.8);
+    color: #000;
     border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
-    border: solid #ccc 1px;
+    border: solid #aaa 1px;
 }
 
 table tr:hover {
@@ -88,8 +116,8 @@ table tr:hover {
 }    
     
 table td, table th {
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
+    border-left: 1px solid #aaa;
+    border-top: 1px solid #aaa;
     padding: 0 2px;
     text-align: left;    
 }
