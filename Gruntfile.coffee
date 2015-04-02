@@ -136,7 +136,7 @@ module.exports = (grunt) ->
                     dest: 'dist/'
                     filter: 'isFile'
                 }]
-            rename:
+            pdf:
                 files: [{
                     expand: true
                     src: ['dist/full/*.pdf']
@@ -351,10 +351,11 @@ module.exports = (grunt) ->
             'clean:html'
             'clean:dist'
             'buildIndex'
-            'copy'
+            'copy:dist'
             'filterMarkdown'
             'buildMarkdown'
             'markdownpdf'
+            'copy:pdf'
         ]
             
             
