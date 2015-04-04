@@ -197,12 +197,12 @@ module.exports = (grunt) ->
                         #preload header/footer image
                         data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_heg.png" />\n'
                         data += '<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_hes-so_noir.jpg" />\n'
-                        console.log data
                         this.queue(data)
                 paperBorder: '0.5cm'
                 highlightCssPath: 'bower_components/highlightjs/styles/vs.css'
                 cssPath: 'css/pdf.css'
                 assetDir: slash(__dirname) + '/slides/images'
+                title: grunt.file.read 'slides/title' if grunt.file.exists 'slides/title'
                 remarkable:
                     html: true
             files:

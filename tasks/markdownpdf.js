@@ -16,8 +16,8 @@ module.exports = function (grunt) {
   grunt.registerMultiTask("markdownpdf", "Convert Markdown documents to PDF", function () {
 
     var opts = this.options()
-      , done = this.async();
-
+      , done = this.async(); 
+    
     function getBodyFontFamily(){
       var css = grunt.file.read(opts.cssPath);
       var match = css.match(/body.*?{[\s\S]*?font-family:(.*?);/)
@@ -57,9 +57,11 @@ module.exports = function (grunt) {
           var file = path.parse(filepath);
           var content = grunt.file.read(filepath);
           var match = content.match(/#+ (.*?)\n/);
-          var title = file.name;
+          
+          var title =  opts.title || '';
+          title += '<br\>';
           if(match){
-            title = match[1];
+            title += match[1].replace(/<br.*?>/, ' ');
           }
           
           var runningsTemplate = grunt.file.read(path.join(process.cwd(), 'templates', '_runnings.js'));
