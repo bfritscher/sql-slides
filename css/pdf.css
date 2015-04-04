@@ -10,6 +10,10 @@ h1, h2, h3, strong{
   font-family: 'Lato Semibold';
 }
 
+h1, h2, h3{
+  page-break-after: avoid;
+}
+
 h1, h2{
   text-align: center;
 }
@@ -76,16 +80,17 @@ p.w-50{
 .layout-two pre{
   width: 60%;
   float: left;
-  margin-right: 3em;
 }
-.layout-two table{
-    float: right;
+.layout-two .output{
+    float:right;
+    width: 34%;
 }
 
 .nopdf, pre.nopdf, p.nopdf, table.nopdf{
     display: none;
 }
-  
+
+/* fix for page-break-inside https://github.com/ariya/phantomjs/issues/10638 */
 pre{
   padding-left: 0.5em;
   border: 0;
@@ -93,6 +98,14 @@ pre{
   font-size: 0.9em;
   background-color: #EDEFF2;
   margin: 0 0 1em 0;
+  display: inline-block;
+  min-width: 60%;
+}
+pre:after{
+  content: '';
+  display:block;
+  height:0px;
+  visibility: hidden;
 }
 
 .hljs-keyword{

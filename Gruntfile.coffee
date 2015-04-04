@@ -187,15 +187,17 @@ module.exports = (grunt) ->
                         $('.col2').each (idx, pre) ->
                             $pre = $(pre)
                             table = $pre.next('table')
+                            output = $('<div class="output"></div>')
                             $('<div class="layout-two"></div>')
                             .insertBefore($pre)
                             .append(pre)
-                            .append(table)
+                            .append(output)
+                            output.append(table)
                             
                         #preload header/footer image
                         data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_heg.png" />\n'
                         data += '<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_hes-so_noir.jpg" />\n'
-                        
+                        console.log data
                         this.queue(data)
                 paperBorder: '0.5cm'
                 highlightCssPath: 'bower_components/highlightjs/styles/vs.css'
