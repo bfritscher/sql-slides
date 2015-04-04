@@ -8,7 +8,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
   font-family: 'News Cycle';
   font-style: normal;
   font-weight: 400;
-  src: local('News Cycle Regular'), local('NewsCycle-Regular'), url(https://fonts.gstatic.com/s/newscycle/v12/d03oiboZGiaNuMDvH253CiEAvth_LlrfE80CYdSH47w.woff2) format('woff2');
+  src: local('News Cycle Regular'), local('News Cycle'), local('NewsCycle-Regular'), url(../fonts/NewsCycle-Regular.ttf) format('ttf'), url(https://fonts.gstatic.com/s/newscycle/v12/d03oiboZGiaNuMDvH253CiEAvth_LlrfE80CYdSH47w.woff2) format('woff2');
   unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -16,7 +16,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
   font-family: 'News Cycle';
   font-style: normal;
   font-weight: 400;
-  src: local('News Cycle Regular'), local('NewsCycle-Regular'), url(https://fonts.gstatic.com/s/newscycle/v12/9Xe8dq6pQDsPyVH2D3tMQvk_vArhqVIZ0nv9q090hN8.woff2) format('woff2');
+  src: local('News Cycle Regular'), local('News Cycle'), local('NewsCycle-Regular'), url(../fonts/NewsCycle-Regular.ttf) format('ttf'), url(https://fonts.gstatic.com/s/newscycle/v12/9Xe8dq6pQDsPyVH2D3tMQvk_vArhqVIZ0nv9q090hN8.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 /* latin-ext */
@@ -24,7 +24,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
   font-family: 'News Cycle';
   font-style: normal;
   font-weight: 700;
-  src: local('News Cycle Bold'), local('NewsCycle-Bold'), url(https://fonts.gstatic.com/s/newscycle/v12/G28Ny31cr5orMqEQy6ljtxHJTnCUrjaAm2S9z52xC3Y.woff2) format('woff2');
+  src: local('News Cycle Bold'), local('News Cycle'), local('NewsCycle-Bold'), url(../fonts/NewsCycle-Bold.ttf) format('ttf'), url(https://fonts.gstatic.com/s/newscycle/v12/G28Ny31cr5orMqEQy6ljtxHJTnCUrjaAm2S9z52xC3Y.woff2) format('woff2');
   unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -32,7 +32,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
   font-family: 'News Cycle';
   font-style: normal;
   font-weight: 700;
-  src: local('News Cycle Bold'), local('NewsCycle-Bold'), url(https://fonts.gstatic.com/s/newscycle/v12/G28Ny31cr5orMqEQy6ljt4WiMMZ7xLd792ULpGE4W_Y.woff2) format('woff2');
+  src: local('News Cycle Bold'), local('News Cycle'), local('NewsCycle-Bold'), url(../fonts/NewsCycle-Bold.ttf) format('ttf'), url(https://fonts.gstatic.com/s/newscycle/v12/G28Ny31cr5orMqEQy6ljt4WiMMZ7xLd792ULpGE4W_Y.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 /* latin-ext */
@@ -105,24 +105,67 @@ SQL-slide custom styles
 **/
 .reveal #toc{
   position: absolute;
-  z-index: 9999;
-  font-size: 15px;
-  bottom: 0;
-  left: 0;
-  height: 30%;
+  z-index: 800;
+  font-size: 0.5em;
+  top: 0;
+  right: 0;
+  height: 0%;
+  width: 0%;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(255,255,255,0.8);
+  padding: 1em;
+  box-sizing: border-box;
+  transition: width 0.3s, height 0.3s;
+}
+.reveal #toc ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+    -webkit-column-width: 300px; /* Chrome, Safari, Opera */
+    -moz-column-width: 300px; /* Firefox */
+    column-width: 300px;
+  
+    -webkit-column-gap: 2em; /* Chrome, Safari, Opera */
+    -moz-column-gap: 2em; /* Firefox */
+    column-gap: 2em;
+  height: 100%;
   width: 100%;
-  padding: 15px;
+  overflow: auto;
+}
+.reveal #toc li{
+    padding: 0.7em;
+    margin: 0.2em;
+    cursor: pointer;
+    background-color: rgba(0,0, 0, 0.1);
+-webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+          page-break-inside: avoid; /* Firefox */
+               break-inside: avoid; /* IE 10+ */   
+}
+
+.reveal #toc li:hover, .reveal.overview #tocshow:hover{
+    font-weight: bold;
+    background-color: rgba(255,255, 0, 0.1);
+}
+
+.reveal #tocshow{
+  position: absolute;
+  z-index: 850;
+  font-size: 0.5em;
+  top: 0;
+  right: 0;
+  height: 0;
+  width: 0;
   display: none;
-  cursor: pointer;
-  -webkit-column-width: 300px;
+  padding: 0;
+  margin: 0;
+  width: 60px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid #aaa;
 }
 
-
-.reveal #toc li:hover{
-    color: red;
-}
-
-.reveal.overview #toc{
+.reveal.overview #tocshow{
   display: block;
 }
 
@@ -410,10 +453,6 @@ SQL-slide custom styles
     box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
     border-top: none;
     text-shadow: 0 1px 0 rgba(255,255,255,.5); 
-}
-
-.output table td:first-child, .output table th:first-child {
-    border-left: none;
 }
 
 pre div.run:hover{
