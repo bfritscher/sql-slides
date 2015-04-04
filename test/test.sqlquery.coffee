@@ -230,7 +230,13 @@ describe 'SQLQuery', ->
         it 'a class can be forwarded to output with output-classname', ->
             todo()
         it 'a title can be added with data-title', ->
-            todo()
-            
+            html = """
+                   <section id="test">
+                   <pre data-title="atitle" data-db="test"><code class="sql"></code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init()
+            expect(jQuery('#test pre .code-title').text()).to.be.equal('atitle')
             
             
