@@ -1,4 +1,3 @@
-# Generated on 2015-03-24 using generator-reveal 0.4.0
 module.exports = (grunt) ->
     through = require 'through'
     cheerio = require 'cheerio'
