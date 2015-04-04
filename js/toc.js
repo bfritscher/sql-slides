@@ -3,7 +3,7 @@
   var $ul = jQuery('<ul></ul>');
   
   jQuery('h1, h2, h3').each(function(i, item){
-    if(item.innerText.trim() != ''){
+    if(item.innerText.trim() !== ''){
         jQuery('<li>' + item.innerText + '</li>')
         .appendTo($ul).on('click', function(){
           var x, y = 0;
