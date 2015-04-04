@@ -85,11 +85,7 @@
                     { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return true; }, callback: function() { hljs.initHighlightingOnLoad(); } },
                     { src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
                     { src: 'bower_components/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-                    { src: 'bower_components/reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, callback: function(){
-                        Reveal.addEventListener('overviewshown', function( event ) {
-                            document.getElementById("searchinput").focus();
-                        });
-                    }},
+                    { src: 'bower_components/reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }},
                     //{ src: 'bower_components/reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
                     { src: 'js/sqltomarkdown.js', async: false },
                     { src: 'js/sqlquery.js', async: false, callback: function(){SQLQuery.init();} },
