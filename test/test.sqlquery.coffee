@@ -102,8 +102,18 @@ describe 'SQLQuery', ->
             server.respond()
             expect(jQuery('#test .output').hasClass('error')).to.be.true
             
-        it 'load from cache on start if ?usecache', ->
-            todo()
+        it '?usecache force to load from cache', ->
+            server.respondWith [200,
+                { "Content-Type": "application/json" },
+                JSON.stringify({})]
+            html = """
+                   <section id="test">
+                   <pre data-db="test" class="run"><code class="sql"></code></pre>
+                   </section>
+                   """
+            jQuery(html).appendTo 'body'
+            SQLQuery.init({location: {pathname: '/test.html', search:'usecache'}})
+            expect(server.requests).to.have.length(1) #only cache
 
     describe 'URL options', ->
         beforeEach ->

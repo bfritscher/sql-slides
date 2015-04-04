@@ -84,18 +84,19 @@ var SQLQuery = (function () {
     }
     
     //force use of cache on start
-    if(mywindow.location.search.indexOf('usecache') > -1){
+    if(mywindow.location.search.indexOf('usecache') > -1 && !isUser){
       handleError();
+    }else{
+        jQuery.ajax({
+          url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
+          type:'POST',
+          dataType:'json',
+          contentType:'application/json',
+          data:JSON.stringify({db: db,sql: sql}),
+          success:handleResponse,
+          error:handleError
+        });
     }
-    jQuery.ajax({
-      url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
-      type:'POST',
-      dataType:'json',
-      contentType:'application/json',
-      data:JSON.stringify({db: db,sql: sql}),
-      success:handleResponse,
-      error:handleError
-    });
   }
   
   function parseCode(){
