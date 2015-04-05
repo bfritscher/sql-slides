@@ -172,7 +172,7 @@ module.exports = (grunt) ->
                     through (data) ->
                         #strip note:
                         data = data.toString()
-                        data = data.replace(/<p>note: /gm, '<p>')
+                        data = data.replace(/note:/gm, '')
                         
                         #add comment class to previous
                         $ = cheerio.load('<body>' + data + '</body>')
@@ -182,6 +182,10 @@ module.exports = (grunt) ->
                             match = elem.nodeValue.match(/class="(.*?)"/)
                             if match
                                 $(elem).prev().addClass(match[1])
+                            #add data-title as title
+                            match = elem.nodeValue.match(/data-title="(.*?)"/)
+                            if match
+                                $('<p class="sql-title">' + match[1] + '</p>').insertBefore($(elem).prev())
                         
                         #wrap col2
                         $('.col2').each (idx, pre) ->
@@ -306,6 +310,7 @@ module.exports = (grunt) ->
                     cache = grunt.file.readJSON filepath.replace('.md', '.cache')
                     replacer = (match, sql, db) ->
                         classes = /class="(.*?)"/.exec(match)
+                        title = /data-title=".*?"/.exec(match)
                         return '' if classes && classes[1].indexOf('nopdf') > -1
                         response = cache[SQLQuery.hashCode(sql)]
                         if response && response.error
@@ -316,7 +321,11 @@ module.exports = (grunt) ->
                             return table
                         else
                             answer = '```sql\n' + sql + '\n```\n\n'
-                            answer += '<!-- .element class="' + classes[1] + '" -->\n\n' if classes
+                            answer += '<!-- .element '
+                            answer += ' class="' + classes[1] + '" ' if classes
+                            #re-add title comment to parse it in markdownpdf html
+                            answer += ' ' + title + ' ' if title
+                            answer += ' -->\n\n'
                             return answer + table
                     theFile = filepath.match(/\/([^/]*)$/)[1]
                     filedest = file.dest + theFile

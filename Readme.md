@@ -73,7 +73,7 @@ Clicking the *run* button or using *ctrl+enter* sends the query to the server. T
 - To apply *.fragment* class and *data-fragment-index* to the output element use the **.start-hidden** class and the **data-output-fragment-index** attribute.
 
 - Class **.col2** will wrap *pre* and *output* inside a *div* and make them display next to each other.
-- **data-title** attribute can be used to set a title. A div will be added after the *code* element in the *pre* (*not yet handled in the pdf output)
+- **data-title** attribute can be used to set a title. A div will be added after the *code* element in the *pre*.
 
 By default the **output table can be dragged**. Except if one of the following class is applied (**.left, .right, .bottom, .top, .nodrag**) which are applied to the output and not the code block.
 
@@ -92,6 +92,10 @@ In order to generate pdf files and also to not depend on the server a cache file
 - **?cache** to generate cache file for all data-db blocks (must be connected to the server). Download the file and put it into the same folder as the original *.md file. Cache file has to have the same name as the md filename but end with *.cache*.
 
 - **?usecache** can be used to forces to load data from cache without going to the server (needed for slow connection which do not respond error directly).
+
+### Known issues
+
+- A line without characters has to have no spaces. Otherwise output will not be shown in pdf.
 
 
 ## URL options

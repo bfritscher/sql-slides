@@ -46,6 +46,10 @@ h3{
     width: 49%;
 }
 
+.w-40{
+    width: 49%;
+}
+
 .w-33{
     width: 33%;
 }
@@ -88,6 +92,12 @@ p.w-50{
 
 .nopdf, pre.nopdf, p.nopdf, table.nopdf{
     display: none;
+}
+
+.sql-title{
+    margin:0;
+    padding:0;
+    font-size: 0.9em;
 }
 
 /* fix for page-break-inside https://github.com/ariya/phantomjs/issues/10638 */
