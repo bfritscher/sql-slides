@@ -7,3 +7,4 @@ dist
 .tmp
 test/tests.js
 slides/
+.idea
