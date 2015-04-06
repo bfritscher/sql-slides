@@ -39,9 +39,10 @@ var SQLQuery = (function () {
 
   
   function run(db, sql, $output, isUser){
+    var hash = hashCode(sql);
     function handleResponse(response, type){
       if(generateCache){
-        cache[hashCode(sql)] = jQuery.extend(true, {}, response);
+        cache[hash] = jQuery.extend(true, {}, response);
         cacheDone++;
       }
       if(response.error){
@@ -64,7 +65,7 @@ var SQLQuery = (function () {
       }
       if(isUser){
         var s = Reveal.getState();
-        ga('send', 'event', 'run', type, 'Slide #/' + s.indexh + '/' + s.indexv + '/' + s.indexf + '/' + hashCode(sql));
+        ga('send', 'event', 'run', type, 'Slide #/' + s.indexh + '/' + s.indexv + '/' + s.indexf + '/' + hash);
       }
     }
     function handleError(response, error){
@@ -72,7 +73,6 @@ var SQLQuery = (function () {
       if(generateCache){
         cacheError++;
       }else{
-        var hash = hashCode(sql);
         if(cache.hasOwnProperty(hash)){
           handleResponse(cache[hash], 'cache');
         }else{
@@ -100,6 +100,13 @@ var SQLQuery = (function () {
   }
   
   function parseCode(){
+    //jQuery(document).ready(function(){
+    //console.log(document);
+    if(jQuery('section[data-markdown]:not([data-markdown-parsed])').length > 0){
+      setTimeout(parseCode, 10);
+      return;
+    }
+    
     jQuery('code.sql').each(function(index, code){
       var $code = jQuery(code);
       $code.attr('contenteditable', '')
@@ -120,7 +127,8 @@ var SQLQuery = (function () {
         }
         var toRemove = [];
         var canDrag = true;
-        $pre[0].classList.forEach(function(className){
+        for(var i=0; i < $pre[0].classList.length; i++){
+          var className = $pre[0].classList[i];
             //TODO could change to regex... to match w-%
             //TODO more flexible forward classes with output-
            if(['top','left', 'right', 'bottom', 'no-margin', 'w-100'].indexOf(className) > -1){
@@ -131,7 +139,7 @@ var SQLQuery = (function () {
                 canDrag = false;
               }
            }
-        });
+        }
         if(canDrag){
           $output.draggabilly({});
         }
@@ -146,7 +154,7 @@ var SQLQuery = (function () {
             .appendTo($pre);
         }
         $run.click(function(){
-          run(db, $code[0].innerText, $output, true);
+          run(db, $code[0].textContent, $output, true);
         });
         $code.keydown(function (e) { //ctrl + enter to run
           if (e.ctrlKey && e.keyCode === 13) {
@@ -155,7 +163,7 @@ var SQLQuery = (function () {
         });
         if( mywindow.location.search.indexOf('sqlnorun') === -1 &&
             ($pre.hasClass('run') || mywindow.location.search.indexOf('sqlrun') > -1 || generateCache)){
-          run(db, $code[0].innerText, $output);
+          run(db, $code[0].textContent, $output);
           if(generateCache){
             cache[hashCode($code.text())] = '';
             cacheCounter++;
