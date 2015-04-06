@@ -103,6 +103,19 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 /**
 SQL-slide custom styles
 **/
+
+.reveal .slides section .fragment.highlight-green.visible span{
+    color: #17ff2e !important;
+}
+
+.reveal .slides section .fragment.highlight-green.visible span{
+    font-weight: bold;
+}
+
+.reveal .slides section .fragment.highlight-current-green.current-fragment span{
+  color: #17ff2e !important;
+}
+
 .reveal #toc{
   position: absolute;
   z-index: 800;
