@@ -14,12 +14,17 @@ h1, h2, h3{
   page-break-after: avoid;
 }
 
-h1, h2{
+h1, h2, h4{
   text-align: center;
 }
 
 h3{
   margin-top: 2em;
+}
+
+blockquote{
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .hide{
@@ -42,21 +47,41 @@ h3{
     width: 66%;
 }
 
+.w-60{
+    width: 60%;
+}
+
 .w-50{
     width: 49%;
 }
 
 .w-40{
-    width: 49%;
+    width: 40%;
 }
 
 .w-33{
     width: 33%;
 }
 
+.w-30{
+    width: 30%;
+}
+
 .w-25{
     width: 25%;
 }
+
+.w-20{
+    width: 20%;
+}
+
+.float-left{
+    width: auto;
+}
+.float-right{
+    width: auto;
+}
+
 
 img{
   max-width: 80%;

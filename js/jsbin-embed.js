@@ -30,8 +30,11 @@
       }
     }
     
-    //male code zone compatible with jsbin plugin
-    jQuery('pre.jsbin-embed').each(function(index, pre){
+    //init only on slide shown
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+      jQuery(event.currentSlide).find('pre.jsbin-embed').each(function(index, pre){
         embed(pre);
+      });
     });
+
 })();

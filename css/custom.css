@@ -104,6 +104,10 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 SQL-slide custom styles
 **/
 
+.pageborder, .reveal section img.pageborder{
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
 .reveal .slides section .fragment.highlight-green.visible span{
     color: #17ff2e !important;
 }
@@ -148,12 +152,25 @@ SQL-slide custom styles
 }
 .reveal #toc li{
     padding: 0.7em;
+    max-height: 2em;
+    text-overflow: ellipsis;
+    overflow: hidden;
     margin: 0.2em;
     cursor: pointer;
     background-color: rgba(0,0, 0, 0.1);
 -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
           page-break-inside: avoid; /* Firefox */
                break-inside: avoid; /* IE 10+ */   
+}
+
+.reveal #toc li.subsection{
+  margin-left: 2em;
+}
+.reveal #toc li.H1{
+  background-color: rgba(0,0, 0, 0.3);
+}
+.reveal #toc li.active{
+  background-color: rgba(255,0, 0, 0.1);
 }
 
 .reveal #toc li:hover, .reveal.overview #tocshow:hover{
@@ -426,6 +443,12 @@ SQL-slide custom styles
 .reveal .w-100{
     width: 100%;
 }
+
+.reveal .background{
+  z-index: -1;
+}
+
+
 
 .output table {
     font-family: 'trebuchet MS', 'Lucida sans', Arial;
