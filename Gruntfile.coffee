@@ -13,7 +13,7 @@ module.exports = (grunt) ->
         watch:
             livereload:
                 options:
-                    livereload: true
+                    livereload: 35728
                 files: [
                     'index.html'
                     'slides/{,*/}*.{md,html}'
@@ -47,13 +47,13 @@ module.exports = (grunt) ->
 
             livereload:
                 options:
-                    port: 9000
+                    port: 9001
                     # Change hostname to '0.0.0.0' to access
                     # the server from outside.
                     hostname: 'localhost'
                     base: '.'
                     open: true
-                    livereload: true
+                    livereload: 35728
                     middleware: (connect, options, middlewares) ->
                         rewrite = modRewrite(['^(.*)$ /slides/$1'])
                         middlewares.unshift (req, res, next)->
@@ -300,14 +300,16 @@ module.exports = (grunt) ->
                     if !grunt.file.exists filepath
                         grunt.log.warn('Source file "' + filepath + '" not found.')
                         false
-                    else if !grunt.file.exists filepath.replace('.md', '.cache')
-                        grunt.log.warn('Cache file "' + filepath + '" not found.')
-                        false
                     else
                         true
                 .map (filepath) ->
                     md = grunt.file.read filepath
-                    cache = grunt.file.readJSON filepath.replace('.md', '.cache')
+                    if !grunt.file.exists filepath.replace('.md', '.cache')
+                        grunt.log.warn('Cache file "' + filepath + '" not found.')
+                        cache = {}
+                    else
+                        cache = grunt.file.readJSON filepath.replace('.md', '.cache')
+                    
                     replacer = (match, sql, db) ->
                         classes = /class="(.*?)"/.exec(match)
                         title = /data-title=".*?"/.exec(match)
