@@ -82,7 +82,7 @@
                     { src: 'bower_components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
                     { src: 'js/loadhtmlslides.js', condition: function() { return !!document.querySelector( '[data-html]' ); }},
                     { src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: 'bower_components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                     { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return true; }, callback: function() { 
                       jQuery('pre code').each(function(idx, item){
                           if($(this).parent().hasClass('parse-fragment')){
