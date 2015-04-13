@@ -32,7 +32,11 @@
       $li.addClass(title.prop('tagName'));
       text = title.text().trim();
       if(text === ''){
-        text = x + '-' + y;
+        //try images
+        text = title.find('img').attr('alt');
+        if(!text || text === ''){
+          text = x + '-' + y;
+        }
       }
       if(text.length > 54){
         text = text.substr(0, 54) + '...';

@@ -292,6 +292,11 @@ SQL-slide custom styles
   max-height: 500px;
 }
 
+.reveal pre code.sh, .reveal pre code.sh .hljs-built_in {
+  background-color: black;
+  color: lime;
+}
+
 .reveal .warn{
     color: red;
 }
@@ -413,6 +418,12 @@ SQL-slide custom styles
 .reveal .float-right{
     float: right;
 }
+.reveal .w-10{
+    width: 10%;
+}
+.reveal .w-15{
+    width: 15%;
+}
 .reveal .w-20{
     width: 20%;
 }
@@ -436,6 +447,9 @@ SQL-slide custom styles
 }
 .reveal .w-66{
     width: 66%;
+}
+.reveal .w-70{
+    width: 70%;
 }
 .reveal .w-75{
     width: 75%;
