@@ -319,7 +319,8 @@ module.exports = (grunt) ->
                             table = response.error + '\n<!-- .element class="warn" -->\n'
                         else
                             table = SQLtoMarkdown.parse(response, 10)
-                        if match.indexOf('output-in-statement') > -1
+                        # hack should find something better link to folder structure :-(
+                        if match.indexOf('output-in-statement') > -1 && filepath.indexOf('filtered') > -1
                             return table
                         else
                             answer = '```sql\n' + sql + '\n```\n\n'
