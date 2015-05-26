@@ -24,7 +24,7 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
   font-family: 'News Cycle';
   font-style: normal;
   font-weight: 700;
-  src: local('News Cycle Bold'), local('News Cycle'), local('NewsCycle-Bold'), url(../fonts/NewsCycle-Bold.ttf) format('ttf'), url(https://fonts.gstatic.com/s/newscycle/v12/G28Ny31cr5orMqEQy6ljtxHJTnCUrjaAm2S9z52xC3Y.woff2) format('woff2');
+  src: local('News Cycle Bold'), local('NewsCycle-Bold'), url(../fonts/NewsCycle-Bold.ttf) format('ttf'), url(https://fonts.gstatic.com/s/newscycle/v12/G28Ny31cr5orMqEQy6ljtxHJTnCUrjaAm2S9z52xC3Y.woff2) format('woff2');
   unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
@@ -412,6 +412,7 @@ SQL-slide custom styles
     position: absolute;
     bottom: 20px;
 }
+
 .reveal .float-left{
     float: left;
 }
