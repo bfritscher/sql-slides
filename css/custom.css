@@ -292,7 +292,7 @@ SQL-slide custom styles
   max-height: 500px;
 }
 
-.reveal pre code.sh, .reveal pre code.sh .hljs-built_in {
+.reveal pre code.lang-sh, .reveal pre code.lang-sh .hljs-built_in {
   background-color: black;
   color: lime;
 }

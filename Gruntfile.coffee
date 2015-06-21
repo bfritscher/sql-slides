@@ -202,6 +202,7 @@ module.exports = (grunt) ->
                         #preload header/footer image
                         data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_heg.png" />\n'
                         data += '<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_hes-so_noir.jpg" />\n'
+                        grunt.file.write slash(__dirname) + '/.tmp/' +  $('h4').first().text().slice(0,10)  + '.html', data
                         this.queue(data)
                 paperBorder: '0.5cm'
                 highlightCssPath: 'bower_components/highlightjs/styles/vs.css'

@@ -12,6 +12,7 @@ h1, h2, h3, strong{
 
 h1, h2, h3{
   page-break-after: avoid;
+  clear: both;
 }
 
 h1, h2, h4{
@@ -82,6 +83,17 @@ blockquote{
     width: auto;
 }
 
+.pdf-w-30{
+  width: 30%;
+}
+
+.pdf-w-30 img{
+  width: 100%;
+}
+
+.pdf-float-left{
+  float: left; 
+}
 
 img{
   max-width: 80%;
