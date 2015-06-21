@@ -70,7 +70,7 @@ module.exports = function (grunt) {
           localOpts.preProcessHtml = opts.preProcessHtml;
           var runnings = grunt.template.process(runningsTemplate, {data:{
             topLeft: title,
-            bottomLeft: file.base + '@' + getVersion(file.base),
+            bottomLeft: file.base + '@' + getVersion(file.base) + ' - ' + new Date().toISOString().slice(0,16) + ' - BFR',
             assetDir: localOpts.assetDir ||'',
             font: escape(localOpts.font || getBodyFontFamily())}});
           var runningsPath = path.join(process.cwd(), '.tmp', file.name + '_runnings.js');
