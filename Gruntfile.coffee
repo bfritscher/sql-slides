@@ -134,6 +134,7 @@ module.exports = (grunt) ->
                     cwd: 'slides/'
                     src: [
                         'images/**'
+                        'videos/**'
                         'js/**'
                     ]
                     dest: 'dist/'
