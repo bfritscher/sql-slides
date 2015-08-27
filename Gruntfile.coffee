@@ -42,7 +42,7 @@ module.exports = (grunt) ->
             jshint:
                 files: ['js/*.js']
                 tasks: ['jshint']
-        
+
         connect:
 
             livereload:
@@ -81,12 +81,12 @@ module.exports = (grunt) ->
             build:
                 src: ['slides/*.json']
                 dest: ''
-                
+
         filterMarkdown:
             build:
                 src: ['slides/*_serie.md']
                 dest: '.tmp/filtered/'
-                
+
         buildMarkdown:
             filtered:
                 src: ['.tmp/filtered/*.md']
@@ -94,7 +94,7 @@ module.exports = (grunt) ->
             full:
                 src: ['slides/*.md']
                 dest: '.tmp/build/full/'
-                
+
         clean:
             dist:
                 files: [{
@@ -174,7 +174,7 @@ module.exports = (grunt) ->
                         #strip note:
                         data = data.toString()
                         data = data.replace(/note:/gm, '')
-                        
+
                         #add comment class to previous
                         $ = cheerio.load('<body>' + data + '</body>')
                         $('body').contents().filter (idx, elem) ->
@@ -187,7 +187,7 @@ module.exports = (grunt) ->
                             match = elem.nodeValue.match(/data-title="(.*?)"/)
                             if match
                                 $('<p class="sql-title">' + match[1] + '</p>').insertBefore($(elem).prev())
-                        
+
                         #wrap col2
                         $('.col2').each (idx, pre) ->
                             $pre = $(pre)
@@ -198,7 +198,7 @@ module.exports = (grunt) ->
                             .append(pre)
                             .append(output)
                             output.append(table)
-                            
+
                         #preload header/footer image
                         data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_heg.png" />\n'
                         data += '<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_hes-so_noir.jpg" />\n'
@@ -214,11 +214,11 @@ module.exports = (grunt) ->
             files:
                 src: ['.tmp/build/{full,filtered}/*.md']
                 dest: 'dist/'
-        
+
     # Load all grunt tasks.
     require('load-grunt-tasks')(grunt)
     grunt.loadTasks('tasks')
-    
+
     grunt.registerMultiTask 'buildIndex',
         'Build slides from templates/_index.html and slides/*.json.',
         ->
@@ -251,8 +251,8 @@ module.exports = (grunt) ->
                                     slide
                     grunt.file.write filedest, html
                     grunt.log.writeln 'File "' + filedest + '" created.'
-    
-    
+
+
     grunt.registerMultiTask 'filterMarkdown',
         'Remove fragment code and sub-sections to create a exercice md',
         ->
@@ -273,7 +273,7 @@ module.exports = (grunt) ->
                     else
                         true
                 .map (filepath) ->
-                    
+
                     slide = XRegExp('^\\n\\n\\n\\n', 'gm')
                     subslide = XRegExp('^\\n\\n\\n', 'gm')
                     firstSlide = XRegExp('(.*?)(---subslide---.*)?', 's')
@@ -291,7 +291,7 @@ module.exports = (grunt) ->
                     grunt.file.write filedest, data
                     grunt.file.copy filepath.replace('.md', '.cache'), filedest.replace('.md', '.cache')
                     grunt.log.writeln 'File "' + filedest + '" created.'
-    
+
     grunt.registerMultiTask 'buildMarkdown',
         'Build cache results into markdown files in slides/*.md.',
         ->
@@ -311,7 +311,7 @@ module.exports = (grunt) ->
                         cache = {}
                     else
                         cache = grunt.file.readJSON filepath.replace('.md', '.cache')
-                    
+
                     replacer = (match, sql, db) ->
                         classes = /class="(.*?)"/.exec(match)
                         title = /data-title=".*?"/.exec(match)
@@ -334,10 +334,10 @@ module.exports = (grunt) ->
                             return answer + table
                     theFile = filepath.match(/\/([^/]*)$/)[1]
                     filedest = file.dest + theFile
-                    md = md.replace(/```sql\n([\s\S!]*?)\n```\n(?:.*?data-db="(.*?)".*?-->\n)?/gm, replacer)
+                    md = md.replace(/```sql\n([\s\S!]*?\n)```\n(?:.*?data-db="(.*?)".*?-->\n)?/gm, replacer)
                     grunt.file.write filedest, md
                     grunt.log.writeln 'File "' + filedest + '" created.'
-    
+
     grunt.registerTask 'new',
         'Create a new slidedeck',
         (name) ->
@@ -354,7 +354,7 @@ module.exports = (grunt) ->
             grunt.file.write 'slides/' + name + '.json', list
             grunt.file.write 'slides/' + name + '.md', file
             grunt.log.writeln 'File "' + name + '.md|json" created.'
-            
+
     grunt.registerTask 'test',
         '*Lint* javascript and coffee files.', [
             'coffeelint'
@@ -380,8 +380,8 @@ module.exports = (grunt) ->
             'markdownpdf'
             'copy:pdf'
         ]
-            
-            
+
+
     # Define default task.
     grunt.registerTask 'default', [
         'test'
