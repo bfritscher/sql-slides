@@ -2,7 +2,7 @@
 /* global marked:false, SQLtoMarkdown:false, exports:false, ga:false */
 var SQLQuery = (function () {
   'use strict';
-  
+
   function hashCode(str) {
     var hash = 0, i, chr, len;
     if (str.length === 0){
@@ -18,12 +18,12 @@ var SQLQuery = (function () {
     return hash;
   }
   //Source: http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
-  
+
   if(typeof exports !== 'undefined'){
     exports.hashCode = hashCode;
     return;
   }
-  
+
   var config = {
     animation: 'flipInX',
     animationError: 'tada'
@@ -34,10 +34,10 @@ var SQLQuery = (function () {
   var cacheDone = 0;
   var cacheError = 0;
   var generateCache = false;
-  
-  
 
-  
+
+
+
   function run(db, sql, $output, isUser){
     var hash = hashCode(sql);
     function handleResponse(response, type){
@@ -82,7 +82,7 @@ var SQLQuery = (function () {
         }
       }
     }
-    
+
     //force use of cache on start
     if(mywindow.location.search.indexOf('usecache') > -1 && !isUser){
       handleError();
@@ -98,7 +98,7 @@ var SQLQuery = (function () {
         });
     }
   }
-  
+
   function parseCode(){
     //jQuery(document).ready(function(){
     //console.log(document);
@@ -106,8 +106,8 @@ var SQLQuery = (function () {
       setTimeout(parseCode, 10);
       return;
     }
-    
-    jQuery('code.sql').each(function(index, code){
+
+    jQuery('code.lang-sql').each(function(index, code){
       var $code = jQuery(code);
       $code.attr('contenteditable', '')
       .attr('spellcheck', 'false');
@@ -118,7 +118,7 @@ var SQLQuery = (function () {
           $pre.wrap('<div class="layout-two"></div>');
         }
         var $output = jQuery('<div class="output"></div>').insertAfter($pre);
-        
+
         if($pre.hasClass('start-hidden') || $pre.attr('data-output-fragment-index') !== undefined){
           $output.addClass('fragment');
           if($pre.attr('data-output-fragment-index') !== undefined){
@@ -176,8 +176,8 @@ var SQLQuery = (function () {
     var pathname = mywindow.location.pathname;
     return pathname.slice(pathname.lastIndexOf('/')+1).replace(/\.html$/m, '.cache');
   }
-  
-  
+
+
   function init(fakewindow){
       if(fakewindow){
         mywindow = fakewindow;
@@ -196,7 +196,7 @@ var SQLQuery = (function () {
           async: false //must be sync in order to be able to write output data-fragment-index before being parsed by Reveal
         })
         .always(parseCode);
-      }  
+      }
       else if(generateCache){
         parseCode();
         var checkCacheDone = function(){
