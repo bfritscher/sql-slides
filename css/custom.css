@@ -142,7 +142,7 @@ SQL-slide custom styles
     -webkit-column-width: 300px; /* Chrome, Safari, Opera */
     -moz-column-width: 300px; /* Firefox */
     column-width: 300px;
-  
+
     -webkit-column-gap: 2em; /* Chrome, Safari, Opera */
     -moz-column-gap: 2em; /* Firefox */
     column-gap: 2em;
@@ -160,7 +160,7 @@ SQL-slide custom styles
     background-color: rgba(0,0, 0, 0.1);
 -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
           page-break-inside: avoid; /* Firefox */
-               break-inside: avoid; /* IE 10+ */   
+               break-inside: avoid; /* IE 10+ */
 }
 
 .reveal #toc li.subsection{
@@ -331,7 +331,7 @@ SQL-slide custom styles
   justify-content: center;
   align-items: flex-start;
 }
-  
+
 .reveal ol li{
     margin-bottom: 0.8em;
 }
@@ -341,11 +341,15 @@ SQL-slide custom styles
     list-style-type: none;
 }
 
-.reveal .slides span.smaller, .reveal .slides p.small, .reveal .slides strong.small, .reveal .slides em.small, .reveal .slides .small li{
+.reveal .slides span.big, .reveal .slides p.big, .reveal .slides strong.big, .reveal .slides em.big, .reveal .slides .big li, .reveal .slides table.big {
+    font-size: 1.2em;
+}
+
+.reveal .slides span.small, .reveal .slides p.small, .reveal .slides strong.small, .reveal .slides em.small, .reveal .slides .small li, .reveal .slides table.small {
     font-size: 0.8em;
 }
 
-.reveal .slides span.smaller, .reveal .slides p.smaller, .reveal .slides strong.smaller, .reveal .slides em.smaller, .reveal .slides .smaller li{
+.reveal .slides span.smaller, .reveal .slides p.smaller, .reveal .slides strong.smaller, .reveal .slides em.smaller, .reveal .slides .smaller li, .reveal .slides table.smaller {
     font-size: 0.6em;
 }
 
@@ -475,11 +479,11 @@ SQL-slide custom styles
     border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
     margin: 0 18px;
-    
+
     border: solid #ccc 1px;
-    -webkit-box-shadow: 0 1px 1px #ccc; 
-    -moz-box-shadow: 0 1px 1px #ccc; 
-    box-shadow: 0 1px 1px #ccc;         
+    -webkit-box-shadow: 0 1px 1px #ccc;
+    -moz-box-shadow: 0 1px 1px #ccc;
+    box-shadow: 0 1px 1px #ccc;
 }
 .output > div{
     margin: 0 auto;
@@ -491,14 +495,14 @@ SQL-slide custom styles
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;     
-}    
-    
+    transition: all 0.1s ease-in-out;
+}
+
 .output table td, .output table th {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
     padding: 4px;
-    text-align: left;    
+    text-align: left;
 }
 
 .output table th {
@@ -509,11 +513,11 @@ SQL-slide custom styles
     background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
     background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
     background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
-    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
     border-top: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
 
 pre div.run:hover{
