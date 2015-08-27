@@ -75,6 +75,8 @@ Clicking the *run* button or using *ctrl+enter* sends the query to the server. T
 - Class **.col2** will wrap *pre* and *output* inside a *div* and make them display next to each other.
 - **data-title** attribute can be used to set a title. A div will be added after the *code* element in the *pre*.
 
+- **.parse-fragment** allows to add fragment inside code blocks ```<span class="fragment highlight-green">```
+
 By default the **output table can be dragged**. Except if one of the following class is applied (**.left, .right, .bottom, .top, .nodrag**) which are applied to the output and not the code block.
 
 ## Annotations for PDF export
@@ -102,7 +104,7 @@ In order to generate pdf files and also to not depend on the server a cache file
 
 
 - **?sqlrun** forces to run all data-db block even if not annotated with run.
-- **?sqlnorun** loads page without running or loading run annotated sql codes. 
+- **?sqlnorun** loads page without running or loading run annotated sql codes.
 
 ## Animation configuration
 
@@ -119,7 +121,7 @@ SQL_slides features are provided by a combination of reveal.js plugins and grunt
 ## Custom Reveal.js plugins
 
 ### sqlquery.js
-Parses page and upgrades all sql code blocks to interact with a sql-explorer instance. 
+Parses page and upgrades all sql code blocks to interact with a sql-explorer instance.
 
 ### sqltomarkdown.js
 Transforms a sql-explorer result object into a markdown table.
@@ -159,6 +161,6 @@ converts all the markdown versions to a pdf file with phantom, custom headers ar
 ### 5. copy to dist folder
 **dist** folders contains the needed filews
 
-**dist/pdf/** folder contains the pdf files: 
+**dist/pdf/** folder contains the pdf files:
 - for normal markdown all slides with all tables
 - for *_serie.md two files one _solution.pdf with all and one _enonce.pdf which is the filtered version which can be used as statement.
