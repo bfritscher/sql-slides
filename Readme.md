@@ -87,11 +87,17 @@ There are also some class annotation available to affect the exported PDF result
 - **.output-in-statement** class forces the output to be displayed in the pdf (used for filtered version which otherwise strips most of the fragment and tables to produce an assignment statement)
 - **title** file inside **/slides** is used to set *top left header* of pdf files.
 
+## Annotation helper class for layout
+
+- **.w-%%** width
+- **.top, .right, .bottom, .left** absolute position
+- **.smaller, .small, .big** font-size
+
 ## SQL query cache handling
 
 In order to generate pdf files and also to not depend on the server a cache file of query results can be created. The cache is a json file with the sql query hashed through the function available on *SQLQuery.hashCode(sql)*. Cache is generated and used through URL search parameters.
 
-- **?cache** to generate cache file for all data-db blocks (must be connected to the server). Download the file and put it into the same folder as the original *.md file. Cache file has to have the same name as the md filename but end with *.cache*.
+- **?generatecache** to generate cache file for all data-db blocks (must be connected to the server). Download the file and put it into the same folder as the original *.md file. Cache file has to have the same name as the md filename but end with *.cache*.
 
 - **?usecache** can be used to forces to load data from cache without going to the server (needed for slow connection which do not respond error directly).
 
