@@ -16,8 +16,8 @@ module.exports = function (grunt) {
   grunt.registerMultiTask("markdownpdf", "Convert Markdown documents to PDF", function () {
 
     var opts = this.options()
-      , done = this.async(); 
-    
+      , done = this.async();
+
     function getBodyFontFamily(){
       var css = grunt.file.read(opts.cssPath);
       var match = css.match(/body.*?{[\s\S]*?font-family:(.*?);/)
@@ -26,7 +26,7 @@ module.exports = function (grunt) {
       }
       return 'Arial';
     }
-    
+
     function getVersion(file){
       try{
         return execSync('git log -n 1  --abbrev-commit --pretty=oneline -- ' + file, {cwd:'slides/'}).toString().slice(0,7) || '0';
@@ -34,11 +34,11 @@ module.exports = function (grunt) {
         return '0';
       }
     }
-    
+
     function escape(str){
       return str.replace(/'/g, "\\'");
     }
-    
+
     // Create the tasks to process the targets
     this.files.forEach(function (f) {
         var i=0;
@@ -57,27 +57,27 @@ module.exports = function (grunt) {
           var file = path.parse(filepath);
           var content = grunt.file.read(filepath);
           var match = content.match(/#+ (.*?)\n/);
-          
+
           var title =  opts.title || '';
           title += '<br\>';
           if(match){
             title += match[1].replace(/<br.*?>/, ' ');
           }
-          
+
           var runningsTemplate = grunt.file.read(path.join(process.cwd(), 'templates', '_runnings.js'));
           var localOpts = extend({}, opts);
           localOpts.preProcessMd = opts.preProcessMd;
           localOpts.preProcessHtml = opts.preProcessHtml;
           var runnings = grunt.template.process(runningsTemplate, {data:{
             topLeft: title,
-            bottomLeft: file.base + '@' + getVersion(file.base) + ' - ' + new Date().toISOString().slice(0,16) + ' - BFR',
+            bottomLeft: file.base + '@' + getVersion(file.base) + ' - BFR',
             assetDir: localOpts.assetDir ||'',
             font: escape(localOpts.font || getBodyFontFamily())}});
           var runningsPath = path.join(process.cwd(), '.tmp', file.name + '_runnings.js');
           grunt.file.write(runningsPath, runnings);
           localOpts.runningsPath = runningsPath;
           grunt.verbose.writeln("Wrote runnings file: " + runningsPath);
-          
+
           //execute markdownpdf
           var destPath = filepath.replace(/\.(markdown|md)/g, "") + ".pdf";
           grunt.verbose.writeln("Determined dest path: " + destPath);
@@ -92,7 +92,7 @@ module.exports = function (grunt) {
           return true;
         })
 
-        
+
     });
   });
 
