@@ -9,3 +9,4 @@ test/tests.js
 slides/
 slides_*/
 .idea
+.vscode/
