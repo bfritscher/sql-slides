@@ -40,6 +40,11 @@ blockquote{
     width: 100%;
 }
 
+.w-80{
+    width: 80%;
+}
+
+
 .w-75{
     width: 75%;
 }
@@ -92,7 +97,7 @@ blockquote{
 }
 
 .pdf-float-left{
-  float: left; 
+  float: left;
 }
 
 img{
@@ -102,6 +107,10 @@ img{
 }
 
 p.w-50{
+  display: inline-block;
+}
+
+.inline-block, .left{
   display: inline-block;
 }
 
@@ -173,14 +182,14 @@ table {
 }
 
 table tr:hover {
-    background: #fbf8e9;  
-}    
-    
+    background: #fbf8e9;
+}
+
 table td, table th {
     border-left: 1px solid #aaa;
     border-top: 1px solid #aaa;
     padding: 0 2px;
-    text-align: left;    
+    text-align: left;
 }
 
 table th {
