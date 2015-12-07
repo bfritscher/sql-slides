@@ -458,6 +458,9 @@ SQL-slide custom styles
 .reveal .w-75{
     width: 75%;
 }
+.reveal .w-80{
+    width: 80%;
+}
 .reveal .w-100{
     width: 100%;
 }
