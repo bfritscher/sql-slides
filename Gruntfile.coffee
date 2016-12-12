@@ -317,6 +317,10 @@ module.exports = (grunt) ->
                         title = /data-title=".*?"/.exec(match)
                         return '' if classes && classes[1].indexOf('nopdf') > -1
                         response = cache[SQLQuery.hashCode(sql)]
+                        if !response
+                            console.log('ERROR')
+                            console.log(sql)
+                            console.log(SQLQuery.hashCode(sql))
                         if response && response.error
                             table = response.error + '\n<!-- .element class="warn" -->\n'
                         else

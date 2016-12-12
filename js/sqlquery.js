@@ -15,7 +15,7 @@ var SQLQuery = (function () {
       hash |= 0; // Convert to 32bit integer
       /* jshint ignore:end */
     }
-    return hash;
+    return String(hash);
   }
   //Source: http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
 
@@ -165,7 +165,7 @@ var SQLQuery = (function () {
             ($pre.hasClass('run') || mywindow.location.search.indexOf('sqlrun') > -1 || generateCache)){
           run(db, $code[0].textContent, $output);
           if(generateCache){
-            cache[hashCode($code.text())] = '';
+            cache[hashCode($code[0].textContent)] = '';
             cacheCounter++;
           }
         }
