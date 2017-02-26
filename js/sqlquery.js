@@ -35,12 +35,16 @@ var SQLQuery = (function () {
   var cacheError = 0;
   var generateCache = false;
 
-
-
-
   function run(db, sql, $output, isUser){
     var hash = hashCode(sql);
     function handleResponse(response, type){
+      // convert from old php api to new format
+      if (response && response.data) {
+        response = response.data;
+        if (response.header) {
+          response.headers = response.header;
+        }
+      }
       if(generateCache){
         cache[hash] = jQuery.extend(true, {}, response);
         cacheDone++;
@@ -87,12 +91,15 @@ var SQLQuery = (function () {
     if(mywindow.location.search.indexOf('usecache') > -1 && !isUser){
       handleError();
     }else{
+        // TODO: switch based on...?
         jQuery.ajax({
-          url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
+          //url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
+          url:'https://hec.unil.ch/info1ere/questions/evaluate',
           type:'POST',
-          dataType:'json',
-          contentType:'application/json',
-          data:JSON.stringify({db: db,sql: sql}),
+          //dataType:'json',
+          //contentType:'application/json',
+          //data:JSON.stringify({db: db,sql: sql}),
+          data: {assignment: db,sql: sql},
           success:handleResponse,
           error:handleError
         });
@@ -100,8 +107,6 @@ var SQLQuery = (function () {
   }
 
   function parseCode(){
-    //jQuery(document).ready(function(){
-    //console.log(document);
     if(jQuery('section[data-markdown]:not([data-markdown-parsed])').length > 0){
       setTimeout(parseCode, 10);
       return;
