@@ -15,7 +15,10 @@
         <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
         <link rel="stylesheet" href="bower_components/reveal.js/css/theme/simple.css" id="theme">
         <link rel="stylesheet" href="css/custom.css">
-        
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Droid+Sans+Mono|Hind:400,700|Open+Sans:400,400i,700');
+        </style>
+
         <!-- If the query includes 'print-pdf', use the PDF print sheet -->
         <script>
           if( window.location.search.match( /print-pdf/gi ) ) {
@@ -65,7 +68,7 @@
                 history: true,
                 center: false,
                 // Turns fragments on and off globally
-                fragments: true,                
+                fragments: true,
                 // Apply a 3D roll to links on hover
                 rollingLinks: false,
                 // Opens links in an iframe preview overlay
@@ -83,7 +86,7 @@
                     { src: 'js/loadhtmlslides.js', condition: function() { return !!document.querySelector( '[data-html]' ); }},
                     { src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                     { src: 'js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return true; }, callback: function() { 
+                    { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return true; }, callback: function() {
                       jQuery('pre code').each(function(idx, item){
                           if($(this).parent().hasClass('parse-fragment')){
                             $(this).html($(this).text());
@@ -101,8 +104,8 @@
                     { src: 'js/toc.js', async: false}
                 ]
             });
-            
-            
+
+
             $(document).ready(function () {
               var title = document.title;
               Reveal.addEventListener("slidechanged",function(event){
