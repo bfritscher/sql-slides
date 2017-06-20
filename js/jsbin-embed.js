@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-        
+
     function embed(link) {
       var iframe = document.createElement('iframe'),
           url = link.dataset.href.replace(/edit/, 'embed');
@@ -29,7 +29,7 @@
         window.attachEvent('onmessage', onmessage);
       }
     }
-    
+
     //init only on slide shown
     Reveal.addEventListener( 'slidechanged', function( event ) {
       jQuery(event.currentSlide).find('pre.jsbin-embed').each(function(index, pre){

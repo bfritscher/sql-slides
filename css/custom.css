@@ -1,10 +1,11 @@
 /*
 Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
 */
-.hljs{display:block;overflow-x:auto;padding:.5em;background:#fff;color:#000;-webkit-text-size-adjust:none}.apache .hljs-cbracket,.diff .hljs-header,.hljs-annotation,.hljs-chunk,.hljs-comment{color:green}.bash .hljs-variable,.css .smalltalk .hljs-class,.hljs-built_in,.hljs-id,.hljs-keyword,.hljs-request,.hljs-status,.hljs-winutils,.nginx .hljs-title,.tex .hljs-command,.xml .hljs-tag,.xml .hljs-tag .hljs-value{color:#00f}.apache .hljs-tag,.coffeescript .hljs-attribute,.django .hljs-variable,.hljs-addition,.hljs-date,.hljs-flow,.hljs-parent,.hljs-rules .hljs-value,.hljs-stream,.hljs-string,.hljs-tag .hljs-value,.hljs-template_tag,.hljs-title,.ruby .hljs-symbol,.ruby .hljs-symbol .hljs-string,.tex .hljs-formula{color:#a31515}.apache .hljs-sqbracket,.hljs-array,.hljs-attr_selector,.hljs-decorator,.hljs-deletion,.hljs-doctype,.hljs-envvar,.hljs-filter .hljs-argument,.hljs-localvars,.hljs-pi,.hljs-pragma,.hljs-preprocessor,.hljs-prompt,.hljs-pseudo,.hljs-shebang,.nginx .hljs-built_in,.ruby .hljs-string,.tex .hljs-special,.userType{color:#2b91af}.hljs-dartdoc,.hljs-javadoc,.hljs-phpdoc,.hljs-xmlDocTag{color:gray}.hljs-type,.hljs-typename{font-weight:700}.vhdl .hljs-string{color:#666}.vhdl .hljs-literal{color:#a31515}.vhdl .hljs-attribute{color:#00b0e8}.xml .hljs-attribute{color:red}
+.hljs{display:block;overflow-x:auto;padding:.5em;background:#fff;color:#000}.hljs-comment,.hljs-quote,.hljs-variable{color:green}.hljs-built_in,.hljs-keyword,.hljs-name,.hljs-selector-tag,.hljs-tag{color:#00f}.hljs-addition,.hljs-attribute,.hljs-literal,.hljs-section,.hljs-string,.hljs-template-tag,.hljs-template-variable,.hljs-title,.hljs-type{color:#a31515}.hljs-deletion,.hljs-meta,.hljs-selector-attr,.hljs-selector-pseudo{color:#2b91af}.hljs-doctag{color:grey}.hljs-attr{color:red}.hljs-bullet,.hljs-link,.hljs-symbol{color:#00b0e8}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
 
 .reveal {
     font-family: 'Open Sans', sans-serif;
+    font-size: 34px;
 }
 
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
@@ -385,6 +386,9 @@ SQL-slide custom styles
   z-index: -1;
 }
 
+.red {
+    color: #dd002a;
+}
 
 
 .output table {
