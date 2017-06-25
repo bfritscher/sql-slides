@@ -253,6 +253,13 @@ SQL-slide custom styles
   align-items: flex-start;
 }
 
+.reveal iframe.jsbin-embed {
+    min-height: 95% !important;
+    max-width: 120% !important;
+    width: 120% !important;
+    margin: 0 -10% !important;
+}
+
 .reveal ol li{
     margin-bottom: 0.8em;
 }
