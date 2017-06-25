@@ -203,6 +203,11 @@ SQL-slide custom styles
   width: auto;
 }
 
+.reveal code {
+    background-color: #efefef;
+    padding: 0 2px;
+}
+
 .reveal pre code {
   color: inherit;
   background: inherit;
