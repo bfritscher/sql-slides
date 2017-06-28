@@ -178,7 +178,7 @@ module.exports = (grunt) ->
                         #add comment class to previous
                         $ = cheerio.load('<body>' + data + '</body>')
                         $('body').contents().filter (idx, elem) ->
-                            return elem.type == 'comment';
+                            return elem.type == 'comment'
                         .each (idx, elem) ->
                             match = elem.nodeValue.match(/class="(.*?)"/)
                             if match
