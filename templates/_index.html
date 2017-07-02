@@ -110,6 +110,9 @@
 
             $(document).ready(function () {
               var title = document.title;
+              $('body').on('dblclick', 'code', function () {
+                $(this).attr('contenteditable', true);
+              });
               Reveal.addEventListener("slidechanged",function(event){
                 var fullTitle = title + ': ' + $(event.currentSlide).find('h1, h2, h3').first().text()
                 document.title = fullTitle;
