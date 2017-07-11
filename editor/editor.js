@@ -41,7 +41,7 @@ const enableEmmet = (editor, emmet, options) => {
 require.config({
   paths: {
     'vs': '../node_modules/monaco-editor/min/vs',
-    'emmet': 'js/vendors/emmet-min',
+    'emmet': '../js/vendors/emmet-min',
     'vue': '../node_modules/vue/dist/vue.min'
   }
 });

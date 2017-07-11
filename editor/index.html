@@ -1,0 +1,95 @@
+<style>
+    body {
+        margin: 0;
+    }
+
+    #editorApp {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .edit {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+
+    .edit>div {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        width: 25%;
+        min-width: 20px;
+
+    }
+
+    .edit>div:last-child {
+        flex: 1;
+    }
+
+    .edit>div>div {
+        flex-grow: 1;
+    }
+
+    .handle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 1px;
+        cursor: ew-resize;
+        background-color: black;
+    }
+
+    .handle:hover {
+        width: 5px;
+    }
+
+    .edit>div:last-child .handle,
+    .edit>div:only-child .handle {
+        display: none;
+    }
+    iframe {
+        border: 0;
+        margin-left: 2px;
+        pointer-events: none;
+    }
+</style>
+<div id="editorApp">
+    <div @click="values.javascript = 'test'">test</div>
+    <form method="POST" action="https://fritscher.ch/html/" target="_blank">
+<textarea name="html" v-model="preview"></textarea>
+<input type="submit">
+    </form>
+    <div>
+        <div @click="panels.html=!panels.html">HTML</div>
+        <div @click="panels.css=!panels.css">CSS</div>
+        <div @click="panels.javascript=!panels.javascript">javascript</div>
+        <div @click="panels.output=!panels.output">Output</div>
+    </div>
+    <div class="edit">
+        <panel v-if="panels.html" style="background-color: red">
+            <editor language="html" v-model="values.html"></editor>
+        </panel>
+        <panel v-if="panels.css" style="background-color: green">
+            <editor language="css" v-model="values.css"></editor>
+        </panel>
+        <panel v-if="panels.javascript" style="background-color: blue">
+            <editor language="javascript" v-model="values.javascript"></editor>
+        </panel>
+        <panel v-if="panels.output" style="background-color: yellow">
+            <iframe ref="preview"></iframe>
+        </panel>
+    </div>
+</div>
+
+<script src="../node_modules/monaco-editor/min/vs/loader.js"></script>
+<script src="editor.js"></script>
+<script type="text/x-template" id="panel">
+    <div>
+        <slot></slot>
+        <div class="handle" ref="handle"></div>
+    </div>
+</script>
