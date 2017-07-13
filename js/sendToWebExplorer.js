@@ -1,29 +1,43 @@
 (function () {
     'use strict';
     function sendToWebExplorer() {
-        const html = $('section.present[data-markdown] code.lang-html').text();
-        const css = $('section.present[data-markdown] code.lang-css').text();
-        const javascript = $('section.present[data-markdown] code.lang-javascript').text();
-
+        const html = $('section.present[data-markdown] code.lang-html');
+        const htmlText = html.text();
+        const htmlVisible = !!htmlText && !html.parent().hasClass('hide');
+        const css = $('section.present[data-markdown] code.lang-css');
+        const cssText = css.text();
+        const cssVisible = !!cssText && !css.parent().hasClass('hide');
+        const javascript = $('section.present[data-markdown] code.lang-javascript');
+        const javascriptText = javascript.text();
+        const javascriptisible = !!javascriptText && !javascript.parent().hasClass('hide');
+        const count = [htmlVisible, cssVisible, javascriptisible, htmlVisible].reduce(function(count, value) {
+            return value ? count + 1  : count;
+        }, 0) || 1;
+        const width = Math.round(100 / count) + '%';
+        const widthDefault = '25%'
         const data = {
             panels: {
                 html: {
-                    visible: !!html
+                    visible: htmlVisible,
+                    width: htmlVisible ? width : widthDefault
                 },
                 css: {
-                    visible: !!css
+                    visible: cssVisible,
+                    width: cssVisible ? width : widthDefault
                 },
                 javascript: {
-                    visible: !!javascript
+                    visible: javascriptisible,
+                    width: javascriptisible ? width : widthDefault
                 },
                 output: {
-                    visible: !!html
+                    visible: htmlVisible,
+                    width: htmlVisible ? width : widthDefault
                 }
             },
             values: {
-                html,
-                css,
-                javascript
+                html: htmlText,
+                css: cssText,
+                javascript: javascriptText
             },
             options: {
                 fontSize: 22,
