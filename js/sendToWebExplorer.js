@@ -9,8 +9,9 @@
         const cssVisible = !!cssText && !css.parent().hasClass('hide');
         const javascript = $('section.present[data-markdown] code.lang-javascript');
         const javascriptText = javascript.text();
-        const javascriptisible = !!javascriptText && !javascript.parent().hasClass('hide');
-        const count = [htmlVisible, cssVisible, javascriptisible, htmlVisible].reduce(function(count, value) {
+        const javascriptVisible = !!javascriptText && !javascript.parent().hasClass('hide');
+        const outputVisible = htmlVisible || javascriptText.indexOf('console.log') > -1;
+        const count = [htmlVisible, cssVisible, javascriptVisible, outputVisible].reduce(function(count, value) {
             return value ? count + 1  : count;
         }, 0) || 1;
         const width = Math.round(100 / count) + '%';
@@ -26,12 +27,12 @@
                     width: cssVisible ? width : widthDefault
                 },
                 javascript: {
-                    visible: javascriptisible,
-                    width: javascriptisible ? width : widthDefault
+                    visible: javascriptVisible,
+                    width: javascriptVisible ? width : widthDefault
                 },
                 output: {
-                    visible: htmlVisible,
-                    width: htmlVisible ? width : widthDefault
+                    visible: outputVisible,
+                    width: outputVisible ? width : widthDefault
                 }
             },
             values: {
