@@ -93,13 +93,13 @@ var SQLQuery = (function () {
     }else{
         // TODO: switch based on...?
         jQuery.ajax({
-          //url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
-          url:'https://hec.unil.ch/info1ere/questions/evaluate',
+          url:'https://amc.ig.he-arc.ch/sqlexplorer/api/evaluate',
+          //url:'https://hec.unil.ch/info1ere/questions/evaluate',
           type:'POST',
-          //dataType:'json',
-          //contentType:'application/json',
-          //data:JSON.stringify({db: db,sql: sql}),
-          data: {assignment: db,sql: sql},
+          dataType:'json',
+          contentType:'application/json',
+          data:JSON.stringify({db: db, sql: sql}),
+          //data: {assignment: db, sql: sql},
           success:handleResponse,
           error:handleError
         });
@@ -159,7 +159,7 @@ var SQLQuery = (function () {
             .appendTo($pre);
         }
         $run.click(function(){
-          run(db, $code[0].textContent, $output, true);
+          run(db, getSQLFromCode($code), $output, true);
         });
         $code.keydown(function (e) { //ctrl + enter to run
           if (e.ctrlKey && e.keyCode === 13) {
@@ -168,9 +168,9 @@ var SQLQuery = (function () {
         });
         if( mywindow.location.search.indexOf('sqlnorun') === -1 &&
             ($pre.hasClass('run') || mywindow.location.search.indexOf('sqlrun') > -1 || generateCache)){
-          run(db, $code[0].textContent, $output);
+          run(db, getSQLFromCode($code), $output);
           if(generateCache){
-            cache[hashCode($code[0].textContent)] = '';
+            cache[hashCode(getSQLFromCode($code))] = '';
             cacheCounter++;
           }
         }
@@ -182,6 +182,9 @@ var SQLQuery = (function () {
     return pathname.slice(pathname.lastIndexOf('/')+1).replace(/\.html$/m, '.cache');
   }
 
+  function getSQLFromCode($code){
+    return $code[0].innerHTML.replace(/<div>/g, '\n<div>').replace(/<.*?>/g, '').replace(/\r\n/g, '\n');
+  }
 
   function init(fakewindow){
       if(fakewindow){
