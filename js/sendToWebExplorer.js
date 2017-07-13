@@ -15,7 +15,7 @@
             return value ? count + 1  : count;
         }, 0) || 1;
         const width = Math.round(100 / count) + '%';
-        const widthDefault = '25%'
+        const widthDefault = '25%';
         const data = {
             panels: {
                 html: {
