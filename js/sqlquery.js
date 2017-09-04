@@ -183,7 +183,9 @@ var SQLQuery = (function () {
   }
 
   function getSQLFromCode($code){
-    return $code[0].innerHTML.replace(/<div>/g, '\n<div>').replace(/<.*?>/g, '').replace(/\r\n/g, '\n');
+    var sql = $code[0].innerHTML.replace(/<div>/g, '\n<div>').replace(/<.*?>/g, '').replace(/\r\n/g, '\n');
+    return $('<textarea />').html(sql).text();
+
   }
 
   function init(fakewindow){
