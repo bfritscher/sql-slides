@@ -413,6 +413,7 @@ SQL-slide custom styles
     border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
     margin: 0 18px;
+    max-width: 100%;
 
     border: solid #ccc 1px;
     -webkit-box-shadow: 0 1px 1px #ccc;
