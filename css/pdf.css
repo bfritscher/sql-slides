@@ -1,5 +1,5 @@
 body {
-    font-size: 1.1em;
+    font-size: 0.6em;
     margin: 0 1cm;
     padding: 0;
     font-family: 'Lato Light';
@@ -24,8 +24,8 @@ h3{
 }
 
 blockquote{
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
 }
 
 .hide{
