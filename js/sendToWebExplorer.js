@@ -14,8 +14,8 @@
         const count = [htmlVisible, cssVisible, javascriptVisible, outputVisible].reduce(function(count, value) {
             return value ? count + 1  : count;
         }, 0) || 1;
-        const width = Math.round(100 / count) + '%';
-        const widthDefault = '25%';
+        const width = Math.round(100 / count);
+        const widthDefault = 25;
         const data = {
             panels: {
                 html: {
@@ -62,7 +62,7 @@
         .appendTo(pre);
         $run.click(sendToWebExplorer);
     });
-    var editor = jQuery('<div style="transition: 1s; z-index: 900; position:fixed;top:100%;left:0;width:100%;height:100%;"><iframe style="width:100%;height:100%;border:0;" src="https://fritscher.ch/webexplorer/"></iframe></div>');
+    var editor = jQuery('<div style="transition: 1s; z-index: 900; position:fixed;top:100%;left:0;width:100%;height:100%;"><iframe style="width:100%;height:100%;border:0;" src="//fritscher.ch/webexplorer/"></iframe></div>');
     var close = jQuery('<div class="run" style="  cursor: pointer; position: absolute;bottom: 4px;right: 4px;font-family: sans-serif;font-weight: bold;font-size: 14px;">X</div>');
     close.click(function(){
         editor.css({'top': '100%'});
