@@ -117,13 +117,13 @@ module.exports = (grunt) ->
                     expand: true
                     src: [
                         'slides/*.*'
-                        'bower_components/animate-css/animate.min.css'
-                        'bower_components/draggabilly/dist/draggabilly.pkgd.min.js'
-                        'bower_components/jquery/dist/jquery.min.js'
-                        'bower_components/reveal.js/css/{,*/}*.css'
-                        'bower_components/reveal.js/js/*'
-                        'bower_components/reveal.js/plugin/**'
-                        'bower_components/reveal.js/lib/**'
+                        'node_modules/animate.css/animate.min.css'
+                        'node_modules/draggabilly/dist/draggabilly.pkgd.min.js'
+                        'node_modules/jquery/dist/jquery.min.js'
+                        'node_modules/reveal.js/css/{,*/}*.css'
+                        'node_modules/reveal.js/js/*'
+                        'node_modules/reveal.js/plugin/**'
+                        'node_modules/reveal.js/lib/**'
                         'js/**'
                         'css/**'
                         'fonts/**'
@@ -205,7 +205,7 @@ module.exports = (grunt) ->
                         grunt.file.write slash(__dirname) + '/.tmp/' +  $('h4').first().text().slice(0,10)  + '.html', data
                         this.queue(data)
                 paperBorder: '0.5cm'
-                highlightCssPath: 'bower_components/highlightjs/styles/vs.css'
+                highlightCssPath: 'node_modules/highlight.js/styles/vs.css'
                 cssPath: 'css/pdf.css'
                 assetDir: slash(__dirname) + '/slides/images'
                 title: grunt.file.read 'slides/title' if grunt.file.exists 'slides/title'

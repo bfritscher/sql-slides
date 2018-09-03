@@ -10,7 +10,7 @@ Slide content has to be put into a /slides folder inside the project's root dire
 
 Clone project and install dependencies.
 
-`npm install && bower install`
+`npm install`
 
 Change the hardcoded SQL-Explorer server location in `js/sqlquery.js`
 
