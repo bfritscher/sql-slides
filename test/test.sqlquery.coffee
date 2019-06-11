@@ -153,7 +153,7 @@ describe 'SQLQuery', ->
                    """
             jQuery(html).appendTo 'body'
             SQLQuery.init()
-            code = jQuery('#test code.lang-sql')[0]
+            code = jQuery('#test code.language-sql')[0]
             expect(code.contentEditable).to.be.equal('true')
             expect(code.spellcheck).to.be.false
 

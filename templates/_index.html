@@ -11,6 +11,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="node_modules/reveal.js/css/reset.css">
         <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
         <link rel="stylesheet" href="node_modules/reveal.js/css/reveal.css">
         <link rel="stylesheet" href="node_modules/reveal.js/css/theme/simple.css" id="theme">
@@ -52,8 +53,6 @@
                 <% }); %>
             </div>
         </div>
-
-        <script src="node_modules/reveal.js/lib/js/head.min.js"></script>
         <script src="node_modules/reveal.js/js/reveal.js"></script>
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <script src="node_modules/draggabilly/dist/draggabilly.pkgd.min.js"></script>
@@ -63,7 +62,7 @@
             // https://github.com/hakimel/reveal.js#configuration
             Reveal.initialize({
                 width: 1000,
-	            height: 700,
+	              height: 700,
                 controls: true,
                 progress: true,
                 slideNumber: true,
@@ -84,10 +83,9 @@
                 postMessage: true,
                 // Optional libraries used to extend on reveal.js
                 dependencies: [
-                    { src: 'node_modules/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
                     { src: 'js/loadhtmlslides.js', condition: function() { return !!document.querySelector( '[data-html]' ); }},
                     { src: 'node_modules/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: 'js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'node_modules/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                     { src: 'node_modules/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return true; }, callback: function() {
                       jQuery('pre code').each(function(idx, item){
                           if($(this).parent().hasClass('parse-fragment')){

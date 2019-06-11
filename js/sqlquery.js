@@ -106,6 +106,12 @@ var SQLQuery = (function () {
     }
   }
 
+  function getSQLFromCode($code){
+    var sql = $code[0].innerHTML.replace(/<div>/g, '\n<div>').replace(/<.*?>/g, '').replace(/\r\n/g, '\n');
+    return $('<textarea />').html(sql).text();
+
+  }
+
   function parseCode(){
     if(jQuery('section[data-markdown]:not([data-markdown-parsed])').length > 0){
       setTimeout(parseCode, 10);
@@ -180,12 +186,6 @@ var SQLQuery = (function () {
   function getCacheName(){
     var pathname = mywindow.location.pathname;
     return pathname.slice(pathname.lastIndexOf('/')+1).replace(/\.html$/m, '.cache');
-  }
-
-  function getSQLFromCode($code){
-    var sql = $code[0].innerHTML.replace(/<div>/g, '\n<div>').replace(/<.*?>/g, '').replace(/\r\n/g, '\n');
-    return $('<textarea />').html(sql).text();
-
   }
 
   function init(fakewindow){

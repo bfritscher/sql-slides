@@ -1,18 +1,7 @@
 (function(){
 'use strict';
   var $ul = jQuery('<ul></ul>');
-  
-  jQuery('.slides > section').each(function(x, item){
-    var subsections = jQuery(item).find('section');
-    if(subsections.length > 0){
-      subsections.each(function(y, item){
-        createSectionEntry(item, x, y);
-      });
-    }else{
-      createSectionEntry(item, x, 0);
-    }
-  });
-  
+
   function createSectionEntry(item, x, y){
     var $li = jQuery('<li></li>');
     if(y > 0){
@@ -25,7 +14,7 @@
     Reveal.addEventListener( 'slidechanged', function( event ) {
       $li.toggleClass('active', event.indexh === x && event.indexv === y);
     });
-    
+
     var title = jQuery(item).find('h1, h2, h3, h4, p').first();
     var text = '';
     if(title){
@@ -44,7 +33,18 @@
     }
     $li.text(text);
   }
-  
+
+  jQuery('.slides > section').each(function(x, item){
+    var subsections = jQuery(item).find('section');
+    if(subsections.length > 0){
+      subsections.each(function(y, item){
+        createSectionEntry(item, x, y);
+      });
+    }else{
+      createSectionEntry(item, x, 0);
+    }
+  });
+
   var $toc = jQuery('<div id="toc" class="toc"></div>');
   $toc.appendTo(jQuery('.reveal'));
   var $button = jQuery('<button id="tocshow">TOC</button>');
@@ -54,6 +54,6 @@
   $button.appendTo(jQuery('.reveal'));
   $toc.append($ul);
   $toc.on('click', function(){
-    $toc.css({width:'0%', height:'0%', 'z-index': 800}); 
+    $toc.css({width:'0%', height:'0%', 'z-index': 800});
   });
 }());
