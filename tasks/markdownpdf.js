@@ -19,11 +19,13 @@ module.exports = function (grunt) {
       , done = this.async();
 
     function getBodyFontFamily(){
-      var css = grunt.file.read(opts.cssPath);
-      var match = css.match(/body.*?{[\s\S]*?font-family:(.*?);/)
-      if(match){
-        return match[1];
-      }
+      try {
+        var css = grunt.file.read(opts.cssPath);
+        var match = css.match(/body.*?{[\s\S]*?font-family:(.*?);/)
+        if(match){
+          return match[1];
+        }
+      } catch (e) {}
       return 'Arial';
     }
 
@@ -66,8 +68,6 @@ module.exports = function (grunt) {
 
           var runningsTemplate = grunt.file.read(path.join(process.cwd(), 'templates', '_runnings.js'));
           var localOpts = extend({}, opts);
-          localOpts.preProcessMd = opts.preProcessMd;
-          localOpts.preProcessHtml = opts.preProcessHtml;
           var runnings = grunt.template.process(runningsTemplate, {data:{
             topLeft: title,
             bottomLeft: file.base + '@' + getVersion(file.base) + ' - Boris Fritscher',

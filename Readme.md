@@ -17,8 +17,8 @@ Change the hardcoded SQL-Explorer server location in `js/sqlquery.js`
 ## Usage
 
 1. Create a new presentation with `grunt new:"name of the presentation"`
-2. `grunt serve` to start the web server. Start editing the files in /slides with custom annotations. Use *.json file to merge multiple files (see generator-reveal)
-3. `grunt dist` to generate a version with minimal dependencies in the dist folder, as well as all the **pdfs**. (pdf export does not merge multiple files into one)
+2. `npm run serve` to start the web server. Start editing the files in /slides with custom annotations. Use *.json file to merge multiple files (see generator-reveal)
+3. `npm run dist` to generate a version with minimal dependencies in the dist folder, as well as all the **pdfs**. (pdf export does not merge multiple files into one)
 
 ## Custom Annotations
 

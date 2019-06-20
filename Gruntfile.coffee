@@ -163,17 +163,15 @@ module.exports = (grunt) ->
 
         markdownpdf:
             options:
-                preProcessMd: ->
-                    self = this
-                    through (data) ->
-                        data = data.toString()
-                        .replace(/images\//g, __dirname + '/slides/images/')
-                        this.queue(data)
                 preProcessHtml: (data) ->
                     through (data) ->
                         #strip note:
                         data = data.toString()
                         data = data.replace(/note:/gm, '')
+                        absolutePath = 'file:///' + process.cwd().replace(/ /g, '%20').replace(/\\/g, '/') + '/slides/';
+                        find = /img src="/g;
+                        replace = 'img src="' + absolutePath;
+                        data = data.replace(find, replace);
 
                         #add comment class to previous
                         $ = cheerio.load('<body>' + data + '</body>')
@@ -200,14 +198,14 @@ module.exports = (grunt) ->
                             output.append(table)
 
                         #preload header/footer image
-                        data = $('body').html() +  '\n<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_heg.png" />\n'
-                        data += '<img class="hide" src="' + slash(__dirname) + '/slides/images/common/logo_hes-so_noir.jpg" />\n'
+                        data = $('body').html() +  '\n<img class="hide" src="' + absolutePath  + '/images/common/logo_heg.png" />\n'
+                        data += '<img class="hide" src="' + absolutePath + '/images/common/logo_hes-so_noir.jpg" />\n'
                         grunt.file.write slash(__dirname) + '/.tmp/' +  $('h4').first().text().slice(0,10)  + '.html', data
                         this.queue(data)
                 paperBorder: '0.5cm'
                 highlightCssPath: 'node_modules/highlight.js/styles/vs.css'
-                cssPath: 'css/pdf.css'
-                assetDir: slash(__dirname) + '/slides/images'
+                cssPath: __dirname + '/css/pdf.css'
+                assetDir: 'file:///' +  process.cwd().replace(/ /g, '%20').replace(/\\/g, '/') + '/slides/images/'
                 title: grunt.file.read 'slides/title' if grunt.file.exists 'slides/title'
                 remarkable:
                     html: true

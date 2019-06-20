@@ -16,10 +16,10 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-markdown-pdf": "^3.0.0",
     "load-grunt-tasks": "^5.0.0",
     "markdown-pdf": "^9.0.0",
     "mocha": "^6.1.4",
+    "phantomjs-prebuilt": "^2.1.16",
     "sinon": "^7.3.2",
     "slash": "^3.0.0",
     "through": "^2.3.8",
@@ -31,6 +31,7 @@
   },
   "scripts": {
     "serve": "grunt serve",
+    "dist": "grunt dist",
     "test": "grunt test"
   },
   "dependencies": {

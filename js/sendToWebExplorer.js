@@ -60,10 +60,11 @@
     close.click(function(){
         editor.css({'top': '100%'});
     });
-    editor.append(close);
-    jQuery('body').append(editor);
 
-    Reveal.addEventListener( 'ready', function( event ) {
+    Reveal.addEventListener( 'ready', function() {
+        if( window.location.search.match( /print-pdf/gi)) return;
+        editor.append(close);
+        jQuery('body').append(editor);
         jQuery('code.language-javascript, code.language-html, code.language-css').each(function(index, code){
             var pre = code.parentElement;
             var $run = jQuery('<div class="run">run</div>')
