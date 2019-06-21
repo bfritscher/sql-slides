@@ -62,7 +62,9 @@
     });
 
     Reveal.addEventListener( 'ready', function() {
-        if( window.location.search.match( /print-pdf/gi)) return;
+        if( window.location.search.match( /print-pdf/gi)) {
+            return;
+        }
         editor.append(close);
         jQuery('body').append(editor);
         jQuery('code.language-javascript, code.language-html, code.language-css').each(function(index, code){
