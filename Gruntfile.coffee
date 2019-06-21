@@ -168,10 +168,10 @@ module.exports = (grunt) ->
                         #strip note:
                         data = data.toString()
                         data = data.replace(/note:/gm, '')
-                        absolutePath = 'file:///' + process.cwd().replace(/ /g, '%20').replace(/\\/g, '/') + '/slides/';
-                        find = /img src="/g;
-                        replace = 'img src="' + absolutePath;
-                        data = data.replace(find, replace);
+                        absolutePath = 'file:///' + process.cwd().replace(/ /g, '%20').replace(/\\/g, '/') + '/slides/'
+                        find = /img src="/g
+                        replace = 'img src="' + absolutePath
+                        data = data.replace(find, replace)
 
                         #add comment class to previous
                         $ = cheerio.load('<body>' + data + '</body>')
