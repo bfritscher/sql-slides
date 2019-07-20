@@ -104,6 +104,7 @@
                     { src: 'js/sqltomarkdown.js', async: false },
                     { src: 'js/sqlquery.js', async: false, callback: function(){SQLQuery.init();} },
                     { src: 'js/toc.js', async: false},
+                    { src: 'js/htmlPreview.js', async: false},
                     { src: 'js/sendToWebExplorer.js', async: false, callback: function(){}}
                 ]
             });
@@ -113,6 +114,7 @@
               var title = document.title;
               $('body').on('dblclick', 'code', function () {
                 $(this).attr('contenteditable', true);
+                $(this).attr('spellcheck', false);
               });
               Reveal.addEventListener("slidechanged",function(event){
                 var fullTitle = title + ': ' + $(event.currentSlide).find('h1, h2, h3').first().text()

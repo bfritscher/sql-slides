@@ -1,19 +1,76 @@
 /*
 Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
 */
-.hljs{display:block;overflow-x:auto;padding:.5em;background:#fff;color:#000}.hljs-comment,.hljs-quote,.hljs-variable{color:green}.hljs-built_in,.hljs-keyword,.hljs-name,.hljs-selector-tag,.hljs-tag{color:#00f}.hljs-addition,.hljs-attribute,.hljs-literal,.hljs-section,.hljs-string,.hljs-template-tag,.hljs-template-variable,.hljs-title,.hljs-type{color:#a31515}.hljs-deletion,.hljs-meta,.hljs-selector-attr,.hljs-selector-pseudo{color:#2b91af}.hljs-doctag{color:grey}.hljs-attr{color:red}.hljs-bullet,.hljs-link,.hljs-symbol{color:#00b0e8}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #fff;
+    color: #000;
+}
+.hljs-comment,
+.hljs-quote,
+.hljs-variable {
+    color: green;
+}
+.hljs-built_in,
+.hljs-keyword,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-tag {
+    color: #00f;
+}
+.hljs-addition,
+.hljs-attribute,
+.hljs-literal,
+.hljs-section,
+.hljs-string,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-title,
+.hljs-type {
+    color: #a31515;
+}
+.hljs-deletion,
+.hljs-meta,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+    color: #2b91af;
+}
+.hljs-doctag {
+    color: grey;
+}
+.hljs-attr {
+    color: red;
+}
+.hljs-bullet,
+.hljs-link,
+.hljs-symbol {
+    color: #00b0e8;
+}
+.hljs-emphasis {
+    font-style: italic;
+}
+.hljs-strong {
+    font-weight: 700;
+}
 
 .reveal {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 34px;
 }
 
-.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
-    font-family: 'Hind', sans-serif;
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+    font-family: "Hind", sans-serif;
 }
 
 .reveal code {
-    font-family: 'Droid Sans Mono', monospace;
+    font-family: "Droid Sans Mono", monospace;
     line-height: 1.3em;
 }
 
@@ -21,41 +78,46 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 SQL-slide custom styles
 **/
 
-.pageborder, .reveal section img.pageborder{
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+.pageborder,
+.reveal section img.pageborder {
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
 }
 
-.reveal .slides section .fragment.highlight-green.visible span{
+.reveal .slides section .fragment.highlight-green.visible span {
     color: #17ff2e !important;
 }
 
-.reveal .slides section .fragment.highlight-green.visible span{
+.reveal .slides section .fragment.highlight-green.visible span {
     font-weight: bold;
 }
 
-.reveal .slides section .fragment.highlight-current-green.current-fragment span{
-  color: #17ff2e !important;
+.reveal
+    .slides
+    section
+    .fragment.highlight-current-green.current-fragment
+    span {
+    color: #17ff2e !important;
 }
 
-.reveal #toc{
-  position: absolute;
-  z-index: 800;
-  font-size: 0.5em;
-  top: 0;
-  right: 0;
-  height: 0%;
-  width: 0%;
-  padding: 0;
-  margin: 0;
-  background-color: rgba(255,255,255,0.8);
-  padding: 1em;
-  box-sizing: border-box;
-  transition: width 0.3s, height 0.3s;
+.reveal #toc {
+    position: absolute;
+    z-index: 800;
+    font-size: 0.5em;
+    top: 0;
+    right: 0;
+    height: 0%;
+    width: 0%;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1em;
+    box-sizing: border-box;
+    transition: width 0.3s, height 0.3s;
 }
-.reveal #toc ul{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.reveal #toc ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     -webkit-column-width: 300px; /* Chrome, Safari, Opera */
     -moz-column-width: 300px; /* Firefox */
     column-width: 300px;
@@ -63,194 +125,191 @@ SQL-slide custom styles
     -webkit-column-gap: 2em; /* Chrome, Safari, Opera */
     -moz-column-gap: 2em; /* Firefox */
     column-gap: 2em;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
 }
-.reveal #toc li{
+.reveal #toc li {
     padding: 0.7em;
     max-height: 2em;
     text-overflow: ellipsis;
     overflow: hidden;
     margin: 0.2em;
     cursor: pointer;
-    background-color: rgba(0,0, 0, 0.1);
--webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
-          page-break-inside: avoid; /* Firefox */
-               break-inside: avoid; /* IE 10+ */
+    background-color: rgba(0, 0, 0, 0.1);
+    -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+    page-break-inside: avoid; /* Firefox */
+    break-inside: avoid; /* IE 10+ */
 }
 
-.reveal #toc li.subsection{
-  margin-left: 2em;
+.reveal #toc li.subsection {
+    margin-left: 2em;
 }
-.reveal #toc li.H1{
-  background-color: rgba(0,0, 0, 0.3);
+.reveal #toc li.H1 {
+    background-color: rgba(0, 0, 0, 0.3);
 }
-.reveal #toc li.active{
-  background-color: rgba(255,0, 0, 0.1);
+.reveal #toc li.active {
+    background-color: rgba(255, 0, 0, 0.1);
 }
 
-.reveal #toc li:hover, .reveal.overview #tocshow:hover{
+.reveal #toc li:hover,
+.reveal.overview #tocshow:hover {
     font-weight: bold;
-    background-color: rgba(255,255, 0, 0.1);
+    background-color: rgba(255, 255, 0, 0.1);
 }
 
-.reveal #tocshow{
-  position: absolute;
-  z-index: 850;
-  font-size: 0.5em;
-  top: 0;
-  right: 0;
-  height: 0;
-  width: 0;
-  display: none;
-  padding: 0;
-  margin: 0;
-  width: 60px;
-  height: 40px;
-  background-color: transparent;
-  border: 1px solid #aaa;
+.reveal #tocshow {
+    position: absolute;
+    z-index: 850;
+    font-size: 0.5em;
+    top: 0;
+    right: 0;
+    height: 0;
+    width: 0;
+    display: none;
+    padding: 0;
+    margin: 0;
+    width: 60px;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #aaa;
 }
 
-.reveal.overview #tocshow{
-  display: block;
+.reveal.overview #tocshow {
+    display: block;
 }
 
-.reveal .slide-background.bg-contain{
+.reveal .slide-background.bg-contain {
     background-size: contain;
 }
 
-.reveal .slides section .fragment.is-pointer-down{
-  -webkit-transition: none;
-  transition: none;
+.reveal .slides section .fragment.is-pointer-down {
+    -webkit-transition: none;
+    transition: none;
 }
 
-.reveal section{
+.reveal section {
     height: 100%;
 }
 
 .reveal blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
 }
 
 .reveal .slides blockquote p {
-    margin:  10px;
+    margin: 10px;
 }
 
-.reveal .hide{
-  display:none;
-}
-
-.reveal .slides h2{
-  margin-bottom: 1em;
-}
-
-.reveal .slides h3{
-  text-align: left;
-  margin-bottom: 0.8em;
-}
-
-.reveal .slides p{
-  text-align: left;
-  margin-bottom: 1em;
-}
-
-.reveal .slides ul{
-  list-style-type: square;
-}
-
-.reveal section img{
-  border: none;
-  box-shadow: none;
-}
-
-.reveal .slides p.center{
-  text-align: center;
-}
-
-.reveal .slides p.comment{
-  font-size: 90%;
-  color: #999;
-}
-.reveal .credits img{
-    display: block;
-}
-.reveal p.credits{
-  color: #ccc;
-  font-size: 10px;
-  text-align: right;
-}
-
-.reveal .layout-two{
- display: flex;
- flex-direction: row;
- align-items: flex-start;
- align-content: center;
-}
-
-.reveal section.layout-two > p:first-of-type{
-  float:left;
-  width: 50%;
-}
-
-.reveal section.layout-two > p:nth-of-type(2){
-  margin-left: 50%;
-  width: 50%;
-}
-
-.reveal .layout-two pre {
-  width: auto;
-}
-
-.reveal code {
-    background-color: #efefef;
-    padding: 0 2px;
-}
-
-.reveal pre code {
-  color: inherit;
-  background: inherit;
-  max-height: 500px;
-}
-
-.reveal pre code.language-sh, .reveal pre code.language-sh .hljs-built_in {
-  background-color: black;
-  color: lime;
-}
-
-.reveal .warn{
-    color: red;
-}
-
-.reveal table{
-    font-size: 0.62em;
-}
-
-#searchinputdiv{
+.reveal .hide {
     display: none;
 }
 
-.reveal.overview #searchinputdiv{
+.reveal .slides h2 {
+    margin-bottom: 1em;
+}
+
+.reveal .slides h3 {
+    text-align: left;
+    margin-bottom: 0.8em;
+}
+
+.reveal .slides p {
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+.reveal .slides ul {
+    list-style-type: square;
+}
+
+.reveal section img {
+    border: none;
+    box-shadow: none;
+}
+
+.reveal .slides p.center {
+    text-align: center;
+}
+
+.reveal .slides p.comment {
+    font-size: 90%;
+    color: #999;
+}
+.reveal .credits img {
+    display: block;
+}
+.reveal p.credits {
+    color: #ccc;
+    font-size: 10px;
+    text-align: right;
+}
+
+.reveal .layout-two {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: center;
+}
+
+.reveal section.layout-two > p:first-of-type {
+    float: left;
+    width: 50%;
+}
+
+.reveal section.layout-two > p:nth-of-type(2) {
+    margin-left: 50%;
+    width: 50%;
+}
+
+.reveal .layout-two pre {
+    width: auto;
+}
+
+.reveal pre code {
+    color: inherit;
+    background: inherit;
+    max-height: 500px;
+}
+
+.reveal pre code.language-sh,
+.reveal pre code.language-sh .hljs-built_in {
+    background-color: black;
+    color: lime;
+}
+
+.reveal .warn {
+    color: red;
+}
+
+.reveal table {
+    font-size: 0.62em;
+}
+
+#searchinputdiv {
+    display: none;
+}
+
+.reveal.overview #searchinputdiv {
     display: block;
 }
 
-.reveal section.summary{
-  background-image: url('../images/common/summary.jpg');
-  background-repeat: no-repeat;
-  background-position: 100% 100%;
-  height: 100%;
-  width: 100%;
+.reveal section.summary {
+    background-image: url("../images/common/summary.jpg");
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    height: 100%;
+    width: 100%;
 }
 
-.reveal .slides section div.output{
-  max-height: 400px;
-  margin: 0 auto;
-  overflow: auto;
-  padding: 1px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+.reveal .slides section div.output {
+    max-height: 400px;
+    margin: 0 auto;
+    overflow: auto;
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .reveal iframe.jsbin-embed {
@@ -260,7 +319,7 @@ SQL-slide custom styles
     margin: 0 -10% !important;
 }
 
-.reveal ol li{
+.reveal ol li {
     margin-bottom: 0.8em;
 }
 
@@ -269,60 +328,75 @@ SQL-slide custom styles
     list-style-type: none;
 }
 
-.reveal .slides span.big, .reveal .slides p.big, .reveal .slides strong.big, .reveal .slides em.big, .reveal .slides .big li, .reveal .slides table.big {
+.reveal .slides span.big,
+.reveal .slides p.big,
+.reveal .slides strong.big,
+.reveal .slides em.big,
+.reveal .slides .big li,
+.reveal .slides table.big {
     font-size: 1.2em;
 }
 
-.reveal .slides span.small, .reveal .slides p.small, .reveal .slides strong.small, .reveal .slides em.small, .reveal .slides .small li, .reveal .slides table.small {
+.reveal .slides span.small,
+.reveal .slides p.small,
+.reveal .slides strong.small,
+.reveal .slides em.small,
+.reveal .slides .small li,
+.reveal .slides table.small {
     font-size: 0.8em;
 }
 
-.reveal .slides span.smaller, .reveal .slides p.smaller, .reveal .slides strong.smaller, .reveal .slides em.smaller, .reveal .slides .smaller li, .reveal .slides table.smaller {
+.reveal .slides span.smaller,
+.reveal .slides p.smaller,
+.reveal .slides strong.smaller,
+.reveal .slides em.smaller,
+.reveal .slides .smaller li,
+.reveal .slides table.smaller {
     font-size: 0.6em;
 }
 
-
-.output.error, .error{
-  background-color: red;
-  color: white;
-  height:auto;
-  width: 90%;
+.output.error,
+.error {
+    background-color: red;
+    color: white;
+    height: auto;
+    width: 90%;
 }
 
-.reveal .output table:hover{
+.reveal .output table:hover,
+.reveal .preview:hover {
     background-color: #fff;
 }
 
-.reveal p.error{
-  margin: 0 auto;
-  padding: 5px;
-  box-sizing: border-box;
+.reveal p.error {
+    margin: 0 auto;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
-.reveal .left{
+.reveal .left {
     position: absolute;
     left: 0;
 }
 
-
-.reveal .no-margin{
+.reveal .no-margin {
     margin: 0 !important;
 }
 
-.reveal .clear{
+.reveal .clear {
     clear: both;
 }
 
-.code-title{
-    background-color: #E5F2FF;
+.code-title {
+    background-color: #e5f2ff;
     color: #838181;
 }
 
-.reveal .inline{
+.reveal .inline {
     display: inline;
 }
 
-.reveal .inline-block{
+.reveal .inline-block {
     display: inline-block;
 }
 
@@ -332,95 +406,138 @@ SQL-slide custom styles
     padding-left: 0.5em;
 }
 
-.reveal .right{
+.reveal .right {
     position: absolute;
     right: 0;
 }
-.reveal .top{
+.reveal .top {
     position: absolute;
-    top:0;
+    top: 0;
 }
-.reveal .bottom{
+.reveal .bottom {
     position: absolute;
     bottom: 20px;
 }
 
-.reveal .float-left{
+.reveal .float-left {
     float: left;
 }
-.reveal .float-right{
+.reveal .float-right {
     float: right;
 }
-.reveal .w-10{
+.reveal .w-10 {
     width: 10%;
 }
-.reveal .w-15{
+.reveal .w-15 {
     width: 15%;
 }
-.reveal .w-20{
+.reveal .w-20 {
     width: 20%;
 }
-.reveal .w-25{
+.reveal .w-25 {
     width: 25%;
 }
-.reveal .w-30{
+.reveal .w-30 {
     width: 30%;
 }
-.reveal .w-33{
+.reveal .w-33 {
     width: 33%;
 }
-.reveal .w-40{
+.reveal .w-40 {
     width: 40%;
 }
-.reveal .w-50{
+.reveal .w-50 {
     width: 50%;
 }
-.reveal .w-60{
+.reveal .w-60 {
     width: 60%;
 }
-.reveal .w-66{
+.reveal .w-66 {
     width: 66%;
 }
-.reveal .w-70{
+.reveal .w-70 {
     width: 70%;
 }
-.reveal .w-75{
+.reveal .w-75 {
     width: 75%;
 }
-.reveal .w-80{
+.reveal .w-80 {
     width: 80%;
 }
-.reveal .w-100{
+.reveal .w-100 {
     width: 100%;
 }
 
-.reveal .background{
-  z-index: -1;
+.reveal .background {
+    z-index: -1;
 }
 
 .red {
     color: #dd002a;
 }
 
-
 .output table {
-    font-family: 'trebuchet MS', 'Lucida sans', Arial;
+    font-family: "trebuchet MS", "Lucida sans", Arial;
     font-size: 18px;
     line-height: 18px;
     word-spacing: 10px;
     color: #444;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
     margin: 0 18px;
     max-width: 100%;
-
+    z-index: 1;
     border: solid #ccc 1px;
     -webkit-box-shadow: 0 1px 1px #ccc;
     -moz-box-shadow: 0 1px 1px #ccc;
     box-shadow: 0 1px 1px #ccc;
 }
-.output > div{
+
+.reveal .preview {
+  font-size: 16px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  max-width: 100%;
+  z-index: 1;
+  border: solid #ccc 1px;
+  -webkit-box-shadow: 0 1px 1px #ccc;
+  -moz-box-shadow: 0 1px 1px #ccc;
+  box-shadow: 0 1px 1px #ccc;
+}
+
+.reveal .preview h1 {
+  font-size: 2em;
+}
+.reveal .preview h2 {
+  font-size: 1.5em;
+}
+.reveal .preview h3 {
+  font-size: 1.17em;
+}
+.reveal .preview a {
+  color: blue;
+  text-decoration: underline;
+}
+.reveal .preview a:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+.reveal .preview fieldset {
+  border-width: 2px;
+  border-style: groove;
+  border-color: threedface;
+  border-image: initial;
+  padding: 4px;
+}
+
+.reveal .preview p {
+  margin: 0.5em 0;
+}
+
+
+.output > div {
     margin: 0 auto;
 }
 
@@ -433,7 +550,8 @@ SQL-slide custom styles
     transition: all 0.1s ease-in-out;
 }
 
-.output table td, .output table th {
+.output table td,
+.output table th {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
     padding: 4px;
@@ -442,42 +560,48 @@ SQL-slide custom styles
 
 .output table th {
     background-color: #dce9f9;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#ebf3fc),
+        to(#dce9f9)
+    );
     background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:    -moz-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: linear-gradient(top, #ebf3fc, #dce9f9);
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
     border-top: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-pre div.run:hover{
-  opacity: 1;
+pre div.run:hover {
+    opacity: 1;
 }
 
-pre div.run{
-  opacity: 0;
-  background-color: red;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: white;
-  padding: 2px 6px;
-  cursor: pointer;
-  transition: all 0.5s;
+pre div.run {
+    opacity: 0;
+    background-color: red;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    padding: 2px 6px;
+    cursor: pointer;
+    transition: all 0.5s;
 }
 
-pre .hljs-keyword{
-  font-weight: bold;
+pre .hljs-keyword {
+    font-weight: bold;
 }
-pre .hljs-comment{
-  color: #006a00;
+pre .hljs-comment {
+    color: #006a00;
 }
-.box{
+.box {
     -webkit-box-shadow: 0 3px 2px #777;
     -moz-box-shadow: 0 3px 2px #777;
     box-shadow: 0 3px 2px #777;
