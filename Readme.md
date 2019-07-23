@@ -20,6 +20,10 @@ Change the hardcoded SQL-Explorer server location in `js/sqlquery.js`
 2. `npm run serve` to start the web server. Start editing the files in /slides with custom annotations. Use *.json file to merge multiple files (see generator-reveal)
 3. `npm run dist` to generate a version with minimal dependencies in the dist folder, as well as all the **pdfs**. (pdf export does not merge multiple files into one)
 
+## Print
+
+append ?print-pdf to url
+
 ## Custom Annotations
 
 In addition to Reveal.js annotation (see their documentation) custom annotation are supported inside reveal.js markdown format element annotation:
