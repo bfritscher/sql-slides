@@ -48,16 +48,17 @@
             }
         });
 
-        var $toc = jQuery('<div id="toc" class="toc"></div>');
+        var $toc = jQuery('<div id="toc" class="toc" style="display:none"></div>');
         $toc.appendTo(jQuery('.reveal'));
         var $button = jQuery('<button id="tocshow">TOC</button>');
         $button.on('click', function() {
+            $toc.show();
             $toc.css({ width: '100%', height: '100%', 'z-index': 900 });
         });
         $button.appendTo(jQuery('.reveal'));
         $toc.append($ul);
         $toc.on('click', function() {
-            $toc.css({ width: '0%', height: '0%', 'z-index': 800 });
+            $toc.hide();
         });
     }
 
