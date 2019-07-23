@@ -232,6 +232,15 @@ SQL-slide custom styles
     text-align: center;
 }
 
+.reveal .slides .text-left {
+  text-align: left;
+}
+
+.reveal .slides ul.text-left {
+  display: block;
+  padding-left: 1em;
+}
+
 .reveal .slides p.comment {
     font-size: 90%;
     color: #999;
@@ -364,7 +373,8 @@ SQL-slide custom styles
 }
 
 .reveal .output table:hover,
-.reveal .preview:hover {
+.reveal .preview:hover,
+.reveal .preview-domtree:hover {
     background-color: #fff;
 }
 
@@ -468,6 +478,55 @@ SQL-slide custom styles
     width: 100%;
 }
 
+.reveal .h-10 {
+  height: 10%;
+}
+
+.reveal .h-20 {
+  height: 20%;
+}
+
+.reveal .h-25 {
+  height: 25%;
+}
+
+.reveal .h-30 {
+  height: 30%;
+}
+
+.reveal .h-40 {
+  height: 40%;
+}
+
+.reveal .h-50 {
+  height: 50%;
+}
+
+.reveal .h-60 {
+  height: 60%;
+}
+
+.reveal .h-70 {
+  height: 70%;
+}
+
+.reveal .h-75 {
+  height: 75%;
+}
+
+.reveal .h-80 {
+  height: 80%;
+}
+
+.reveal .h-90 {
+  height: 90%;
+}
+
+.reveal .h-100 {
+  height: 100%;
+}
+
+
 .reveal .background {
     z-index: -1;
 }
@@ -494,9 +553,8 @@ SQL-slide custom styles
     box-shadow: 0 1px 1px #ccc;
 }
 
-.reveal .preview {
+.reveal .preview, .reveal .preview-domtree {
   font-size: 16px;
-  padding: 10px;
   background-color: rgba(255, 255, 255, 0.8);
   max-width: 100%;
   z-index: 1;
@@ -506,14 +564,20 @@ SQL-slide custom styles
   box-shadow: 0 1px 1px #ccc;
 }
 
+.reveal .preview {
+  padding: 10px;
+}
+
 .reveal .preview h1 {
   font-size: 2em;
 }
 .reveal .preview h2 {
   font-size: 1.5em;
+  margin: 1em 0;
 }
 .reveal .preview h3 {
   font-size: 1.17em;
+  margin: 1em 0.5em;
 }
 .reveal .preview a {
   color: blue;
@@ -532,8 +596,26 @@ SQL-slide custom styles
   padding: 4px;
 }
 
+.reveal .preview li {
+  margin: 0;
+}
+
 .reveal .preview p {
   margin: 0.5em 0;
+}
+
+.reveal .preview table {
+  font-size: 1em;
+}
+
+.reveal .preview td,
+.reveal .preview th,
+.reveal .preview table {
+  border: 1px solid;
+}
+.reveal .preview thead,
+.reveal .preview tfoot {
+  background-color: #e0e0e0;
 }
 
 
@@ -605,4 +687,10 @@ pre .hljs-comment {
     -webkit-box-shadow: 0 3px 2px #777;
     -moz-box-shadow: 0 3px 2px #777;
     box-shadow: 0 3px 2px #777;
+}
+
+.reveal .text-white,
+.reveal .text-white a {
+  color: white;
+  text-shadow: 2px 2px #3f3c3c;
 }
