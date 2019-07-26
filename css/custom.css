@@ -416,6 +416,16 @@ SQL-slide custom styles
     padding-left: 0.5em;
 }
 
+.reveal .left-25 {
+  position: absolute;
+  left: 25%;
+}
+
+.reveal .left-30 {
+  position: absolute;
+  left: 30%;
+}
+
 .reveal .right {
     position: absolute;
     right: 0;
@@ -426,7 +436,7 @@ SQL-slide custom styles
 }
 .reveal .bottom {
     position: absolute;
-    bottom: 20px;
+    bottom: 40px;
 }
 
 .reveal .float-left {
