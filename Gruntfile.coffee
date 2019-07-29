@@ -377,10 +377,10 @@ module.exports = (grunt) ->
             'clean:dist'
             'buildIndex'
             'copy:dist'
-            'filterMarkdown'
-            'buildMarkdown'
-            'markdownpdf'
-            'copy:pdf'
+            #'filterMarkdown'
+            #'buildMarkdown'
+            #'markdownpdf'
+            #'copy:pdf'
         ]
 
 
