@@ -24,6 +24,13 @@ Change the hardcoded SQL-Explorer server location in `js/sqlquery.js`
 
 append ?print-pdf to url
 
+or use [decktape](https://github.com/astefanutti/decktape)
+
+```sh
+npm install -g decktape
+decktape reveal -s 1000x700 http://localhost:9001/
+```
+
 ## Custom Annotations
 
 In addition to Reveal.js annotation (see their documentation) custom annotation are supported inside reveal.js markdown format element annotation:
