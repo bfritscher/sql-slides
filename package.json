@@ -37,7 +37,7 @@
   "dependencies": {
     "animate.css": "^3.7.2",
     "draggabilly": "^2.2.0",
-    "highlight.js": "^9.15.8",
+    "highlight.js": "^10.4.1",
     "jquery": "^3.4.1",
     "reveal.js": "^3.8.0"
   }
