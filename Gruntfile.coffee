@@ -107,9 +107,9 @@ module.exports = (grunt) ->
                 }]
             html:
                 files: [{
-                      src: [
-                          '*.html'
-                      ]
+                    src: [
+                        '*.html'
+                    ]
                 }]
         copy:
             dist:
@@ -120,10 +120,9 @@ module.exports = (grunt) ->
                         'node_modules/animate.css/animate.min.css'
                         'node_modules/draggabilly/dist/draggabilly.pkgd.min.js'
                         'node_modules/jquery/dist/jquery.min.js'
-                        'node_modules/reveal.js/css/{,*/}*.css'
-                        'node_modules/reveal.js/js/*'
+                        'node_modules/reveal.js/dist/**'
                         'node_modules/reveal.js/plugin/**'
-                        'node_modules/reveal.js/lib/**'
+                        'node_modules/highlight.js/styles/vs.css'
                         'js/**'
                         'css/**'
                         'fonts/**'
