@@ -4,13 +4,13 @@
     var close = jQuery('<div class="run" style="  cursor: pointer; position: absolute;bottom: 4px;right: 4px;font-family: sans-serif;font-weight: bold;font-size: 14px;">X</div>');
 
     function sendToWebExplorer() {
-        const html = $('section.present[data-markdown] code.language-html');
+        const html = $('section.present[data-markdown] code.html');
         const htmlText = html.text();
         const htmlVisible = !!htmlText && !html.parent().hasClass('hide');
-        const css = $('section.present[data-markdown] code.language-css');
+        const css = $('section.present[data-markdown] code.css');
         const cssText = css.text();
         const cssVisible = !!cssText && !css.parent().hasClass('hide');
-        const javascript = $('section.present[data-markdown] code.language-javascript');
+        const javascript = $('section.present[data-markdown] code.javascript');
         const javascriptText = javascript.text();
         const javascriptVisible = !!javascriptText && !javascript.parent().hasClass('hide');
         const outputVisible = htmlVisible || javascriptText.indexOf('console.log') > -1;
@@ -67,7 +67,7 @@
         }
         editor.append(close);
         jQuery('body').append(editor);
-        jQuery('code.language-javascript, code.language-html, code.language-css').each(function(index, code){
+        jQuery('code.javascript, code.html, code.css').each(function(index, code){
             var pre = code.parentElement;
             var $run = jQuery('<div class="run">run</div>')
             .appendTo(pre);
