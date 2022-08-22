@@ -199,7 +199,8 @@ module.exports = (grunt) ->
                         #preload header/footer image
                         data = $('body').html() +  '\n<img class="hide" src="' + absolutePath  + '/images/common/logo_heg.png" />\n'
                         data += '<img class="hide" src="' + absolutePath + '/images/common/logo_hes-so_noir.jpg" />\n'
-                        grunt.file.write slash(__dirname) + '/.tmp/' +  $('h4').first().text().slice(0,10)  + '.html', data
+                        #debug
+                        grunt.file.write slash(__dirname) + '/.tmp/' +  $('h1').first().text().slice(0,10)  + '.html', data
                         this.queue(data)
                 paperBorder: '0.5cm'
                 highlightCssPath: 'node_modules/highlight.js/styles/vs.css'
