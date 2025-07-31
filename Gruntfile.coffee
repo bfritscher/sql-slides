@@ -54,8 +54,15 @@ module.exports = (grunt) ->
                     hostname: '0.0.0.0'
                     base: '.'
                     open: true
-                    livereload: 35728
+                    # livereload: 35728
                     middleware: (connect, options, middlewares) ->
+                        # Add livereload middleware
+                        livereload = require('connect-livereload')
+                        middlewares.unshift livereload(
+                            port: 35728
+                            hostname: 'localhost'
+                        )
+
                         rewrite = modRewrite(['^(.*)$ /slides/$1'])
                         middlewares.unshift (req, res, next)->
                             r = url.parse(req.url)
