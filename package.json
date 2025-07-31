@@ -3,27 +3,27 @@
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
-    "async": "^3.2.5",
-    "chai": "^4.3.10",
-    "cheerio": "^1.0.0-rc.12",
+    "async": "^3.2.6",
+    "chai": "^5.2.1",
+    "cheerio": "^1.1.2",
     "coffeelint": "^2.1.0",
     "connect-modrewrite": "^0.10.2",
     "grunt": "^1.6.1",
     "grunt-coffeelint": "0.0.16",
     "grunt-contrib-clean": "^2.0.1",
     "grunt-contrib-coffee": "^2.1.0",
-    "grunt-contrib-connect": "^4.0.0",
+    "grunt-contrib-connect": "^5.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^3.2.0",
     "grunt-contrib-watch": "^1.1.0",
     "load-grunt-tasks": "^5.1.0",
     "markdown-pdf": "^11.0.0",
-    "mocha": "^10.2.0",
+    "mocha": "^11.7.1",
     "phantomjs-prebuilt": "^2.1.16",
-    "sinon": "^17.0.1",
-    "slash": "^3.0.0",
+    "sinon": "^21.0.0",
+    "slash": "^5.1.0",
     "through": "^2.3.8",
-    "xregexp": "^5.1.1"
+    "xregexp": "^5.1.2"
   },
   "engines": {
     "node": ">=0.10.0",
@@ -37,8 +37,8 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "draggabilly": "^3.0.0",
-    "highlight.js": "^11.9.0",
+    "highlight.js": "^11.11.1",
     "jquery": "^3.7.1",
-    "reveal.js": "^5.0.2"
+    "reveal.js": "^5.2.1"
   }
 }
