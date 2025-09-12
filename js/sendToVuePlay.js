@@ -1,5 +1,5 @@
 (function () {
-    "use strict";
+    'use strict';
     // Add utility functions for encoding
     function strToU8(str) {
         const encoder = new TextEncoder();
@@ -7,7 +7,7 @@
     }
 
     function strFromU8(arr, latin1) {
-        const decoder = new TextDecoder(latin1 ? "latin1" : "utf-8");
+        const decoder = new TextDecoder(latin1 ? 'latin1' : 'utf-8');
         return decoder.decode(arr);
     }
 
@@ -25,7 +25,7 @@
             return btoa(binary);
         } catch (e) {
             // Fallback to simple base64 encoding
-            return btoa(unescape(encodeURIComponent(data)));
+            return btoa(encodeURIComponent(data));
         }
     }
 
@@ -35,24 +35,24 @@
         return serializedState;
     }
 
-    Reveal.addEventListener("ready", function () {
+    Reveal.addEventListener('ready', function () {
         if (window.location.search.match(/print-pdf/gi)) {
             return;
         }
-        jQuery("code.vue").each(function (index, code) {
+        jQuery('code.vue').each(function (index, code) {
             var pre = code.parentElement;
             var $run = jQuery('<div class="run">run</div>').appendTo(pre);
-            $run.on("click", function () {
+            $run.on('click', function () {
                 // Collect all visible Vue code blocks
                 const files = {};
 
-                jQuery("section.present[data-markdown] code.vue").each(
+                jQuery('section.present[data-markdown] code.vue').each(
                     function (i, codeElement) {
                         const codeText = jQuery(codeElement).text();
                         // Check if first line contains a .vue filename
-                        const lines = codeText.split("\n");
+                        const lines = codeText.split('\n');
                         const firstLine = lines[0].trim();
-                        let filename = "App.vue";
+                        let filename = 'App.vue';
                         let content = codeText;
 
                         // If first line looks like a comment with .vue filename, use it
@@ -64,7 +64,7 @@
                             if (match) {
                                 filename = match[1];
                                 // Remove the filename line from content
-                                content = lines.slice(1).join("\n").trim();
+                                content = lines.slice(1).join('\n').trim();
                             }
                         }
 
@@ -79,12 +79,12 @@
                 const playgroundUrl = `https://play.vuejs.org/#${encodedStore}`;
 
                 // Open in new tab
-                window.open(playgroundUrl, "_blank");
+                window.open(playgroundUrl, '_blank');
             });
         });
     });
 
-    Reveal.registerPlugin("sendToVuePlay", {
+    Reveal.registerPlugin('sendToVuePlay', {
         init: function () {
             return new Promise((resolve) => resolve());
         },
